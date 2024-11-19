@@ -5,8 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
   	<dependency>
-  		<groupId>org.emilio</groupId>
-  		<artifactId>PruebaJavaFX</artifactId>
+  		<groupId>org.pedrito</groupId>
+  		<artifactId>PruebaFX</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
