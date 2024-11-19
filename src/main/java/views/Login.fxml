@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="850.0" prefWidth="800.0" stylesheets="@login_styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@login_styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
 	<children>
-		<Label alignment="CENTER" layoutX="280.0" layoutY="199.0" text="Iniciar Sesión" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="250.0">
-			<font>
-				<Font name="Arial Italic" size="40.0" />
-			</font>
-		</Label>
-		<TextField layoutX="319.0" layoutY="312.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="670.0" promptText=" Nombre Usuario / Email" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="350.0">
-			<font>
-				<Font name="Albert Sans Light" size="24.0" />
-			</font>
-			<cursor>
-				<Cursor fx:constant="HAND" />
-			</cursor>
-		</TextField>
-		<PasswordField layoutX="70.0" layoutY="425.0" prefHeight="50.0" prefWidth="670.0" promptText="  Contraseña" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="425.0">
-			<font>
-				<Font name="Albert Sans Light" size="24.0" />
-			</font>
-		</PasswordField>
-		<Button layoutX="285.0" layoutY="546.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="285.0" text="Iniciar Sesión" AnchorPane.leftAnchor="260.0" AnchorPane.topAnchor="560.0">
-         <font>
-            <Font name="Albert Sans Italic" size="24.0" />
-         </font></Button>
-      <SVGPath content="M28,14H8.8l4.62-4.62C13.814,8.986,14,8.516,14,8c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-7.958,7.958  C2.334,14.866,2,15.271,2,16s0.279,1.08,0.646,1.447l7.974,7.973C11.006,25.807,11.469,26,12,26c1.188,0,2-1.016,2-2  c0-0.516-0.186-0.986-0.58-1.38L8.8,18H28c1.104,0,2-0.896,2-2S29.104,14,28,14z" fill="WHITE" layoutX="25.0" layoutY="31.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40.0" />
+		<Pane id="pane" layoutX="908.0" layoutY="478.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@login_styles.css" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="560.0" AnchorPane.rightAnchor="560.0" AnchorPane.topAnchor="115.0">
+			<children>
+				<Button id="btnLogin" fx:id="btnLogin" layoutX="260.0" layoutY="560.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="285.0" text="Iniciar Sesión" textAlignment="CENTER">
+					<font>
+						<Font name="Albert Sans Italic" size="24.0" />
+					</font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+				</Button>
+				<Label alignment="CENTER" layoutX="225.0" layoutY="250.0" prefHeight="80.0" prefWidth="365.0" text="Iniciar Sesión" textFill="WHITE">
+					<font>
+						<Font name="Arial Italic" size="40.0" />
+					</font>
+				</Label>
+				<SVGPath content="M28,14H8.8l4.62-4.62C13.814,8.986,14,8.516,14,8c0-0.984-0.813-2-2-2c-0.531,0-0.994,0.193-1.38,0.58l-7.958,7.958  C2.334,14.866,2,15.271,2,16s0.279,1.08,0.646,1.447l7.974,7.973C11.006,25.807,11.469,26,12,26c1.188,0,2-1.016,2-2  c0-0.516-0.186-0.986-0.58-1.38L8.8,18H28c1.104,0,2-0.896,2-2S29.104,14,28,14z" fill="WHITE" layoutX="72.0" layoutY="52.0" />
+				<TextField layoutX="70.0" layoutY="350.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="670.0" promptText=" Nombre Usuario / Email">
+					<font>
+						<Font name="Albert Sans Light" size="24.0" />
+					</font>
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
+				</TextField>
+				<PasswordField layoutX="70.0" layoutY="430.0" prefHeight="50.0" prefWidth="670.0" promptText="  Contraseña">
+					<font>
+						<Font name="Albert Sans Light" size="24.0" />
+					</font>
+				</PasswordField>
+				<Group layoutX="228.0" layoutY="33.0">
+					<children>
+						<ImageView fitHeight="200.0" fitWidth="200.0" layoutX="83.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@/images/retroRack_logo.png" />
+							</image>
+						</ImageView>
+						<Label id="logoTitulo" alignment="CENTER" layoutY="101.0" prefHeight="80.0" prefWidth="365.0" text="RETRORACK" textFill="WHITE">
+							<font>
+								<Font name="Corbel Bold" size="60.0" />
+							</font>
+						</Label>
+					</children>
+				</Group>
+				<Label id="lblNoTienesCuenta" layoutX="160.0" layoutY="725.0" text="No tienes cuenta?" />
+				<Label id="lblCrearCuenta" layoutX="447.0" layoutY="731.0" text="Crear Cuenta" />
+			</children>
+		</Pane>
 	</children>
 </AnchorPane>

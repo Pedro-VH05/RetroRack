@@ -1,12 +1,22 @@
 /* Estilo general para el fondo */
-.root {
-    -fx-background-color: #303030;
+#anchorPane{
+	 -fx-background-color: rgba(0, 0 , 0, 0.7);
+}
+
+#pane{
+	 -fx-background-color: #303030;
+	 -fx-background-radius:30;
+}
+
+#logoTitulo {
+	-fx-font-family: Genos Bold;
+	-fx-font-size: 40.0;
 }
 
 /* Estilo para el Label */
 .label {
     -fx-text-fill: white;
-    -fx-font-family: Albert Sans;
+    -fx-font-family:"Albert Sans";
     -fx-font-style: italic;
     -fx-font-size: 40.0;
     -fx-alignment: center;
@@ -30,8 +40,22 @@
 }
 
 /* Estilo para el Button */
-.button {
+#btnLogin {
     -fx-background-color: #FF983D;
+    -fx-text-fill: black;
+    -fx-font-family: "Albert Sans Black";
+    -fx-font-weight: 900;
+    -fx-font-size: 24.0;
+    -fx-background-radius: 50;
+    outline:none;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 20, 0.5, 0, 4);
+    -fx-transition: background-color 0.3s ease-in-out;
+    
+}
+
+/* Estilo para el Button */
+#btnLogin:hover {
+    -fx-background-color: #e3a56d;
     -fx-text-fill: black;
     -fx-font-family: "Albert Sans Black";
     -fx-font-weight: 900;
@@ -41,3 +65,20 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 20, 0.5, 0, 4);
     
 }
+
+
+#lblNoTienesCuenta {
+	 -fx-font-family: "Albert Sans Black";
+	 -fx-font-weight: 900;
+	 -fx-font-size: 32;
+}
+
+#lblCrearCuenta {
+	 -fx-font-family: "Albert Sans Black";
+	 -fx-font-weight: 900;
+	 -fx-font-size: 24;
+	 -fx-underline: true;
+	 -fx-text-fill: #FF983D;
+}
+
+
