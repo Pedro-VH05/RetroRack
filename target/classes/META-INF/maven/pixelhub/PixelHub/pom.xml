@@ -3,4 +3,11 @@
   <groupId>pixelhub</groupId>
   <artifactId>PixelHub</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.emilio</groupId>
+  		<artifactId>PruebaJavaFX</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
