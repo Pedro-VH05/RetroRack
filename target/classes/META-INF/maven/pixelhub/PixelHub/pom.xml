@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <dependencies>
   	<dependency>
-  		<groupId>org.pedrito</groupId>
+  		<groupId>org.pedrit</groupId>
   		<artifactId>PruebaFX</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
