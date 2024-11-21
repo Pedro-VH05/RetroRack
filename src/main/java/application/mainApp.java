@@ -15,7 +15,7 @@ public class mainApp extends Application {
       try {
          FXMLLoader loader = new FXMLLoader();
 
-         loader.setLocation(mainApp.class.getResource("/views/Login.fxml"));
+         loader.setLocation(mainApp.class.getResource("/views/VentanaLogin.fxml"));
          primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
          Pane ventana = (Pane) loader.load();

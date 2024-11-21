@@ -1,60 +1,42 @@
 package controllers;
 
-import java.io.IOException;
-
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.SVGPath;
 
 public class LoginController {
 
-   @FXML
-   private Button btnLogin;
+    @FXML
+    private SVGPath arrowBackToLogin;
 
-   @FXML
-   void hoverEnter(MouseEvent event) {
-      btnLogin.getStyleClass().add("btnLogin-hover");
-   }
+    @FXML
+    private Button btnLogIn;
 
-   @FXML
-   void hoverExit(MouseEvent event) {
-      btnLogin.getStyleClass().remove("btnLogin-hover");
-   }
+    @FXML
+    private Button btnRegister;
 
-   @FXML
-   void goToCrearCuenta(MouseEvent event) {
-      // Obtener el Stage de la ventana actual
-      Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-      currentStage.close();
+    @FXML
+    private Label btngoToRegister;
 
-      try {
-         // Cargar el archivo FXML para la nueva ventana
-         Parent root = FXMLLoader.load(getClass().getResource("/views/Register.fxml"));
+    @FXML
+    private AnchorPane loginPane;
 
-         // Crear la nueva escena
-         Scene scene = new Scene(root);
+    @FXML
+    private AnchorPane registerPane;
 
-         // Añadir el archivo CSS a la nueva escena
-         scene.getStylesheets().add(getClass().getResource("/views/login_styles.css").toExternalForm());
+    @FXML
+    void goToLogin(MouseEvent event) {
+    	loginPane.setVisible(true);
+        registerPane.setVisible(false);
+    }
 
-         // Crear el nuevo Stage
-         Stage newStage = new Stage(StageStyle.UNDECORATED);
-         newStage.getIcons().add(new Image("/images/retroRack_logo.png"));
-         newStage.setScene(scene);
-         newStage.setTitle("Crear Cuenta");
-         newStage.show();
-      } catch (IOException ex) {
-         ex.printStackTrace();
-      }
-   }
+    @FXML
+    void goToRegister(MouseEvent event) {
+    	registerPane.setVisible(true);
+        loginPane.setVisible(false);
+    }      
 
 }
