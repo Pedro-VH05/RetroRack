@@ -1,3 +1,20 @@
+@font-face {
+	fx-font-family: "Genos SemiBold";
+	src: url('/fonts/Genos-SemiBold.ttf');
+}
+@font-face {
+	fx-font-family: "Albert Sans Light";
+	src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+	fx-font-family: "Albert Sans Black";
+	src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+	fx-font-family: "Albert Sans Italic";
+	src: url('/fonts/AlbertSans-Italic.ttf');
+}
+
 /* Estilo general para el fondo */
 #anchorPane{
 	 -fx-background-color: rgba(0, 0 , 0, 0.7);
@@ -9,15 +26,14 @@
 }
 
 #logoTitulo {
-	-fx-font-family: Genos Bold;
-	-fx-font-size: 40.0;
+	-fx-font-family: "Genos SemiBold";
+	-fx-font-size: 60.0;
 }
 
 /* Estilo para el Label */
 .label {
     -fx-text-fill: white;
-    -fx-font-family:"Albert Sans";
-    -fx-font-style: italic;
+    -fx-font-family:"Albert Sans Italic";
     -fx-font-size: 40.0;
     -fx-alignment: center;
 }
@@ -44,7 +60,6 @@
     -fx-background-color: #FF983D;
     -fx-text-fill: black;
     -fx-font-family: "Albert Sans Black";
-    -fx-font-weight: 900;
     -fx-font-size: 24.0;
     -fx-background-radius: 50;
     outline:none;
@@ -69,13 +84,13 @@
 
 #lblNoTienesCuenta {
 	 -fx-font-family: "Albert Sans Black";
-	 -fx-font-weight: 900;
+	 -fx-font-style: italic;
 	 -fx-font-size: 32;
 }
 
 #lblCrearCuenta {
 	 -fx-font-family: "Albert Sans Black";
-	 -fx-font-weight: 900;
+	 -fx-font-style: italic;
 	 -fx-font-size: 24;
 	 -fx-underline: true;
 	 -fx-text-fill: #FF983D;
