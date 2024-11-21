@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -15,6 +16,7 @@ public class mainApp extends Application {
 			FXMLLoader loader = new FXMLLoader();
 
 			loader.setLocation(mainApp.class.getResource("/views/Login.fxml"));
+			primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
 			Pane ventana = (Pane) loader.load();
 
@@ -22,7 +24,7 @@ public class mainApp extends Application {
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 
 			Scene scene = new Scene(ventana);
-
+			scene.getStylesheets().add("./views/login_styles.css");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {

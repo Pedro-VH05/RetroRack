@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@login_styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane id="anchorPane" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
 	<children>
 		<Pane id="pane" layoutX="908.0" layoutY="478.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@login_styles.css" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="560.0" AnchorPane.rightAnchor="560.0" AnchorPane.topAnchor="115.0">
 			<children>
@@ -46,12 +46,12 @@
 				</PasswordField>
 				<Group layoutX="228.0" layoutY="33.0">
 					<children>
-						<ImageView fitHeight="200.0" fitWidth="200.0" layoutX="83.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="150.0" fitWidth="150.0" layoutX="107.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@/images/retroRack_logo.png" />
 							</image>
 						</ImageView>
-						<Label id="logoTitulo" alignment="CENTER" layoutY="101.0" prefHeight="80.0" prefWidth="365.0" text="RETRORACK" textFill="WHITE">
+						<Label id="logoTitulo" alignment="CENTER" layoutY="134.0" prefHeight="80.0" prefWidth="365.0" text="RETRORACK" textFill="WHITE">
 							<font>
 								<Font name="Corbel Bold" size="60.0" />
 							</font>
@@ -59,7 +59,7 @@
 					</children>
 				</Group>
 				<Label id="lblNoTienesCuenta" layoutX="160.0" layoutY="725.0" text="No tienes cuenta?" />
-				<Label id="lblCrearCuenta" layoutX="447.0" layoutY="731.0" text="Crear Cuenta" />
+				<Label id="lblCrearCuenta" fx:id="btnCrearCuenta" layoutX="447.0" layoutY="731.0" onMouseClicked="#goToCrearCuenta" text="Crear Cuenta" />
 			</children>
 		</Pane>
 	</children>
