@@ -46,12 +46,12 @@
 				</PasswordField>
 				<Group layoutX="228.0" layoutY="33.0">
 					<children>
-						<ImageView fitHeight="150.0" fitWidth="150.0" layoutX="107.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="150.0" fitWidth="150.0" layoutX="100.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@/images/retroRack_logo.png" />
 							</image>
 						</ImageView>
-						<Label id="logoTitulo" alignment="CENTER" layoutY="134.0" prefHeight="80.0" prefWidth="365.0" text="RETRORACK" textFill="WHITE">
+						<Label id="logoTitulo" alignment="CENTER" layoutY="151.0" prefHeight="80.0" prefWidth="365.0" text="RETRORACK" textFill="WHITE">
 							<font>
 								<Font name="Corbel Bold" size="60.0" />
 							</font>

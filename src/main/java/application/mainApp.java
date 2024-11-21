@@ -10,30 +10,30 @@ import javafx.stage.StageStyle;
 
 public class mainApp extends Application {
 
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			FXMLLoader loader = new FXMLLoader();
+   @Override
+   public void start(Stage primaryStage) {
+      try {
+         FXMLLoader loader = new FXMLLoader();
 
-			loader.setLocation(mainApp.class.getResource("/views/Login.fxml"));
-			primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
+         loader.setLocation(mainApp.class.getResource("/views/Login.fxml"));
+         primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
-			Pane ventana = (Pane) loader.load();
+         Pane ventana = (Pane) loader.load();
 
-			// Hacer la ventana sin bordes
-			primaryStage.initStyle(StageStyle.UNDECORATED);
+         // Hacer la ventana sin bordes
+         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-			Scene scene = new Scene(ventana);
-			scene.getStylesheets().add("./views/login_styles.css");
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+         Scene scene = new Scene(ventana);
+         scene.getStylesheets().add("./views/login_styles.css");
+         primaryStage.setScene(scene);
+         primaryStage.show();
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+   public static void main(String[] args) {
+      launch(args);
+   }
 
 }
