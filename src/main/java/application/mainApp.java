@@ -24,7 +24,7 @@ public class mainApp extends Application {
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         scene.getStylesheets().add("./views/login_styles.css");
+         scene.getStylesheets().add("./styles/login_styles.css");
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {
