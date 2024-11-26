@@ -24,7 +24,7 @@ public class mainApp extends Application {
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         //scene.getStylesheets().add("./styles/descubrir_styles.css");
+         scene.getStylesheets().add(getClass().getResource("/styles/descubrir_styles.css").toExternalForm());
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {

@@ -1,0 +1,81 @@
+
+
+@font-face {
+    fx-font-family: "Genos SemiBold";
+    src: url('/fonts/Genos-SemiBold.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Light";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Black";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Italic";
+    src: url('/fonts/AlbertSans-Italic.ttf');
+}
+
+@font-face {
+    fx-font-family: "Albert Sans Medium";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+
+
+BorderPane {
+    -fx-background-color: #303030;
+}
+
+/* GridPane Styling */
+.grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 30px;
+    -fx-padding: 20px;
+}
+
+/* Styling for HBox containers */
+.hbox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+#lblRetroRack{
+    -fx-font-family: "Genos SemiBold";
+    -fx-font-size: 48px;
+    -fx-text-fill: white;
+}
+
+#paneDescubrir, #lblBiblioteca {
+     -fx-background-color: #181818;
+     -fx-background-radius: 0 10 10 0;
+     -fx-padding: 15px;
+     -fx-alignment: center;
+}
+
+#lblBiblioteca {
+	-fx-background-radius: 10 0 0 10;
+
+}
+
+#lblDescubrir {
+	-fx-text-fill: #ffe86f;
+ 	-fx-alignment: center;
+ 	-fx-font-size: 24px;
+ 	-fx-font-family: "Albert Sans Medium";
+ 	-fx-padding: 0 0 0 5;
+}
+
+#paneDescubrir {
+ 	-fx-effect: innershadow(gaussian , black, 10, 0.5 , 0, 0);
+ 	-fx-text-fill: #FFE86F;
+ 	
+}
+
+#brujula1, #brujula2 {
+	-fx-fill: #ffe86f;
+	-fx-translateY: 2.5;
+}
+
+
+
