@@ -19,7 +19,6 @@ public class mainApp extends Application {
          primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
          Pane ventana = (Pane) loader.load();
-
          // Hacer la ventana sin bordes
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
