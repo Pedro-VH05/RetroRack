@@ -15,16 +15,16 @@ public class mainApp extends Application {
       try {
          FXMLLoader loader = new FXMLLoader();
 
-         loader.setLocation(mainApp.class.getResource("/views/VentanaLogin.fxml"));
+         loader.setLocation(mainApp.class.getResource("/views/Descubrir.fxml"));
          primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
          Pane ventana = (Pane) loader.load();
 
          // Hacer la ventana sin bordes
-         primaryStage.initStyle(StageStyle.UNDECORATED);
+         primaryStage.initStyle(StageStyle.DECORATED);
 
          Scene scene = new Scene(ventana);
-         scene.getStylesheets().add("./styles/login_styles.css");
+         //scene.getStylesheets().add("./styles/login_styles.css");
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {

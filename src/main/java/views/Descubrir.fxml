@@ -1,61 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1080.0" maxWidth="1920.0" minHeight="600.0" minWidth="700.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-	<top>
-		<HBox alignment="CENTER" maxHeight="200.0" maxWidth="1920.0" minWidth="700.0" spacing="200.0" BorderPane.alignment="CENTER">
-			<children>
-				<HBox alignment="CENTER" maxHeight="75.0" maxWidth="330.0">
-					<children>
-						<Label text="Biblioteca" textFill="WHITE">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-						<Label text="Biblioteca" textFill="WHITE">
-							<font>
-								<Font size="24.0" />
-							</font>
-						</Label>
-					</children>
-					<HBox.margin>
-						<Insets />
-					</HBox.margin>
-				</HBox>
-				<HBox alignment="CENTER" maxHeight="260.0" maxWidth="500.0">
-					<children>
-						<ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-							<image>
-								<Image url="@../../resources/images/retroRack_logo.png" />
-							</image>
-						</ImageView>
-						<Label text="RETRORACK" textFill="WHITE">
-							<font>
-								<Font size="64.0" />
-							</font>
-						</Label>
-					</children>
-				</HBox>
-				<ImageView pickOnBounds="true" preserveRatio="true">
-					<image>
-						<Image url="@../../resources/images/PABLO.png" />
-					</image>
-               <viewport>
-                  <Rectangle2D height="150.0" minX="-10.0" minY="-10.0" width="150.0" />
-               </viewport>
-				</ImageView>
-			</children>
-			<BorderPane.margin>
-				<Insets />
-			</BorderPane.margin>
-		</HBox>
-	</top>
+<BorderPane minHeight="600.0" minWidth="1000.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox alignment="CENTER" minHeight="20.0" minWidth="100.0" GridPane.rowIndex="1">
+               <children>
+                  <Label text="Biblioteca" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Descubrir" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="100.0" top="30.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="20.0" minWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/retroRack_logo.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="30.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label text="RETRORACK" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <padding>
+                        <Insets top="30.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets top="20.0" />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/images/PABLO.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="100.0" top="30.0" />
+               </padding>
+            </HBox>
+         </children>
+      </GridPane>
+   </top>
 </BorderPane>
