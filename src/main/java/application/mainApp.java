@@ -21,10 +21,10 @@ public class mainApp extends Application {
          Pane ventana = (Pane) loader.load();
 
          // Hacer la ventana sin bordes
-         primaryStage.initStyle(StageStyle.DECORATED);
+         primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         //scene.getStylesheets().add("./styles/login_styles.css");
+         //scene.getStylesheets().add("./styles/descubrir_styles.css");
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {

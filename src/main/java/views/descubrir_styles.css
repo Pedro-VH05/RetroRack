@@ -1,0 +1,48 @@
+@font-face {
+    fx-font-family: "Genos SemiBold";
+    src: url('/fonts/Genos-SemiBold.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Light";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Black";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Italic";
+    src: url('/fonts/AlbertSans-Italic.ttf');
+}
+
+.borderPane {
+    -fx-background-color: #303030;
+}
+
+/* GridPane Styling */
+.grid-pane {
+    -fx-hgap: 20px;
+    -fx-vgap: 30px;
+    -fx-padding: 20px;
+}
+
+/* Styling for HBox containers */
+.hbox {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+#lblRetroRack{
+    -fx-font-family: "Genos SemiBold";
+    -fx-font-size: 48px;
+    -fx-text-fill: white;
+}
+
+/* Image Styling */
+.image-view-logo {
+    -fx-fit-height: 100px;
+    -fx-fit-width: 100px;
+    -fx-preserve-ratio: true;
+}
+
+
