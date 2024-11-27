@@ -144,8 +144,9 @@
          <top>
             <GridPane prefHeight="60.0" prefWidth="1824.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="60.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" prefWidth="1800.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="0.0" prefWidth="88.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="57.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1776.5" minWidth="1670.0" prefWidth="1683.5" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -153,7 +154,19 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField id="searchBar" focusTraversable="false" prefHeight="60.0" promptText="Search Bar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField id="searchBar" focusTraversable="false" prefHeight="60.0" promptText="Search Bar" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="-10.0" />
+                     </GridPane.margin></TextField>
+                  <BorderPane id="searchIcon" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <center>
+                        <SVGPath content="M22.1641 18.5312C23.3359 16.6875 24.0234 14.5 24.0234 12.1484C24.0234 5.57813 18.7031 0.25 12.1406 0.25C5.57031 0.25 0.25 5.57813 0.25 12.1484C0.25 18.7188 5.57031 24.0469 12.1328 24.0469C14.5156 24.0469 16.7344 23.3438 18.5938 22.1406L19.1328 21.7656L27.6172 30.25L30.25 27.5703L21.7734 19.0859L22.1641 18.5312ZM18.7969 5.5C20.5703 7.27344 21.5469 9.63281 21.5469 12.1406C21.5469 14.6484 20.5703 17.0078 18.7969 18.7812C17.0234 20.5547 14.6641 21.5312 12.1562 21.5312C9.64844 21.5312 7.28906 20.5547 5.51562 18.7812C3.74219 17.0078 2.76562 14.6484 2.76562 12.1406C2.76562 9.63281 3.74219 7.27344 5.51562 5.5C7.28906 3.72656 9.64844 2.75 12.1562 2.75C14.6641 2.75 17.0234 3.72656 18.7969 5.5Z" fill="WHITE" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets left="10.0" />
+                           </BorderPane.margin>
+                        </SVGPath>
+                     </center>
+                  </BorderPane>
                </children>
             </GridPane>
          </top>
