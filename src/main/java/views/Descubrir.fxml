@@ -8,6 +8,7 @@
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="1080.0" minWidth="1920.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DescubrirController">
+<BorderPane minHeight="1080" minWidth="1920.0" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DescubrirController">
 	<top>
 		<GridPane alignment="CENTER" prefHeight="123.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
 			<columnConstraints>
@@ -144,9 +145,9 @@
          <top>
             <GridPane prefHeight="60.0" prefWidth="1824.0" BorderPane.alignment="CENTER">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="0.0" prefWidth="88.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="71.0" minWidth="10.0" prefWidth="57.5" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1776.5" minWidth="1670.0" prefWidth="1683.5" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="0.0" prefWidth="64.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="59.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1776.5" minWidth="1670.0" prefWidth="1699.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -170,6 +171,95 @@
                </children>
             </GridPane>
          </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <Label text="Popular Games" textFill="WHITE" BorderPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font size="50.0" />
+                     </font>
+                     <BorderPane.margin>
+                        <Insets bottom="20.0" left="65.0" top="20.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+               <center>
+                  <GridPane hgap="60.0" vgap="40.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="560.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="560.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="560.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="260.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <BorderPane.margin>
+                        <Insets bottom="50.0" left="65.0" right="90.0" />
+                     </BorderPane.margin>
+                     <children>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;" GridPane.columnIndex="2">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;" GridPane.columnIndex="1">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="300.0" prefWidth="560.0" style="-fx-background-radius: 30; -fx-background-color: #080808;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="31.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </GridPane>
+               </center>
+            </BorderPane>
+         </center>
       </BorderPane>
    </center>
 </BorderPane>

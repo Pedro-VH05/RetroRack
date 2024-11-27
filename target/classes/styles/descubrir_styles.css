@@ -79,22 +79,20 @@ BorderPane {
 	
 }
 
-#searchBar{
+#searchBar {
 	-fx-background-color: #181818;
-	-fx-background-radius: 0 50 50 0;	
-	-fx-effect: innershadow(gaussian , rgba(0, 0, 0, 0.7), 20, 0.5 , 0, 0);
+	-fx-background-radius: 0 50 50 0;
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, -4, 0);
 	-fx-font-size: 27px;
 	-fx-font-family: "Albert Sans";
 	-fx-text-fill: #FFF;
-	
 }
 
-#searchIcon{
+#searchIcon {
 	-fx-background-color: #181818;
-	-fx-background-radius: 50 0 0 50;	
-	-fx-effect: innershadow(gaussian , rgba(0, 0, 0, 0.7), 20, 0.5 , 0, 0);	
+	-fx-background-radius: 50 0 0 50;
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 4, 0);
 }
-
 #searchBar .text {
     -fx-fill: gray;
 }
