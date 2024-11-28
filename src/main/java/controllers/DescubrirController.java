@@ -43,10 +43,6 @@ public class DescubrirController {
 		// Restaurar la opacidad del Stage (asegúrate de que el Stage no esté en blanco)
 		stage.setOpacity(1.0);
 
-		// También restauramos el tamaño de la ventana si es necesario
-		stage.setHeight(1080); // Ajusta según el tamaño original de tu ventana
-		stage.setWidth(1920); // Ajusta según el tamaño original de tu ventana
-
 	}
 
 	@FXML
@@ -58,7 +54,6 @@ public class DescubrirController {
 	private void minimizeApp(MouseEvent event) {
 		// Obtener el Stage
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		stage.setIconified(true);
 	}
 
