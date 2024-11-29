@@ -2,6 +2,9 @@ package models;
 
 import java.util.List;
 
+/**
+ * 
+ */
 public class GameResponse {
     private int count;
     private List<Game> results;

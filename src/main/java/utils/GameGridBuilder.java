@@ -1,6 +1,8 @@
 package utils;
 
-import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -10,59 +12,81 @@ import javafx.scene.shape.Rectangle;
 import models.Game;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Clase donde se crea el grid de juegos que se va a mostrar por pantalla
+ */
 public class GameGridBuilder {
 
-	private static final int GAMES_PER_ROW = 3;
 	private static final double IMAGE_WIDTH = 560;
-	private static final double IMAGE_HEIGHT = 325;
+	private static final double IMAGE_HEIGHT = 300;
 
 	/**
-	 * Construye un VBox para mostrar una lista de juegos.
+	 * Crea una sección de juegos con un título y un ScrollPane horizontal.
 	 *
+	 * @param title Título de la sección
 	 * @param games Lista de juegos
-	 * @return VBox con los elementos dispuestos
+	 * @return VBox con la sección
 	 */
-	public static VBox buildGameGrid(List<Game> games) {
-		VBox vBoxContainer = new VBox();
-		HBox currentHBox = new HBox(60);
-		int count = 0;
+	public static VBox createGameSection(String title, List<Game> games) {
+		VBox sectionContainer = new VBox();
 
-		for (Game game : games) {
-			// Crear el BorderPane para cada juego
+		// Crear un título para la sección
+		Label sectionLabel = new Label(title);
+		sectionContainer.getStyleClass().add("categoryLabel");
+
+		// Crear el HBox que contendrá los juegos
+		HBox gamesRow = new HBox(60);
+		gamesRow.getStyleClass().add("custom-hbox");
+
+		List<Game> validGames = validateImgURL(games);
+
+		// Agregar los juegos válidos al HBox
+		for (Game game : validGames) {
 			BorderPane gamePane = new BorderPane();
 
 			// Crear el ImageView y configurar las dimensiones
 			ImageView imageView = new ImageView(new Image(game.getBackgroundImage()));
+
+			// Establecer el tamaño del ImageView para que todas las imágenes tengan el
+			// mismo tamaño
 			imageView.setFitWidth(IMAGE_WIDTH);
 			imageView.setFitHeight(IMAGE_HEIGHT);
+			imageView.setSmooth(true);
+			imageView.setCache(true);
 
 			// Clip para bordes redondeados
-			Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+			Rectangle clip = new Rectangle(IMAGE_WIDTH, IMAGE_HEIGHT);
 			clip.setArcWidth(20);
 			clip.setArcHeight(20);
 			imageView.setClip(clip);
 
 			// Agregar el ImageView al BorderPane
 			gamePane.setCenter(imageView);
-
 			// Añadir el BorderPane al HBox
-			currentHBox.getChildren().add(gamePane);
-			count++;
+			gamesRow.getChildren().add(gamePane);
 
-			// Cuando completes una fila o llegues al final de los juegos
-			if (count % GAMES_PER_ROW == 0 || count == games.size()) {
-
-				VBox.setMargin(currentHBox, new Insets(0, 0, 200, 0)); // Margen estándar
-
-				// Añadir el HBox actual al VBox
-				vBoxContainer.getChildren().add(currentHBox);
-
-				// Crear un nuevo HBox para la siguiente fila
-				currentHBox = new HBox(60);
-			}
 		}
 
-		return vBoxContainer;
+		// Crear el ScrollPane para esta fila
+		ScrollPane scrollPane = new ScrollPane(gamesRow);
+		scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+		scrollPane.setPannable(true);
+		// CSS
+		scrollPane.getStyleClass().add("rowScrollPane");
+
+		// Añadir el título y el ScrollPane a la sección
+		sectionContainer.getChildren().addAll(sectionLabel, scrollPane);
+
+		return sectionContainer;
 	}
+
+	private static List<Game> validateImgURL(List<Game> games) {
+		// Solo se muestran los juegos que tienen URL válida
+		return games.stream().filter(game -> game.getBackgroundImage() != null && !game.getBackgroundImage().isEmpty())
+				.collect(Collectors.toList());
+	}
+
 }

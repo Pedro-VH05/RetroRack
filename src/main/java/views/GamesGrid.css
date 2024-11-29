@@ -1,27 +1,51 @@
-/* ScrollPane */
-.scroll-pane {
-    -fx-background-color: #303030;
+@font-face {
+    fx-font-family: "Albert Sans ExtraBold";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
 }
 
-/* VBox */
 VBox {
     -fx-background-color: #303030;
 }
 
+.root{
+	 -fx-background-color: #303030;
+}
 
 
-/* Labels */
 .label {
     -fx-text-fill: white;
     -fx-font-size: 56.0px;
 }
 
-BorderPane {
-	-fx-background-color: #151515;
-	-fx-background-radius: 10;
-	
+.image-view {
+    -fx-effect: innershadow(gaussian, rgba(0.0, 0.0, 0.0, 0.9), 30.0, 0.5, 0.0, 0.0);
 }
 
-.image-view {
-    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.9), 30, 0.5, 0, 0);
+
+.custom-hbox {
+    -fx-background-color: #303030;
 }
+
+.mainScrollPane{
+	 -fx-background-color: #303030;
+}
+
+BorderPane{
+	-fx-cursor:hand;
+}
+.categoryLabel{
+	-fx-font-size: 50px; 
+	-fx-font-weight: bold;
+	-fx-font-family: "Albert Sans ExtraBold";
+}
+
+/* Ocultar los botones y las flechas de la barra de desplazamiento horizontal */
+.rowScrollPane {
+  -fx-background-color: transparent;
+
+}
+
+
+
+
+
