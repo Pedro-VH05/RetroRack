@@ -8,9 +8,8 @@ VBox {
 }
 
 .root{
-	 -fx-background-color: #303030;
+    -fx-background-color: #303030;
 }
-
 
 .label {
     -fx-text-fill: white;
@@ -18,34 +17,38 @@ VBox {
 }
 
 .image-view {
-    -fx-effect: innershadow(gaussian, rgba(0.0, 0.0, 0.0, 0.9), 30.0, 0.5, 0.0, 0.0);
+   -fx-effect: innershadow(gaussian, rgba(0.0, 0.0, 0.0, 0.9), 30.0, 0.5, 0.0, 0.0);
+    -fx-cursor: hand;
 }
-
 
 .custom-hbox {
     -fx-background-color: #303030;
 }
 
 .mainScrollPane{
-	 -fx-background-color: #303030;
+     -fx-background-color: #303030;
 }
 
 BorderPane{
-	-fx-cursor:hand;
+    -fx-cursor: hand;
 }
+
 .categoryLabel{
-	-fx-font-size: 50px; 
-	-fx-font-weight: bold;
-	-fx-font-family: "Albert Sans ExtraBold";
+    -fx-font-size: 50px; 
+    -fx-font-weight: bold;
+    -fx-font-family: "Albert Sans ExtraBold";
 }
 
-/* Ocultar los botones y las flechas de la barra de desplazamiento horizontal */
 .rowScrollPane {
-  -fx-background-color: transparent;
-
+    -fx-background-color: transparent;
 }
 
-
-
-
-
+.game-name-label {
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-alignment: bottom-right; /* Alineación en la parte inferior derecha */
+    -fx-padding: 10px; /* Espaciado alrededor del texto */
+    -fx-background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el nombre */
+    -fx-background-radius: 5px; /* Bordes redondeados */
+}

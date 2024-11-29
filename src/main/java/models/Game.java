@@ -8,7 +8,7 @@ import java.util.List;
 public class Game {
 	private int id;
 	private String slug;
-	private String nombre;
+	private String name;
 	private String releaseDate;
 	private boolean tba;
 	private String background_image;
@@ -27,14 +27,14 @@ public class Game {
 	private List<Tag> tags;
 	private List<String> screenshots;
 
-	public Game(int id, String slug, String nombre, String releaseDate, boolean tba, String background_image,
+	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image,
 			double rating, int ratingTop, List<Rating> ratings, int ratingsCount, int reviewsCount, int added,
 			int playtime, String metacritic, String esrbRating, List<Platform> plataformas, List<Genre> genres,
 			List<Shop> tiendas, List<Tag> tags, List<String> screenshots) {
 		super();
 		this.id = id;
 		this.slug = slug;
-		this.nombre = nombre;
+		this.name = name;
 		this.releaseDate = releaseDate;
 		this.tba = tba;
 		this.background_image = background_image;
@@ -71,11 +71,11 @@ public class Game {
 	}
 
 	public String getName() {
-		return nombre;
+		return name;
 	}
 
-	public void setName(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getReleaseDate() {
