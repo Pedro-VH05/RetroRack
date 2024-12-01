@@ -62,13 +62,21 @@ public class GameGridBuilder {
             clip.setArcHeight(20);
             imageView.setClip(clip);
 
-            // Crear un contenedor StackPane para la imagen y el nombre del juego
+            // Crear un contenedor StackPane para superponer la imagen y el nombre
             StackPane gameContainer = new StackPane();
-            gameContainer.setStyle("-fx-alignment: center;");
 
             // Crear la etiqueta del nombre del juego
-            Label gameNameLabel = new Label(game.getName());
-            gameNameLabel.getStyleClass().add("game-name-label");  // Clase CSS para el nombre del juego
+            Label gameNameLabel = new Label("  " + game.getName());
+            
+            gameNameLabel.getStyleClass().add("titulo-juego");
+
+            // Ajustar el ancho del Label al ancho de la imagen
+            gameNameLabel.setMaxWidth(IMAGE_WIDTH);
+            gameNameLabel.setMinWidth(IMAGE_WIDTH);
+            gameNameLabel.setPrefWidth(IMAGE_WIDTH);
+
+            // Alinear el Label en la parte inferior del StackPane
+            StackPane.setAlignment(gameNameLabel, javafx.geometry.Pos.BOTTOM_CENTER);
 
             // Añadir la imagen y el nombre al StackPane
             gameContainer.getChildren().addAll(imageView, gameNameLabel);

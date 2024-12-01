@@ -17,7 +17,8 @@ VBox {
 }
 
 .image-view {
-   -fx-effect: innershadow(gaussian, rgba(0.0, 0.0, 0.0, 0.9), 30.0, 0.5, 0.0, 0.0);
+   -fx-effect: 
+     innershadow(gaussian, rgba(0, 0, 0, 0.9), 20, 0.5, 0, 0);
     -fx-cursor: hand;
 }
 
@@ -34,7 +35,7 @@ BorderPane{
 }
 
 .categoryLabel{
-    -fx-font-size: 50px; 
+    -fx-font-size: 50.0px; 
     -fx-font-weight: bold;
     -fx-font-family: "Albert Sans ExtraBold";
 }
@@ -43,12 +44,16 @@ BorderPane{
     -fx-background-color: transparent;
 }
 
-.game-name-label {
-    -fx-text-fill: white;
+.titulo-juego {
+    -fx-text-fill: #FF983D;
     -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-alignment: bottom-right; /* Alineación en la parte inferior derecha */
-    -fx-padding: 10px; /* Espaciado alrededor del texto */
-    -fx-background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el nombre */
-    -fx-background-radius: 5px; /* Bordes redondeados */
+   /* -fx-font-weight: bold;*/
+    -fx-background-color: black;
+    -fx-background-radius: 0 0 5 5;
+    -fx-padding: 10px;
+    -fx-text-alignment: left;
+    -fx-alignment: bottom-left;
 }
+
+
+

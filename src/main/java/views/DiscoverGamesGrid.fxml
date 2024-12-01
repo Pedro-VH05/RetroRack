@@ -9,7 +9,7 @@
 
 <ScrollPane fx:id="mainScrollPane" minViewportHeight="600.0"
 	minViewportWidth="1920.0" prefHeight="200.0" prefWidth="200.0"
-	stylesheets="@GamesGrid.css" BorderPane.alignment="CENTER"
+	stylesheets="@DiscoverGridStyles.css" BorderPane.alignment="CENTER"
 	xmlns="http://javafx.com/javafx/23.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="controllers.DiscoverGamesGridController">

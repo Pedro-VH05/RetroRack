@@ -23,7 +23,7 @@ public class mainApp extends Application {
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         scene.getStylesheets().add(getClass().getResource("/views/DescubrirMainStyles.css").toExternalForm());
+         scene.getStylesheets().add(getClass().getResource("/views/DiscoverMainStyles.css").toExternalForm());
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {
