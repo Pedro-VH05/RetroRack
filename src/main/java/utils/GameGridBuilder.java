@@ -1,5 +1,6 @@
 package utils;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -9,8 +10,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.SVGPath;
 import models.Game;
+import models.Platform;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +24,7 @@ import java.util.stream.Collectors;
  */
 public class GameGridBuilder {
 
-    private static final double IMAGE_WIDTH = 560;
+    private static final double IMAGE_WIDTH = 530;
     private static final double IMAGE_HEIGHT = 300;
 
     /**
@@ -49,8 +53,6 @@ public class GameGridBuilder {
 
             // Crear el ImageView y configurar las dimensiones
             ImageView imageView = new ImageView(new Image(game.getBackgroundImage()));
-
-            // Establecer el tamaño del ImageView para que todas las imágenes tengan el mismo tamaño
             imageView.setFitWidth(IMAGE_WIDTH);
             imageView.setFitHeight(IMAGE_HEIGHT);
             imageView.setSmooth(true);
@@ -67,7 +69,6 @@ public class GameGridBuilder {
 
             // Crear la etiqueta del nombre del juego
             Label gameNameLabel = new Label("  " + game.getName());
-            
             gameNameLabel.getStyleClass().add("titulo-juego");
 
             // Ajustar el ancho del Label al ancho de la imagen
@@ -75,10 +76,9 @@ public class GameGridBuilder {
             gameNameLabel.setMinWidth(IMAGE_WIDTH);
             gameNameLabel.setPrefWidth(IMAGE_WIDTH);
 
-            // Alinear el Label en la parte inferior del StackPane
-            StackPane.setAlignment(gameNameLabel, javafx.geometry.Pos.BOTTOM_CENTER);
+            StackPane.setAlignment(gameNameLabel, Pos.BOTTOM_CENTER);
 
-            // Añadir la imagen y el nombre al StackPane
+            // Añadir la imagen, el nombre y los iconos de las plataformas al StackPane
             gameContainer.getChildren().addAll(imageView, gameNameLabel);
 
             // Agregar el StackPane al BorderPane
@@ -93,7 +93,6 @@ public class GameGridBuilder {
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setPannable(true);
-        // CSS
         scrollPane.getStyleClass().add("rowScrollPane");
 
         // Añadir el título y el ScrollPane a la sección

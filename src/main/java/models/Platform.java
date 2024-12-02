@@ -1,14 +1,18 @@
 package models;
 
 public class Platform {
-    private PlatformDetails platformDetails;
-
-    // Getters and setters
-    public PlatformDetails getPlatform() {
-        return platformDetails;
+    private String name;
+    
+    public Platform(String name) {
+    	this.name = name;
     }
 
-    public void setPlatform(PlatformDetails platformDetails) {
-        this.platformDetails = platformDetails;
+    // Getter y setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

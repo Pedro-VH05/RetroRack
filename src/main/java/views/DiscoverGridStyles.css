@@ -55,5 +55,9 @@ BorderPane{
     -fx-alignment: bottom-left;
 }
 
+.iconos {
+	-fx-fill:white;
+}
+
 
 

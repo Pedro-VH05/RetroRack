@@ -1,7 +1,5 @@
 package utils;
 
-import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 
 public class PlatformIcons {
@@ -17,16 +15,16 @@ public class PlatformIcons {
 
 		// Usamos el switch para determinar qué path asignar
 		switch (platformName.toLowerCase()) {
-		case "playstation":
+		case "PlayStation 5":
 			path.setContent(PLAYSTATION);
 			break;
-		case "xbox":
+		case "Xbox Series S/X":
 			path.setContent(XBOX);
 			break;
-		case "nintendo":
+		case "Nintendo Switch":
 			path.setContent(NINTENDO);
 			break;
-		case "pc":
+		case "PC":
 			path.setContent(PC);
 			break;
 		default:
@@ -35,12 +33,5 @@ public class PlatformIcons {
 		}
 
 		return path;
-	}
-
-	// Método para crear el StackPane con el ícono
-	public static StackPane createPlatformIcon(String platformName) {
-		StackPane pane = new StackPane();
-		pane.getChildren().add(getPlatformIcon(platformName)); // Agregar el ícono al StackPane
-		return pane;
 	}
 }
