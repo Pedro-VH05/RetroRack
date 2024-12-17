@@ -1,6 +1,4 @@
-/utils/
 /META-INF/
-/views/
-/application/
 /controllers/
-/models/
+/utils/
+/application/

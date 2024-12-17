@@ -1,0 +1,63 @@
+@font-face {
+    fx-font-family: "Albert Sans ExtraBold";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+
+VBox {
+    -fx-background-color: #303030;
+}
+
+.root{
+    -fx-background-color: #303030;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 56.0px;
+}
+
+.image-view {
+   -fx-effect: 
+     innershadow(gaussian, rgba(0, 0, 0, 0.9), 20, 0.5, 0, 0);
+    -fx-cursor: hand;
+}
+
+.custom-hbox {
+    -fx-background-color: #303030;
+}
+
+.mainScrollPane{
+     -fx-background-color: #303030;
+}
+
+BorderPane{
+    -fx-cursor: hand;
+}
+
+.categoryLabel{
+    -fx-font-size: 50.0px; 
+    -fx-font-weight: bold;
+    -fx-font-family: "Albert Sans ExtraBold";
+}
+
+.rowScrollPane {
+    -fx-background-color: transparent;
+}
+
+.titulo-juego {
+    -fx-text-fill: #FF983D;
+    -fx-font-size: 20px;
+   /* -fx-font-weight: bold;*/
+    -fx-background-color: black;
+    -fx-background-radius: 0 0 5 5;
+    -fx-padding: 10px;
+    -fx-text-alignment: left;
+    -fx-alignment: bottom-left;
+}
+
+.iconos {
+	-fx-fill:white;
+}
+
+
+

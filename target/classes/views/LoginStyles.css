@@ -1,0 +1,79 @@
+@font-face {
+    fx-font-family: "Genos SemiBold";
+    src: url('/fonts/Genos-SemiBold.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Light";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Black";
+    src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
+}
+@font-face {
+    fx-font-family: "Albert Sans Italic";
+    src: url('/fonts/AlbertSans-Italic.ttf');
+}
+
+StackPane{
+	-fx-background-color: #303030
+}
+
+#logoTitulo {
+    -fx-font-family: "Genos SemiBold";
+    -fx-font-size: 60.0;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-family: "Albert Sans Italic";
+    -fx-font-size: 40.0;
+    -fx-alignment: center;
+}
+
+.text-field {
+    -fx-background-color: #0F0F0F;
+    -fx-background-radius: 30.0;
+    -fx-text-fill: white;
+    -fx-font-family: "Albert Sans Light";
+    -fx-font-size: 24.0;
+}
+
+.password-field {
+    -fx-background-color: #0F0F0F;
+    -fx-background-radius: 30.0;
+    -fx-font-family: "Albert Sans Light";
+    -fx-font-size: 24.0;
+}
+
+#btnLogin {
+    -fx-background-color: #FF983D;
+    -fx-text-fill: black;
+    -fx-font-family: "Albert Sans Black";
+    -fx-font-size: 24.0;
+    -fx-background-radius: 50.0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.5), 20.0, 0.5, 0.0, 4.0);
+}
+
+#btnLogin:hover {
+    -fx-background-color: #e3a56d;
+    -fx-text-fill: black;
+    -fx-font-family: "Albert Sans Black";
+    -fx-font-size: 24.0;
+    -fx-background-radius: 50.0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.5), 20.0, 0.5, 0.0, 4.0);
+}
+
+#lblNoTienesCuenta {
+    -fx-font-family: "Albert Sans Black";
+    -fx-font-style: italic;
+    -fx-font-size: 32.0;
+}
+
+#lblCrearCuenta {
+    -fx-font-family: "Albert Sans Black";
+    -fx-font-style: italic;
+    -fx-font-size: 24.0;
+    -fx-underline: true;
+    -fx-text-fill: #FF983D;
+}

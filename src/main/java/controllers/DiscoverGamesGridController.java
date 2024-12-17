@@ -9,8 +9,10 @@ import models.GameResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import utils.GameFetchUtils;
 import utils.GameGridBuilder;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiscoverGamesGridController {
@@ -24,23 +26,25 @@ public class DiscoverGamesGridController {
 	private OkHttpClient client = new OkHttpClient();
 
 	public void initialize() {
+		GameFetchUtils fetcher = new GameFetchUtils();
 		try {
-//			// Llamadas a la API para tres categorías de juegos
-//			List<Game> bestRatedGames = fetchGames(
-//					"https://api.rawg.io/api/games?ordering=-rating&key=8b5a6229e22946f4a639842b405b094b");
-//			List<Game> popularGames = fetchGames(
-//					"https://api.rawg.io/api/games?ordering=-added&key=8b5a6229e22946f4a639842b405b094b");
-//			List<Game> newGames = fetchGames(
-//					"https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&key=8b5a6229e22946f4a639842b405b094b");
-			List<Game> ps5 = fetchGames(
-					"https://api.rawg.io/api/games?platforms=187&key=8b5a6229e22946f4a639842b405b094b");
-
+			// Llamadas a la API para tres categorías de juegos 
+			List<Game> bestRatedGames = fetcher.fetchGames(
+					"https://api.rawg.io/api/games?ordering=-rating&page_size=15&key=8b5a6229e22946f4a639842b405b094b");
+			List<Game> popularGames = fetcher.fetchGames(
+					"https://api.rawg.io/api/games?ordering=-added&page_size=15&key=8b5a6229e22946f4a639842b405b094b");
+			List<Game> newGames = fetcher.fetchGames(
+					"https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=15&key=8b5a6229e22946f4a639842b405b094b");
+			List<Game> ps5 = fetcher.fetchGames(
+					"https://api.rawg.io/api/games?platforms=187&page_size=15&key=8b5a6229e22946f4a639842b405b094b");
+					
+			
 			// Añadimos las secciones
-//			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejor Valorados", bestRatedGames));
-//			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Populares", popularGames));
-//			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Nuevos", newGames));
+			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejor Valorados", bestRatedGames));
+			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Populares", popularGames));
+			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Nuevos", newGames));
 			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejores Valorados 2001", ps5));
-
+			
 			// Configuración del scroll principal
 			mainScrollPane.setFitToWidth(true);
 			mainScrollPane.setPannable(true);
@@ -53,24 +57,4 @@ public class DiscoverGamesGridController {
 		}
 	}
 
-	/**
-	 * Realiza una solicitud HTTP para obtener una lista de juegos.
-	 *
-	 * @param url URL de la API
-	 * @return Lista de juegos
-	 * @throws IOException Si ocurre un error en la solicitud
-	 */
-	private List<Game> fetchGames(String url) throws IOException {
-		Request request = new Request.Builder().url(url).build();
-
-		try (Response response = client.newCall(request).execute()) {
-			if (!response.isSuccessful()) {
-				throw new IOException("Unexpected code " + response);
-			}
-
-			Gson gson = new Gson();
-			GameResponse gameResponse = gson.fromJson(response.body().charStream(), GameResponse.class);
-			return gameResponse.getResults();
-		}
-	}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="mainScrollPane" minViewportHeight="600.0"
+	minViewportWidth="1920.0" prefHeight="200.0" prefWidth="200.0"
+	stylesheets="@DiscoverGridStyles.css" BorderPane.alignment="CENTER"
+	xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controllers.DiscoverGamesGridController">
+	<content>
+		<VBox id="vbox" fx:id="VBoxContainer" minHeight="600.0"
+			minWidth="1920.0" style="-fx-background-color: #303030;">
+			<padding>
+				<Insets left="60.0" right="60.0" top="20.0" />
+			</padding>
+		</VBox>
+	</content>
+	<BorderPane.margin>
+		<Insets top="30.0" />
+	</BorderPane.margin>
+</ScrollPane>

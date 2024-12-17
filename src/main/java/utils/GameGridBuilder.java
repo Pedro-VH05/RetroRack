@@ -3,32 +3,25 @@ package utils;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.SVGPath;
 import models.Game;
-import models.Platform;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Clase donde se crea el grid de juegos que se va a mostrar por pantalla
- */
 public class GameGridBuilder {
 
     private static final double IMAGE_WIDTH = 530;
     private static final double IMAGE_HEIGHT = 300;
 
     /**
-     * Crea una sección de juegos con un título y un ScrollPane horizontal.
+     * Crea la sección de juegos con un título y un ScrollPane horizontal.
      *
      * @param title Título de la sección
      * @param games Lista de juegos
@@ -51,7 +44,7 @@ public class GameGridBuilder {
         for (Game game : validGames) {
             BorderPane gamePane = new BorderPane();
 
-            // Crear el ImageView y configurar las dimensiones
+            // Crear el ImageView para la imagen del juego
             ImageView imageView = new ImageView(new Image(game.getBackgroundImage()));
             imageView.setFitWidth(IMAGE_WIDTH);
             imageView.setFitHeight(IMAGE_HEIGHT);
@@ -64,34 +57,37 @@ public class GameGridBuilder {
             clip.setArcHeight(20);
             imageView.setClip(clip);
 
-            // Crear un contenedor StackPane para superponer la imagen y el nombre
-            StackPane gameContainer = new StackPane();
+            // Crear un HBox para el título del juego y el texto "prueba"
+            HBox titleContainer = new HBox(10); // Espacio de 10px entre los Labels
+            titleContainer.setAlignment(Pos.CENTER);
 
-            // Crear la etiqueta del nombre del juego
-            Label gameNameLabel = new Label("  " + game.getName());
+            // Crear el Label con el título del juego
+            Label gameNameLabel = new Label(game.getName());
             gameNameLabel.getStyleClass().add("titulo-juego");
 
-            // Ajustar el ancho del Label al ancho de la imagen
-            gameNameLabel.setMaxWidth(IMAGE_WIDTH);
-            gameNameLabel.setMinWidth(IMAGE_WIDTH);
-            gameNameLabel.setPrefWidth(IMAGE_WIDTH);
+            // Crear el Label con el texto "prueba"
+            Label pruebaLabel = new Label("prueba");
+            pruebaLabel.getStyleClass().add("prueba-label");
 
-            StackPane.setAlignment(gameNameLabel, Pos.BOTTOM_CENTER);
+            // Añadir los Labels al HBox
+            titleContainer.getChildren().addAll(gameNameLabel, pruebaLabel);
 
-            // Añadir la imagen, el nombre y los iconos de las plataformas al StackPane
-            gameContainer.getChildren().addAll(imageView, gameNameLabel);
+            // Crear un contenedor principal para la imagen y el título
+            VBox gameContainer = new VBox(10); // Espacio de 10px entre la imagen y el título
+            gameContainer.setAlignment(Pos.CENTER);
+            gameContainer.getChildren().addAll(imageView, titleContainer);
 
-            // Agregar el StackPane al BorderPane
+            // Añadir el VBox al BorderPane
             gamePane.setCenter(gameContainer);
 
-            // Añadir el BorderPane al HBox
+            // Añadir el BorderPane al HBox de juegos
             gamesRow.getChildren().add(gamePane);
         }
 
         // Crear el ScrollPane para esta fila
         ScrollPane scrollPane = new ScrollPane(gamesRow);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setPannable(true);
         scrollPane.getStyleClass().add("rowScrollPane");
 
@@ -101,9 +97,15 @@ public class GameGridBuilder {
         return sectionContainer;
     }
 
+    /**
+     * Filtra los juegos con URL de imagen válida.
+     *
+     * @param games Lista de juegos
+     * @return Lista de juegos con imágenes válidas
+     */
     private static List<Game> validateImgURL(List<Game> games) {
-        // Solo se muestran los juegos que tienen URL válida
-        return games.stream().filter(game -> game.getBackgroundImage() != null && !game.getBackgroundImage().isEmpty())
+        return games.stream()
+                .filter(game -> game.getBackgroundImage() != null && !game.getBackgroundImage().isEmpty())
                 .collect(Collectors.toList());
     }
 }
