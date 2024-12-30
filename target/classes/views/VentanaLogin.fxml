@@ -16,7 +16,8 @@
 <StackPane id="stackPane" prefHeight="850.0" prefWidth="800.0"
 	xmlns="http://javafx.com/javafx/23.0.1"
 	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="controllers.LoginController">
+	fx:controller="controllers.LoginController"
+	stylesheets="@/views/LoginStyles.css">
 	<children>
 		<!-- Panel de Registro -->
 		<AnchorPane id="anchorPaneRregistro" fx:id="registerPane"
@@ -53,7 +54,7 @@
 					onMouseClicked="#goToLogin" />
 				<TextField layoutX="60.0" layoutY="330.0"
 					maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0"
-					prefWidth="670.0" promptText="Nombre de usuario">
+					prefWidth="670.0" promptText="Nombre de usuario" fx:id="nombreUsuario">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
@@ -62,14 +63,14 @@
 					</cursor>
 				</TextField>
 				<PasswordField layoutX="60.0" layoutY="410.0"
-					prefHeight="50.0" prefWidth="670.0" promptText=" Contraseña">
+					prefHeight="50.0" prefWidth="670.0" promptText="Contraseña" fx:id="password">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
 				</PasswordField>
 				<TextField layoutX="60.0" layoutY="490.0"
 					maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0"
-					prefWidth="670.0" promptText="Email">
+					prefWidth="670.0" promptText="Email" fx:id="email">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
@@ -79,7 +80,7 @@
 				</TextField>
 				<TextField layoutX="60.0" layoutY="570.0"
 					maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0"
-					prefWidth="670.0" promptText="Nombre">
+					prefWidth="670.0" promptText="Nombre" fx:id="nombreCompleto">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
@@ -89,7 +90,7 @@
 				</TextField>
 				<TextField layoutX="60.0" layoutY="650.0"
 					maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0"
-					prefWidth="670.0" promptText="Fecha de Nacimiento">
+					prefWidth="670.0" promptText="Fecha de Nacimiento" fx:id="fechaNacimiento">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
@@ -99,7 +100,7 @@
 				</TextField>
 				<Button id="btnLogin" fx:id="btnRegister" layoutX="250.0"
 					layoutY="725.0" mnemonicParsing="false" prefHeight="80.0"
-					prefWidth="285.0" text="Crear cuenta" textAlignment="CENTER">
+					prefWidth="285.0" text="Crear cuenta" textAlignment="CENTER" onMouseClicked="#addUser">
 					<font>
 						<Font name="System Italic" size="24.0" />
 					</font>
