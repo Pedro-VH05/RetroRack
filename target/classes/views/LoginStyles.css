@@ -77,3 +77,30 @@ StackPane{
     -fx-underline: true;
     -fx-text-fill: #FF983D;
 }
+
+/* Estilo general del DatePicker */
+.date-picker {
+    -fx-background-radius: 30; /* Ajusta el radio para redondear */
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-border-radius: 30; /* Bordes redondeados */
+    
+}
+
+
+/* Estilo del campo de texto interno */
+.date-picker .text-field {
+    -fx-background-radius: 30;
+    -fx-background-color: transparent;
+    -fx-border-radius: 30;
+
+}
+
+/* Botón que abre el popup */
+.date-picker .arrow-button {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-background-radius: 15; /* Bordes redondeados */
+    -fx-scale-x: 2; /* Escala horizontal */
+    -fx-scale-y: 2; /* Escala vertical */
+    -fx-padding: 20;
+}
+

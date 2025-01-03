@@ -14,7 +14,7 @@ public class BBDDConnector implements AutoCloseable {
    private static final String BBDD = "bdretrorack";
    private static final String PARAMETROS = "?serverTimezone=UTC";
    private static final String USUARIO = "root";
-   private static final String CLAVE = "root";
+   private static final String CLAVE = "1234";
    
    private Connection conexion;
 
