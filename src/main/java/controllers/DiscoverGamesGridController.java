@@ -1,18 +1,12 @@
 package controllers;
 
-import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import models.Game;
-import models.GameResponse;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import utils.GameFetchUtils;
 import utils.GameGridBuilder;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DiscoverGamesGridController {

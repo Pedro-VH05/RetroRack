@@ -8,14 +8,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class mainApp extends Application {
+public class MainApp extends Application {
 
    @Override
    public void start(Stage primaryStage) {
       try {
          FXMLLoader loader = new FXMLLoader();
 
-         loader.setLocation(mainApp.class.getResource("/views/VentanaLogin.fxml"));
+         loader.setLocation(MainApp.class.getResource("/views/VentanaLogin.fxml"));
          primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
          Pane ventana = (Pane) loader.load();

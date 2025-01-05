@@ -15,8 +15,8 @@
     src: url('/fonts/AlbertSans-Italic.ttf');
 }
 
-StackPane{
-	-fx-background-color: #303030
+#stackPane{
+	-fx-background-image: url("/images/fondo2.png");
 }
 
 #logoTitulo {
@@ -56,12 +56,12 @@ StackPane{
 }
 
 #btnLogin:hover {
-    -fx-background-color: #e3a56d;
+    -fx-background-color: #FF983D;
     -fx-text-fill: black;
     -fx-font-family: "Albert Sans Black";
     -fx-font-size: 24.0;
     -fx-background-radius: 50.0;
-    -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.5), 20.0, 0.5, 0.0, 4.0);
+    -fx-effect: dropshadow(gaussian, #FF983D, 15.0, 0.2, 0.0, 0.0);
 }
 
 #lblNoTienesCuenta {
@@ -80,9 +80,9 @@ StackPane{
 
 /* Estilo general del DatePicker */
 .date-picker {
-    -fx-background-radius: 30; /* Ajusta el radio para redondear */
-    -fx-background-color: transparent; /* Fondo transparente */
-    -fx-border-radius: 30; /* Bordes redondeados */
+    -fx-background-radius: 30;
+    -fx-background-color: #303030;
+    -fx-border-radius: 30; 
     
 }
 
@@ -90,17 +90,20 @@ StackPane{
 /* Estilo del campo de texto interno */
 .date-picker .text-field {
     -fx-background-radius: 30;
-    -fx-background-color: transparent;
     -fx-border-radius: 30;
-
+    -fx-background-color: #121212;
 }
 
 /* Botón que abre el popup */
 .date-picker .arrow-button {
-    -fx-background-color: transparent; /* Fondo transparente */
-    -fx-background-radius: 15; /* Bordes redondeados */
-    -fx-scale-x: 2; /* Escala horizontal */
-    -fx-scale-y: 2; /* Escala vertical */
+    -fx-background-color: #FF983D;
+    -fx-background-radius: 30;
     -fx-padding: 20;
+    -fx-cursor: hand;
 }
 
+.date-picker .arrow-button .arrow {
+	-fx-background-color: white;
+    -fx-scale-x: 2; /* Escala horizontal */
+	-fx-scale-y: 2; /* Escala vertical */
+}

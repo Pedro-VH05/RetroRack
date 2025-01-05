@@ -18,7 +18,7 @@ public class EmailUtil {
 	public static void enviarCorreoBienvenida(String destinatario, String nombreUsuario) {
 		String email = "soporteretrorack@gmail.com";
 		// Contraseña de aplicación
-		String password = "atef uwmq phdl zehu";
+		String appPass = "atef uwmq phdl zehu";
 
 		// Configuración de propiedades de conexión al servidor SMTP de Gmail
 		Properties propiedades = new Properties();
@@ -31,7 +31,7 @@ public class EmailUtil {
 		Session session = Session.getInstance(propiedades, new Authenticator() {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(email, password);
+				return new PasswordAuthentication(email, appPass);
 			}
 		});
 
