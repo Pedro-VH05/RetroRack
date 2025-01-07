@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import models.Game;
-import okhttp3.OkHttpClient;
 import utils.GameFetchUtils;
 import utils.GameGridBuilder;
 import java.util.List;
@@ -16,8 +15,6 @@ public class DiscoverGamesGridController {
 
 	@FXML
 	private VBox VBoxContainer;
-
-	private OkHttpClient client = new OkHttpClient();
 
 	public void initialize() {
 		GameFetchUtils fetcher = new GameFetchUtils();

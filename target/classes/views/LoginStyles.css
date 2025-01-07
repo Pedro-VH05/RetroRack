@@ -6,10 +6,12 @@
     fx-font-family: "Albert Sans Light";
     src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
 }
+
 @font-face {
     fx-font-family: "Albert Sans Black";
     src: url('/fonts/AlbertSans-VariableFont_wght.ttf');
 }
+
 @font-face {
     fx-font-family: "Albert Sans Italic";
     src: url('/fonts/AlbertSans-Italic.ttf');
@@ -46,7 +48,7 @@
     -fx-font-size: 24.0;
 }
 
-#btnLogin {
+.formBtn {
     -fx-background-color: #FF983D;
     -fx-text-fill: black;
     -fx-font-family: "Albert Sans Black";
@@ -55,7 +57,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.5), 20.0, 0.5, 0.0, 4.0);
 }
 
-#btnLogin:hover {
+.formBtn:hover {
     -fx-background-color: #FF983D;
     -fx-text-fill: black;
     -fx-font-family: "Albert Sans Black";
@@ -68,14 +70,25 @@
     -fx-font-family: "Albert Sans Black";
     -fx-font-style: italic;
     -fx-font-size: 32.0;
+    -fx-font-weight: 900;
 }
 
-#lblCrearCuenta {
+#lblIngresaTuCorreo {
     -fx-font-family: "Albert Sans Black";
-    -fx-font-style: italic;
+    -fx-font-size: 24.0;
+    -fx-font-weight: 600;
+}
+
+#lblCrearCuenta, #lblOlvidadoContrasenya {
+    -fx-font-family: "Albert Sans Black";
     -fx-font-size: 24.0;
     -fx-underline: true;
     -fx-text-fill: #FF983D;
+    -fx-font-weight: 900;
+}
+
+#lblOlvidadoContrasenya {
+	 -fx-font-size: 22.0;
 }
 
 /* Estilo general del DatePicker */
@@ -106,4 +119,16 @@
 	-fx-background-color: white;
     -fx-scale-x: 2; /* Escala horizontal */
 	-fx-scale-y: 2; /* Escala vertical */
+}
+
+
+#recoveryPasswordPane {
+    -fx-background-radius: 20;
+	-fx-background-color: #242424;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 30.0, 0.2, 4.0, 4.0);
+}
+
+
+#btnSendCode {
+	-fx-background-radius: 8;
 }

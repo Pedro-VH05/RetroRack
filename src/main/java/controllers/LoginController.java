@@ -1,8 +1,7 @@
 package controllers;
 
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -10,26 +9,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
-import javafx.util.Duration;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import utils.BBDDConnector;
+import utils.BBDDUtils;
 import utils.EmailUtil;
-import utils.PasswordUtil;
+import utils.MensajesErrorUtil;
+import utils.TransitionUtil;
 
 public class LoginController {
-	
-	// Queries
-	private final static String GET_MAX_ID  = "SELECT MAX(id) AS max_id FROM Usuario";
-	private final static String CHECK_EMAIL  = "SELECT COUNT(*) AS count FROM Usuario WHERE email = ?";
-	private final static String INSERT_USER = "INSERT INTO Usuario (id, nombre_usuario, password, email, "
-			+ "nombre_completo, fecha_nacimiento, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 	@FXML
 	private SVGPath arrowBackToLogin;
@@ -60,12 +49,24 @@ public class LoginController {
 
 	@FXML
 	private PasswordField loginPasswordField;
-	
+
 	@FXML
 	private TextField loginUsernameField;
 
 	@FXML
 	private TextField loginPasswordTextField;
+	
+	@FXML
+	private PasswordField newPasswordField;
+
+	@FXML
+	private PasswordField newPasswordFieldConfirmation;
+	
+	@FXML
+	private TextField newTxtPassword;
+	
+	@FXML
+	private TextField newTxtPasswordConfirmation;
 
 	@FXML
 	private TextField email;
@@ -80,45 +81,76 @@ public class LoginController {
 	private StackPane openEye;
 
 	@FXML
+	private Pane closeAppBtn;
+
+	@FXML
+	private AnchorPane recoveryPasswordPane;
+
+	@FXML
+	private AnchorPane verifyCodePane;
+	
+	@FXML
+	private AnchorPane newPasswordPane;
+
+	@FXML
+	private Label recoverPasswordBtn;
+
+	@FXML
+	private Button btnSendCode;
+	
+	@FXML
+	private Button btnVerifyCode;
+
+	@FXML
+	private TextField txtCorreoRecuperacion;
+
+	@FXML
+	private TextField txtCodigoRecuperacion;
+
+	// Instancias
+	private TransitionUtil transition = new TransitionUtil();
+	private BBDDUtils bdUtil = new BBDDUtils();
+	private MensajesErrorUtil mensaje = new MensajesErrorUtil();
+
+	private String emailUsuario;
+
+	@FXML
 	void goToLogin(MouseEvent event) {
-		animatePaneSwitch(registerPane, loginPane);
+		transition.fadeSwitch(registerPane, loginPane, 300);
 	}
 
 	@FXML
 	void goToRegister(MouseEvent event) {
-		// Animar la transición entre panes (loginPane -> registerPane)
-		animatePaneSwitch(loginPane, registerPane);
+		transition.fadeSwitch(loginPane, registerPane, 300);
+	}
+
+	@FXML
+	void goToRecoverPassword(MouseEvent event) {
+		transition.slideSwitch(null, recoveryPasswordPane, 0, 0, 200, true, 700);
+	}
+
+	@FXML
+	private void closePopup(MouseEvent event) {
+	    // Obtenemos el botón que triggereo el evento
+	    Node source = (Node) event.getSource();
+	    // Cogemos el pane correcto
+	    AnchorPane pane = (AnchorPane) source.getParent();
+	    
+	    if (pane != null) {
+	        transition.slideSwitch(null, pane, 0, 0, 200, false, 700);
+	    }
 	}
 
 	@FXML
 	void showPassword(MouseEvent event) {
-		// Copiar el texto del campo de contraseña al campo de texto
-		loginPasswordTextField.setText(loginPasswordField.getText());
-
-		// Ocultar campo de contraseña y mostrar el campo de texto
-		loginPasswordField.setVisible(false);
-		loginPasswordTextField.setVisible(true);
-
-		openEye.setVisible(true);
-		closedEye.setVisible(false);
-		return;
-	}
-
-	@FXML
-	void hidePassword(MouseEvent event) {
-		// Copiar el texto del campo de texto al campo de contraseña
-		loginPasswordField.setText(loginPasswordTextField.getText());
-
-		// Ocultar campo de texto y mostrar el campo de contraseña
-		loginPasswordTextField.setVisible(false);
-		loginPasswordField.setVisible(true);
-
-		openEye.setVisible(false);
-		closedEye.setVisible(true);
-
-		return;
+	    togglePasswordVisibility(loginPasswordTextField, loginPasswordField, closedEye, openEye);
 	}
 	
+	@FXML
+	void showNewPassword(MouseEvent event) {
+	    togglePasswordVisibility(newTxtPassword, newPasswordField, openEye, closedEye);
+	}
+
 
 	@FXML
 	private void addUser(MouseEvent event) {
@@ -131,21 +163,78 @@ public class LoginController {
 
 		if (nombreUsuario.isEmpty() || password.isEmpty() || email.isEmpty() || nombreCompleto.isEmpty()
 				|| fechaNacimiento == null) {
-			mostrarMensajeError("Todos los campos son obligatorios.");
+			mensaje.mostrarMensajeError("Todos los campos son obligatorios.");
 			return;
 		}
 
-		boolean success = registerUser(nombreUsuario, password, email, nombreCompleto, fechaNacimiento);
+		boolean success = bdUtil.registerUser(nombreUsuario, password, email, nombreCompleto, fechaNacimiento);
 
 		if (success) {
-			mostrarMensajeExito("Usuario registrado correctamente");
+			mensaje.mostrarMensajeExito("Usuario registrado correctamente");
 			goToLogin(event);
 			limpiarCampos();
 		} else {
-			mostrarMensajeError("Error al registrar el usuario");
+			mensaje.mostrarMensajeError("Error al registrar el usuario");
 		}
 	}
 
+	@FXML
+	void loginUser(MouseEvent event) {
+		String userInput = ((TextField) loginPane.lookup("#loginUsernameField")).getText();
+
+		// Obtenemos la contraseña del campo visible
+		String plainPassword;
+		if (loginPasswordField.isVisible()) {
+			plainPassword = loginPasswordField.getText();
+		} else {
+			plainPassword = loginPasswordTextField.getText();
+		}
+
+		if (userInput.isEmpty() || plainPassword.isEmpty()) {
+			mensaje.mostrarMensajeError("El nombre de usuario/correo y la contraseña son obligatorios.");
+			return;
+		}
+
+		if (bdUtil.verificaContrasenya(userInput, plainPassword)) {
+			// redirigir a home
+		}
+	}
+
+	@FXML
+	void sendCode(MouseEvent event) {
+		String destinatario = txtCorreoRecuperacion.getText();
+		
+		// Verificar si el correo está registrado
+		if (bdUtil.isEmailRegistered(destinatario)) {
+			emailUsuario = destinatario;
+			String recoveryCode = generateRecoveryCode();
+			bdUtil.updateRecoveryCode(destinatario, recoveryCode);
+			// EmailUtil.correoRecuperacionContrasenya(destinatario, recoveryCode);
+			transition.fadeSwitch(recoveryPasswordPane, verifyCodePane, 300);
+		} else {
+			mensaje.mostrarMensajeError("El correo electrónico no está registrado.");
+		}
+	}
+
+	@FXML
+	void verifyCode() {
+		System.out.println(emailUsuario);
+		String code = txtCodigoRecuperacion.getText();
+		if (bdUtil.verifyCodeFromDB(emailUsuario, code)) {
+			System.out.println("Codigo Correcto");
+			transition.fadeSwitch(verifyCodePane, newPasswordPane, 300);
+		
+		} else {
+			mensaje.mostrarMensajeError("El código de recuperación es incorrecto, prueba otra vez");
+		}
+	}
+
+	// Genera un código aleatorio de 6 dígitos
+	private String generateRecoveryCode() {
+		return String.format("%06d", (int) (Math.random() * 1_000_000));
+	}
+
+	// Limpia los campos del registro
 	private void limpiarCampos() {
 		// Limpiar campos de texto
 		nombreUsuario.clear();
@@ -155,142 +244,26 @@ public class LoginController {
 		fechaNacimiento.setValue(null);
 	}
 
-	private void animatePaneSwitch(AnchorPane activePane, AnchorPane hidePane) {
-		FadeTransition fadeOut = new FadeTransition(Duration.millis(300), activePane);
-		fadeOut.setFromValue(1.0);
-		fadeOut.setToValue(0.0);
-		fadeOut.setOnFinished(e -> {
-			activePane.setVisible(false);
-			hidePane.setVisible(true);
-
-			FadeTransition fadeIn = new FadeTransition(Duration.millis(300), hidePane);
-			fadeIn.setFromValue(0.0);
-			fadeIn.setToValue(1.0);
-			fadeIn.play();
-		});
-
-		fadeOut.play();
-	}
-
-	private boolean registerUser(String nombreUsuario, String password, String email, String nombreCompleto,
-			LocalDate fechaNacimiento) {
-		
-
-		try (BBDDConnector connector = new BBDDConnector();
-				Connection con = connector.conectar();
-				PreparedStatement maxIdStmt = con.prepareStatement(GET_MAX_ID);
-				PreparedStatement checkEmailStmt = con.prepareStatement(CHECK_EMAIL);
-				PreparedStatement insertStmt = con.prepareStatement(INSERT_USER)) {
-
-			con.setAutoCommit(false);
-
-			// Verificar si el correo ya existe
-			checkEmailStmt.setString(1, email);
-			ResultSet rs = checkEmailStmt.executeQuery();
-			if (rs.next() && rs.getInt("count") > 0) {
-				mostrarMensajeError("El correo electrónico ya está registrado.");
-				return false;
-			}
-
-			// Obtener el siguiente ID
-			int nuevoId = 1;
-			ResultSet rsMaxId = maxIdStmt.executeQuery();
-			if (rsMaxId.next()) {
-				nuevoId = rsMaxId.getInt("max_id") + 1;
-			}
-
-			String hashedPassword = PasswordUtil.hashPassword(password);
-			// Insertar el usuario
-			insertStmt.setInt(1, nuevoId);
-			insertStmt.setString(2, nombreUsuario);
-			insertStmt.setString(3, hashedPassword);
-			insertStmt.setString(4, email);
-			insertStmt.setString(5, nombreCompleto);
-			insertStmt.setDate(6, Date.valueOf(fechaNacimiento));
-			insertStmt.setDate(7, Date.valueOf(LocalDate.now()));
-
-			if (insertStmt.executeUpdate() > 0) {
-				// Enviar correo de bienvenida
-				EmailUtil.enviarCorreoBienvenida(email, nombreUsuario);
-				con.commit();
-				return true;
-			} else {
-				con.rollback();
-				return false;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+	private void togglePasswordVisibility(TextField textField, PasswordField passwordField, StackPane openEye, StackPane closedEye) {
+		 boolean isHiding = passwordField.isVisible();
+		 
+	    if (isHiding) {
+	        textField.setText(passwordField.getText());
+	        passwordField.setVisible(false);
+	        textField.setVisible(true);
+	        
+	        openEye.setVisible(true);
+	        closedEye.setVisible(false);
+	  
 	
-	@FXML
-	void logInUser(MouseEvent event) {
-	    String userInput = ((TextField) loginPane.lookup("#loginUsernameField")).getText();
-	    
-	    // Obtenemos la contraseña del campo visible
-	    String plainPassword;
-	    if (loginPasswordField.isVisible()) {
-	        plainPassword = loginPasswordField.getText();
 	    } else {
-	        plainPassword = loginPasswordTextField.getText();
+	        passwordField.setText(textField.getText());
+	        textField.setVisible(false);
+	        passwordField.setVisible(true);
+	        
+	        openEye.setVisible(false);
+	        closedEye.setVisible(true);
 	    }
-
-	    if (userInput.isEmpty() || plainPassword.isEmpty()) {
-	        mostrarMensajeError("El nombre de usuario/correo y la contraseña son obligatorios.");
-	        return;
-	    }
-
-	    String query = "SELECT password FROM Usuario WHERE email = ? OR nombre_usuario = ?";
-
-	    try (BBDDConnector connector = new BBDDConnector();
-	         Connection con = connector.conectar();
-	         PreparedStatement stmt = con.prepareStatement(query)) {
-
-	        // Configurar los parámetros de la consulta
-	        stmt.setString(1, userInput);
-	        stmt.setString(2, userInput);
-
-	        // Ejecutar la consulta
-	        ResultSet rs = stmt.executeQuery();
-
-	        if (rs.next()) {
-	            String hashedPassword = rs.getString("password");
-
-	            // Verificar la contraseña
-	            if (PasswordUtil.verifyPassword(plainPassword, hashedPassword)) {
-	                mostrarMensajeExito("Iniciando Sesión.");
-	                // Falta redirigir al usuario a la pantalla "home"
-	               
-	            } else {
-	                mostrarMensajeError("La contraseña es incorrecta.");
-	            }
-	        } else {
-	            mostrarMensajeError("El usuario o correo electrónico no existe.");
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        mostrarMensajeError("Ocurrió un error al intentar iniciar sesión.");
-	    }
-	}
-
-
-	private void mostrarMensajeError(String mensaje) {
-		Alert alerta = new Alert(Alert.AlertType.ERROR);
-		alerta.getDialogPane().getStylesheets().add(getClass().getResource("../views/Alert.css").toExternalForm());
-		alerta.setTitle("Error");
-		alerta.setContentText(mensaje);
-		alerta.setHeaderText(null);
-		alerta.showAndWait();
-	}
-
-	private void mostrarMensajeExito(String mensaje) {
-		Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-		alerta.getDialogPane().getStylesheets().add(getClass().getResource("../views/Alert.css").toExternalForm());
-		alerta.setTitle("Éxito");
-		alerta.setHeaderText(null);
-		alerta.setContentText(mensaje);
-		alerta.showAndWait();
 	}
 
 }
