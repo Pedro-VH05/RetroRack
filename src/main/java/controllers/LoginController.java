@@ -55,16 +55,16 @@ public class LoginController {
 
 	@FXML
 	private TextField loginPasswordTextField;
-	
+
 	@FXML
 	private PasswordField newPasswordField;
 
 	@FXML
 	private PasswordField newPasswordFieldConfirmation;
-	
+
 	@FXML
 	private TextField newTxtPassword;
-	
+
 	@FXML
 	private TextField newTxtPasswordConfirmation;
 
@@ -81,6 +81,18 @@ public class LoginController {
 	private StackPane openEye;
 
 	@FXML
+	private StackPane newClosedEye;
+
+	@FXML
+	private StackPane newOpenEye;
+
+	@FXML
+	private StackPane newClosedEyeConfirmation;
+
+	@FXML
+	private StackPane newOpenEyeConfirmation;
+
+	@FXML
 	private Pane closeAppBtn;
 
 	@FXML
@@ -88,7 +100,7 @@ public class LoginController {
 
 	@FXML
 	private AnchorPane verifyCodePane;
-	
+
 	@FXML
 	private AnchorPane newPasswordPane;
 
@@ -97,7 +109,7 @@ public class LoginController {
 
 	@FXML
 	private Button btnSendCode;
-	
+
 	@FXML
 	private Button btnVerifyCode;
 
@@ -125,32 +137,37 @@ public class LoginController {
 	}
 
 	@FXML
-	void goToRecoverPassword(MouseEvent event) {
+	void goToRecoverPassword() {
 		transition.slideSwitch(null, recoveryPasswordPane, 0, 0, 200, true, 700);
 	}
 
 	@FXML
 	private void closePopup(MouseEvent event) {
-	    // Obtenemos el botón que triggereo el evento
-	    Node source = (Node) event.getSource();
-	    // Cogemos el pane correcto
-	    AnchorPane pane = (AnchorPane) source.getParent();
-	    
-	    if (pane != null) {
-	        transition.slideSwitch(null, pane, 0, 0, 200, false, 700);
-	    }
+		// Obtenemos el botón que triggereo el evento
+		Node source = (Node) event.getSource();
+		// Cogemos el pane correcto
+		AnchorPane pane = (AnchorPane) source.getParent();
+
+		if (pane != null) {
+			transition.slideSwitch(null, pane, 0, 0, 200, false, 700);
+		}
 	}
 
 	@FXML
-	void showPassword(MouseEvent event) {
-	    togglePasswordVisibility(loginPasswordTextField, loginPasswordField, closedEye, openEye);
-	}
-	
-	@FXML
-	void showNewPassword(MouseEvent event) {
-	    togglePasswordVisibility(newTxtPassword, newPasswordField, openEye, closedEye);
+	void showPassword() {
+		togglePasswordVisibility(loginPasswordTextField, loginPasswordField, openEye, closedEye);
 	}
 
+	@FXML
+	void showNewPassword() {
+		togglePasswordVisibility(newTxtPassword, newPasswordField, newOpenEye, newClosedEye);
+	}
+
+	@FXML
+	void showNewPasswordConfirmation() {
+		togglePasswordVisibility(newTxtPasswordConfirmation, newPasswordFieldConfirmation, newOpenEyeConfirmation,
+				newClosedEyeConfirmation);
+	}
 
 	@FXML
 	private void addUser(MouseEvent event) {
@@ -179,7 +196,7 @@ public class LoginController {
 	}
 
 	@FXML
-	void loginUser(MouseEvent event) {
+	void loginUser() {
 		String userInput = ((TextField) loginPane.lookup("#loginUsernameField")).getText();
 
 		// Obtenemos la contraseña del campo visible
@@ -201,9 +218,9 @@ public class LoginController {
 	}
 
 	@FXML
-	void sendCode(MouseEvent event) {
+	void sendCode() {
 		String destinatario = txtCorreoRecuperacion.getText();
-		
+
 		// Verificar si el correo está registrado
 		if (bdUtil.isEmailRegistered(destinatario)) {
 			emailUsuario = destinatario;
@@ -223,9 +240,34 @@ public class LoginController {
 		if (bdUtil.verifyCodeFromDB(emailUsuario, code)) {
 			System.out.println("Codigo Correcto");
 			transition.fadeSwitch(verifyCodePane, newPasswordPane, 300);
-		
+
 		} else {
 			mensaje.mostrarMensajeError("El código de recuperación es incorrecto, prueba otra vez");
+		}
+	}
+
+	@FXML
+	void changePassword() {
+		// Obtenemos la contraseña del campo visible
+		String plainPassword;
+		if (newPasswordField.isVisible()) {
+			plainPassword = newPasswordField.getText();
+		} else {
+			plainPassword = newTxtPassword.getText();
+		}
+		String plainPasswordConfirmation;
+		if (newPasswordFieldConfirmation.isVisible()) {
+			plainPasswordConfirmation = newPasswordFieldConfirmation.getText();
+		} else {
+			plainPasswordConfirmation = newTxtPasswordConfirmation.getText();
+		}
+		
+		if (plainPassword.equals(plainPasswordConfirmation)) {
+			System.out.println("Cambiando contraseñas...");
+			bdUtil.updatePassword(emailUsuario, plainPassword);
+			transition.fadeSwitch(newPasswordPane, null, 300);
+		} else {
+			mensaje.mostrarMensajeError("Las contraseñas no coinciden");
 		}
 	}
 
@@ -244,26 +286,26 @@ public class LoginController {
 		fechaNacimiento.setValue(null);
 	}
 
-	private void togglePasswordVisibility(TextField textField, PasswordField passwordField, StackPane openEye, StackPane closedEye) {
-		 boolean isHiding = passwordField.isVisible();
-		 
-	    if (isHiding) {
-	        textField.setText(passwordField.getText());
-	        passwordField.setVisible(false);
-	        textField.setVisible(true);
-	        
-	        openEye.setVisible(true);
-	        closedEye.setVisible(false);
-	  
-	
-	    } else {
-	        passwordField.setText(textField.getText());
-	        textField.setVisible(false);
-	        passwordField.setVisible(true);
-	        
-	        openEye.setVisible(false);
-	        closedEye.setVisible(true);
-	    }
+	private void togglePasswordVisibility(TextField textField, PasswordField passwordField, StackPane openEye,
+			StackPane closedEye) {
+		boolean isHiding = passwordField.isVisible();
+
+		if (isHiding) {
+			textField.setText(passwordField.getText());
+			passwordField.setVisible(false);
+			textField.setVisible(true);
+
+			openEye.setVisible(true);
+			closedEye.setVisible(false);
+
+		} else {
+			passwordField.setText(textField.getText());
+			textField.setVisible(false);
+			passwordField.setVisible(true);
+
+			openEye.setVisible(false);
+			closedEye.setVisible(true);
+		}
 	}
 
 }

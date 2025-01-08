@@ -258,5 +258,31 @@ public class BBDDUtils implements AutoCloseable {
 			return false;
 		}
 	}
+	
+	/**
+	 * 
+	 * @param email
+	 * @param newPassword
+	 * @return
+	 */
+	public boolean updatePassword(String email, String newPassword) {
+	    String query = "UPDATE usuario SET password = ? WHERE email = ?";
+	    String hashedPassword = PasswordUtil.hashPassword(newPassword);
+
+	    try (BBDDUtils connector = new BBDDUtils();
+	         Connection con = connector.conectar();
+	         PreparedStatement stmt = con.prepareStatement(query)) {
+	        
+	        stmt.setString(1, hashedPassword); // Establece la contraseña hasheada
+	        stmt.setString(2, email);          // Establece el email del usuario
+
+	        int rowsUpdated = stmt.executeUpdate();
+	        return rowsUpdated > 0;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }

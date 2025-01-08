@@ -15,24 +15,32 @@ public class TransitionUtil {
 	 * @param duration   La duración de la transición en milisegundos.
 	 */
 	public void fadeSwitch(Node activePane, Node hidePane, double duration) {
-		FadeTransition fadeOut = new FadeTransition(Duration.millis(duration), activePane);
-		fadeOut.setFromValue(1.0);
-		fadeOut.setToValue(0.0);
+	    if (activePane == null) {
+	        throw new IllegalArgumentException("El nodo que se va a desaparecer no puede ser nulo.");
+	    }
 
-		fadeOut.setOnFinished(e -> {
-			activePane.setVisible(false);
-			// Asegurarse de que hidePane empieza desde completamente transparente
-			hidePane.setVisible(true);
-			hidePane.setOpacity(0.0); // Aquí es donde agregas esto
+	    FadeTransition fadeOut = new FadeTransition(Duration.millis(duration), activePane);
+	    fadeOut.setFromValue(1.0);
+	    fadeOut.setToValue(0.0);
 
-			FadeTransition fadeIn = new FadeTransition(Duration.millis(duration), hidePane);
-			fadeIn.setFromValue(0.0);
-			fadeIn.setToValue(1.0);
-			fadeIn.play();
-		});
+	    fadeOut.setOnFinished(e -> {
+	        activePane.setVisible(false);
+	        
+	        if (hidePane != null) {
+	        	
+	            hidePane.setVisible(true);
+	            hidePane.setOpacity(0.0);
 
-		fadeOut.play();
+	            FadeTransition fadeIn = new FadeTransition(Duration.millis(duration), hidePane);
+	            fadeIn.setFromValue(0.0);
+	            fadeIn.setToValue(1.0);
+	            fadeIn.play();
+	        }
+	    });
+
+	    fadeOut.play();
 	}
+
 
 	/**
 	 * Transición de deslizamiento.
