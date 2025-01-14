@@ -10,101 +10,111 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import models.Game;
+import models.Platform;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameGridBuilder {
 
-    private static final double IMAGE_WIDTH = 530;
-    private static final double IMAGE_HEIGHT = 300;
+	private static final double IMAGE_WIDTH = 530;
+	private static final double IMAGE_HEIGHT = 300;
 
-    /**
-     * Crea la sección de juegos con un título y un ScrollPane horizontal.
-     *
-     * @param title Título de la sección
-     * @param games Lista de juegos
-     * @return VBox con la sección
-     */
-    public static VBox createGameSection(String title, List<Game> games) {
-        VBox sectionContainer = new VBox();
+	/**
+	 * Crea la sección de juegos con un título y un ScrollPane horizontal.
+	 *
+	 * @param title Título de la sección
+	 * @param games Lista de juegos
+	 * @return VBox con la sección
+	 */
+	public static VBox createGameSection(String title, List<Game> games) {
+		VBox sectionContainer = new VBox();
 
-        // Crear un título para la sección
-        Label sectionLabel = new Label(title);
-        sectionContainer.getStyleClass().add("categoryLabel");
+		// Crear un título para la sección
+		Label sectionLabel = new Label(title);
+		sectionContainer.getStyleClass().add("categoryLabel");
 
-        // Crear el HBox que contendrá los juegos
-        HBox gamesRow = new HBox(60);
-        gamesRow.getStyleClass().add("custom-hbox");
+		// Crear el HBox que contendrá los juegos
+		HBox gamesRow = new HBox(60);
+		gamesRow.getStyleClass().add("custom-hbox");
 
-        List<Game> validGames = validateImgURL(games);
+		List<Game> validGames = validateImgURL(games);
 
-        // Agregar los juegos válidos al HBox
-        for (Game game : validGames) {
-            BorderPane gamePane = new BorderPane();
+		// Agregar los juegos válidos al HBox
+		for (Game game : validGames) {
+			BorderPane gamePane = new BorderPane();
 
-            // Crear el ImageView para la imagen del juego
-            ImageView imageView = new ImageView(new Image(game.getBackgroundImage()));
-            imageView.setFitWidth(IMAGE_WIDTH);
-            imageView.setFitHeight(IMAGE_HEIGHT);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
+			// Crear el ImageView para la imagen del juego
+			ImageView imageView = new ImageView(new Image(game.getBackgroundImage()));
+			imageView.setId("game-background-image");
+			imageView.setFitWidth(IMAGE_WIDTH);
+			imageView.setFitHeight(IMAGE_HEIGHT);
+			imageView.setSmooth(true);
+			imageView.setCache(true);
 
-            // Clip para bordes redondeados
-            Rectangle clip = new Rectangle(IMAGE_WIDTH, IMAGE_HEIGHT);
-            clip.setArcWidth(20);
-            clip.setArcHeight(20);
-            imageView.setClip(clip);
+			// Clip para bordes redondeados
+			Rectangle clip = new Rectangle(IMAGE_WIDTH, IMAGE_HEIGHT);
+			clip.setArcWidth(20);
+			clip.setArcHeight(20);
+			imageView.setClip(clip);
 
-            // Crear un HBox para el título del juego y el texto "prueba"
-            HBox titleContainer = new HBox(10); // Espacio de 10px entre los Labels
-            titleContainer.setAlignment(Pos.CENTER);
+			// Crear un HBox para el título del juego y los iconos de las plataformas
+			HBox titleContainer = new HBox(10); // Espaciado entre los elementos
+			titleContainer.setAlignment(Pos.BASELINE_LEFT); // Alineación a la izquierda
 
-            // Crear el Label con el título del juego
-            Label gameNameLabel = new Label(game.getName());
-            gameNameLabel.getStyleClass().add("titulo-juego");
+			// Crear el Label con el título del juego
+			Label gameNameLabel = new Label(game.getName().toUpperCase());
+			gameNameLabel.getStyleClass().add("titulo-juego");
 
-            // Crear el Label con el texto "prueba"
-            Label pruebaLabel = new Label("prueba");
-            pruebaLabel.getStyleClass().add("prueba-label");
+			// Añadir el Label al HBox
+			titleContainer.getChildren().add(gameNameLabel);
 
-            // Añadir los Labels al HBox
-            titleContainer.getChildren().addAll(gameNameLabel, pruebaLabel);
+			// Recorrer las plataformas del juego y agregar los iconos
+			for (Platform platform : game.getPlatforms()) {
+				// Obtener el icono de la plataforma usando la clase PlatformIconManager
+				ImageView platformIcon = IconUtil.getPlatformIcon(platform);
 
-            // Crear un contenedor principal para la imagen y el título
-            VBox gameContainer = new VBox(10); // Espacio de 10px entre la imagen y el título
-            gameContainer.setAlignment(Pos.CENTER);
-            gameContainer.getChildren().addAll(imageView, titleContainer);
+				// Ajustar el tamaño del icono si es necesario
+				platformIcon.setFitWidth(30);
+				platformIcon.setFitHeight(30);
+				
+				// Añadir el icono al HBox
+				titleContainer.getChildren().add(platformIcon);
+			}
 
-            // Añadir el VBox al BorderPane
-            gamePane.setCenter(gameContainer);
+			// Crear un contenedor principal para la imagen y el título
+			VBox gameContainer = new VBox(10);
+			gameContainer.setAlignment(Pos.CENTER);
+			gameContainer.getChildren().addAll(imageView, titleContainer);
 
-            // Añadir el BorderPane al HBox de juegos
-            gamesRow.getChildren().add(gamePane);
-        }
+			// Añadir el VBox al BorderPane
+			gamePane.setCenter(gameContainer);
 
-        // Crear el ScrollPane para esta fila
-        ScrollPane scrollPane = new ScrollPane(gamesRow);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setPannable(true);
-        scrollPane.getStyleClass().add("rowScrollPane");
+			// Añadir el BorderPane al HBox de juegos
+			gamesRow.getChildren().add(gamePane);
+		}
 
-        // Añadir el título y el ScrollPane a la sección
-        sectionContainer.getChildren().addAll(sectionLabel, scrollPane);
+		// Crear el ScrollPane para esta fila
+		ScrollPane scrollPane = new ScrollPane(gamesRow);
+		scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		scrollPane.setPannable(true);
+		scrollPane.getStyleClass().add("rowScrollPane");
 
-        return sectionContainer;
-    }
+		// Añadir el título y el ScrollPane a la sección
+		sectionContainer.getChildren().addAll(sectionLabel, scrollPane);
 
-    /**
-     * Filtra los juegos con URL de imagen válida.
-     *
-     * @param games Lista de juegos
-     * @return Lista de juegos con imágenes válidas
-     */
-    private static List<Game> validateImgURL(List<Game> games) {
-        return games.stream()
-                .filter(game -> game.getBackgroundImage() != null && !game.getBackgroundImage().isEmpty())
-                .collect(Collectors.toList());
-    }
+		return sectionContainer;
+	}
+
+	/**
+	 * Filtra los juegos con URL de imagen válida.
+	 *
+	 * @param games Lista de juegos
+	 * @return Lista de juegos con imágenes válidas
+	 */
+	private static List<Game> validateImgURL(List<Game> games) {
+		return games.stream().filter(game -> game.getBackgroundImage() != null && !game.getBackgroundImage().isEmpty())
+				.collect(Collectors.toList());
+	}
 }

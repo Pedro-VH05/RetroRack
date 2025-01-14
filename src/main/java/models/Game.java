@@ -3,7 +3,7 @@ package models;
 import java.util.List;
 
 /**
- * Clase Juego 
+ * Clase Juego
  */
 public class Game {
 	private int id;
@@ -213,5 +213,4 @@ public class Game {
 	public void setScreenshots(List<String> screenshots) {
 		this.screenshots = screenshots;
 	}
-
 }

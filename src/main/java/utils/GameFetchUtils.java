@@ -3,6 +3,7 @@ package utils;
 import com.google.gson.Gson;
 import models.Game;
 import models.GameResponse;
+import models.Platform;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,15 +29,30 @@ public class GameFetchUtils {
 	 * @throws IOException Si ocurre un error en la solicitud
 	 */
 	public List<Game> fetchGames(String url) throws IOException {
+		// Crear una solicitud HTTP
 		Request request = new Request.Builder().url(url).build();
 
 		try (Response response = client.newCall(request).execute()) {
+			// Verificamos la respuesta
 			if (!response.isSuccessful()) {
 				throw new IOException("Error al obtener juegos: " + response);
 			}
 
 			Gson gson = new Gson();
 			GameResponse gameResponse = gson.fromJson(response.body().charStream(), GameResponse.class);
+
+			System.out.println("Total de juegos recibidos: " + gameResponse.getCount());
+
+			for (Game game : gameResponse.getResults()) {
+				System.out.println("Juego: " + game.getName());
+				List<Platform> lista = new ArrayList<>();
+				lista = game.getPlatforms();
+				for (Platform platform : lista) {
+					System.out.println("Plataformas: " + platform.toString());
+				}
+			}
+
+			// Retornar la lista de juegos
 			return gameResponse.getResults();
 		}
 	}
