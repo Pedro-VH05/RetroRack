@@ -1,9 +1,15 @@
 package utils;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
-
 import java.util.Properties;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 /**
  * Clase para manejar los emails de bienvenida y de recuperación de contraseña
@@ -53,7 +59,7 @@ public class EmailUtil {
 					+ "</style>" + "</head>" + "<body>" + "<div class=\"container\">"
 					+ "<img src=\"https://raw.githubusercontent.com/Pedro-VH05/RetroRack/main/src/main/resources/images/retroRack_logo.png\" alt=\"RetroRack Logo\">"
 					+ "<h1>Bienvenido " + nombreUsuario + "</h1>"
-					+ "<p>Estamos muy contentos de tenerte en nuestra comunidad. ¡Empecemos esta aventura juntos!</p>"
+					+ "<p>Estamos muy contentos de tenerte en nuestra comunidad.</p>"
 					+ "<p>Si tienes alguna pregunta o necesitas ayuda, no dudes en ponerte en contacto con nosotros.</p>"
 					+ "<p>¡Gracias por ser parte de RetroRack!</p>" + "</div>" + "</body>" + "</html>";
 

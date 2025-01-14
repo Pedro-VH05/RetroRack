@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 /**
@@ -14,17 +15,15 @@ import java.time.LocalDate;
 public class BBDDUtils implements AutoCloseable {
 
 	// Queries
-	private final static String GET_MAX_ID = "SELECT MAX(id) AS max_id FROM Usuario";
 	private final static String CHECK_EMAIL = "SELECT COUNT(*) AS count FROM Usuario WHERE email = ?";
-	private final static String INSERT_USER = "INSERT INTO Usuario (id, nombre_usuario, password, email, "
-			+ "nombre_completo, fecha_nacimiento, fecha_registro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private final static String INSERT_USER = "INSERT INTO Usuario (nombre_usuario, password, email, nombre_completo, fecha_nacimiento, fecha_registro)"
+			+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 	// Atributos
 	private static final String URL = "jdbc:mysql://localhost:3306/";
 	private static final String BBDD = "bdretrorack";
-	private static final String PARAMETROS = "?serverTimezone=UTC";
 	private static final String USUARIO = "root";
-	private static final String CLAVE = "1234";
+	private static final String CLAVE = "12345678";
 
 	private MensajesErrorUtil mensajeError = new MensajesErrorUtil();
 	private Connection conexion;
@@ -39,7 +38,7 @@ public class BBDDUtils implements AutoCloseable {
 
 		try {
 			// Creamos la conexión con los datos introducidos anteriormente
-			conexion = DriverManager.getConnection(URL + BBDD + PARAMETROS, USUARIO, CLAVE);
+			conexion = DriverManager.getConnection(URL + BBDD, USUARIO, CLAVE);
 			System.out.println("Conexion OK");
 		} catch (SQLException e) {
 			// Lanzamos error si falla la conexión
@@ -71,16 +70,15 @@ public class BBDDUtils implements AutoCloseable {
 	 * @param email           - Correo Electrónico del usuario
 	 * @param nombreCompleto  - Nombre completo del usuario
 	 * @param fechaNacimiento - Fecha de nacimiento del usuario
-	 * @return True si el registro se ha realizado con éxito, false si no
+	 * @return - True si el registro se ha realizado con éxito, false si no
 	 */
 	public boolean registerUser(String nombreUsuario, String password, String email, String nombreCompleto,
 			LocalDate fechaNacimiento) {
 
 		try (BBDDUtils connector = new BBDDUtils();
 				Connection con = connector.conectar();
-				PreparedStatement maxIdStmt = con.prepareStatement(GET_MAX_ID);
 				PreparedStatement checkEmailStmt = con.prepareStatement(CHECK_EMAIL);
-				PreparedStatement insertStmt = con.prepareStatement(INSERT_USER)) {
+				PreparedStatement insertStmt = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS)) {
 
 			con.setAutoCommit(false);
 
@@ -92,25 +90,17 @@ public class BBDDUtils implements AutoCloseable {
 				return false;
 			}
 
-			// Obtener el siguiente ID
-			int nuevoId = 1;
-			ResultSet rsMaxId = maxIdStmt.executeQuery();
-			if (rsMaxId.next()) {
-				nuevoId = rsMaxId.getInt("max_id") + 1;
-			}
-
 			String hashedPassword = PasswordUtil.hashPassword(password);
 			// Insertar el usuario
-			insertStmt.setInt(1, nuevoId);
-			insertStmt.setString(2, nombreUsuario);
-			insertStmt.setString(3, hashedPassword);
-			insertStmt.setString(4, email);
-			insertStmt.setString(5, nombreCompleto);
-			insertStmt.setDate(6, Date.valueOf(fechaNacimiento));
-			insertStmt.setDate(7, Date.valueOf(LocalDate.now()));
+			insertStmt.setString(1, nombreUsuario);
+			insertStmt.setString(2, hashedPassword);
+			insertStmt.setString(3, email);
+			insertStmt.setString(4, nombreCompleto);
+			insertStmt.setDate(5, Date.valueOf(fechaNacimiento));
+			insertStmt.setDate(6, Date.valueOf(LocalDate.now()));
 
 			if (insertStmt.executeUpdate() > 0) {
-				// Enviar correo de bienvenida
+				// Enviamos correo de bienvenida
 				EmailUtil.enviarCorreoBienvenida(email, nombreUsuario);
 				con.commit();
 				return true;
@@ -197,7 +187,7 @@ public class BBDDUtils implements AutoCloseable {
 	 * 
 	 * @param email        - Email al que se va a mandar ese código
 	 * @param recoveryCode - Código de recuperacion
-	 * @return True si no ocurre ningun error, false si ocurre alguno
+	 * @return - True si no ocurre ningun error, false si ocurre alguno
 	 */
 	public boolean updateRecoveryCode(String email, String recoveryCode) {
 		String query = "UPDATE Usuario SET cod_recuperacion = ? WHERE email = ?";
@@ -231,8 +221,8 @@ public class BBDDUtils implements AutoCloseable {
 	 * corresponde en la BBDD
 	 * 
 	 * @param destinatario - Email del usuario al que se le ha mandado el código
-	 * @param code  - Código insertado por el usuario
-	 * @return True si los códigos son iguales, false si no
+	 * @param code         - Código insertado por el usuario
+	 * @return - True si los códigos son iguales, false si no
 	 */
 	public boolean verifyCodeFromDB(String destinatario, String code) {
 		String query = "SELECT cod_recuperacion FROM usuario WHERE email = ? AND cod_recuperacion = ?";
@@ -258,31 +248,31 @@ public class BBDDUtils implements AutoCloseable {
 			return false;
 		}
 	}
-	
+
 	/**
+	 * Actualiza la contraseña de un usuario
 	 * 
-	 * @param email
-	 * @param newPassword
-	 * @return
+	 * @param email       - Email del usuario
+	 * @param newPassword - Nueva contraseña del usuario
+	 * @return - True si se cambia con exito, false si no
 	 */
 	public boolean updatePassword(String email, String newPassword) {
-	    String query = "UPDATE usuario SET password = ? WHERE email = ?";
-	    String hashedPassword = PasswordUtil.hashPassword(newPassword);
+		String query = "UPDATE usuario SET password = ? WHERE email = ?";
+		String hashedPassword = PasswordUtil.hashPassword(newPassword);
 
-	    try (BBDDUtils connector = new BBDDUtils();
-	         Connection con = connector.conectar();
-	         PreparedStatement stmt = con.prepareStatement(query)) {
-	        
-	        stmt.setString(1, hashedPassword); // Establece la contraseña hasheada
-	        stmt.setString(2, email);          // Establece el email del usuario
+		try (BBDDUtils connector = new BBDDUtils();
+				Connection con = connector.conectar();
+				PreparedStatement stmt = con.prepareStatement(query)) {
 
-	        int rowsUpdated = stmt.executeUpdate();
-	        return rowsUpdated > 0;
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+			stmt.setString(1, hashedPassword);
+			stmt.setString(2, email);
+
+			int rowsUpdated = stmt.executeUpdate();
+			return rowsUpdated > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-
 
 }

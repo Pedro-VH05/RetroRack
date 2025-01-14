@@ -226,7 +226,7 @@ public class LoginController {
 			emailUsuario = destinatario;
 			String recoveryCode = generateRecoveryCode();
 			bdUtil.updateRecoveryCode(destinatario, recoveryCode);
-			// EmailUtil.correoRecuperacionContrasenya(destinatario, recoveryCode);
+			EmailUtil.correoRecuperacionContrasenya(destinatario, recoveryCode);
 			transition.fadeSwitch(recoveryPasswordPane, verifyCodePane, 300);
 		} else {
 			mensaje.mostrarMensajeError("El correo electrónico no está registrado.");
