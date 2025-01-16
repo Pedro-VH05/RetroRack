@@ -15,26 +15,28 @@ public class DiscoverGamesGridController {
 
 	@FXML
 	private VBox VBoxContainer;
+	
+	private static final String API_KEY = "&key=d119a39f3ac64031a6ab6bb78b067da6";
 
 	public void initialize() {
 		GameFetchUtils fetcher = new GameFetchUtils();
 		try {
 			// Llamadas a la API para tres categorías de juegos 
 			List<Game> bestRatedGames = fetcher.fetchGames(
-					"https://api.rawg.io/api/games?ordering=-rating&page_size=3&key=8b5a6229e22946f4a639842b405b094b");
+					"https://api.rawg.io/api/games?ordering=-rating&page_size=15" + API_KEY);
 			List<Game> popularGames = fetcher.fetchGames(
-					"https://api.rawg.io/api/games?ordering=-added&page_size=3&key=8b5a6229e22946f4a639842b405b094b");
+					"https://api.rawg.io/api/games?ordering=-added&page_size=15" + API_KEY);
 			List<Game> newGames = fetcher.fetchGames(
-					"https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=3&key=8b5a6229e22946f4a639842b405b094b");
-			List<Game> ps5 = fetcher.fetchGames(
-					"https://api.rawg.io/api/games?platforms=187&page_size=3&key=8b5a6229e22946f4a639842b405b094b");
+					"https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=15" + API_KEY);
+			List<Game> b2001 = fetcher.fetchGames(
+					"https://api.rawg.io/api/games?dates=2001-01-01,2001-12-31&ordering=-rating" + API_KEY);
 					
 			
 			// Añadimos las secciones
 			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Populares", popularGames));
 			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Nuevos", newGames));
 			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejor Valorados", bestRatedGames));
-			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejores Valorados 2001", ps5));
+			VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejores Valorados 2001", b2001));
 			
 			// Configuración del scroll principal
 			mainScrollPane.setFitToWidth(true);

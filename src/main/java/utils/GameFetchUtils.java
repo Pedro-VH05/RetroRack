@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import models.Game;
 import models.GameResponse;
 import models.Platform;
+import models.PlatformWrapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class GameFetchUtils {
 
-	private static final String API_KEY = "8b5a6229e22946f4a639842b405b094b";
+	private static final String API_KEY = "d119a39f3ac64031a6ab6bb78b067da6";
 	private static final OkHttpClient client = new OkHttpClient();
 
 	/**
@@ -41,15 +42,15 @@ public class GameFetchUtils {
 			Gson gson = new Gson();
 			GameResponse gameResponse = gson.fromJson(response.body().charStream(), GameResponse.class);
 
-			System.out.println("Total de juegos recibidos: " + gameResponse.getCount());
-
 			for (Game game : gameResponse.getResults()) {
 				System.out.println("Juego: " + game.getName());
-				List<Platform> lista = new ArrayList<>();
-				lista = game.getPlatforms();
-				for (Platform platform : lista) {
-					System.out.println("Plataformas: " + platform.toString());
-				}
+			
+				 for (PlatformWrapper platformWrapper : game.getPlatforms()) {
+				        Platform platform = platformWrapper.getPlatform();
+				        if (platform != null) {
+				            System.out.println("Plataforma: " + platform.getName());
+				        }
+				    }
 			}
 
 			// Retornar la lista de juegos

@@ -75,9 +75,4 @@ public class Platform {
 		this.imageBackground = imageBackground;
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
-
 }

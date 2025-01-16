@@ -8,7 +8,7 @@
    <content>
       <VBox id="vBox" fx:id="VBoxContainer">
          <padding>
-            <Insets bottom="60.0" left="60.0" top="60.0" />
+            <Insets bottom="100.0" left="60.0" right="30.0" top="60.0" />
          </padding>
       </VBox>
    </content>

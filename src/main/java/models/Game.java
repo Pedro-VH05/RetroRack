@@ -21,7 +21,7 @@ public class Game {
 	private int playtime;
 	private String metacritic;
 	private String esrbRating;
-	private List<Platform> platforms;
+	private List<PlatformWrapper> platforms;
 	private List<Genre> genres;
 	private List<Shop> shops;
 	private List<Tag> tags;
@@ -29,7 +29,7 @@ public class Game {
 
 	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image,
 			double rating, int ratingTop, List<Rating> ratings, int ratingsCount, int reviewsCount, int added,
-			int playtime, String metacritic, String esrbRating, List<Platform> platforms, List<Genre> genres,
+			int playtime, String metacritic, String esrbRating, List<PlatformWrapper> platforms, List<Genre> genres,
 			List<Shop> tiendas, List<Tag> tags, List<String> screenshots) {
 		super();
 		this.id = id;
@@ -174,11 +174,11 @@ public class Game {
 		this.esrbRating = esrbRating;
 	}
 
-	public List<Platform> getPlatforms() {
+	public List<PlatformWrapper> getPlatforms() {
 		return platforms;
 	}
 
-	public void setPlatforms(List<Platform> plataformas) {
+	public void setPlatforms(List<PlatformWrapper> plataformas) {
 		this.platforms = plataformas;
 	}
 

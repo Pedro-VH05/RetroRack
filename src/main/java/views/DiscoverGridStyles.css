@@ -40,11 +40,9 @@ BorderPane{
 
 .titulo-juego {
     -fx-text-fill: #FF983D;
-    -fx-font-size: 20px;
+    -fx-font-size: 28px;
     
 }
-
-
 
 #scrollPane {
 	-fx-background: #303030;

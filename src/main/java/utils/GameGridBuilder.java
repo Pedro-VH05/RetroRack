@@ -11,8 +11,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import models.Game;
 import models.Platform;
+import models.PlatformWrapper;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GameGridBuilder {
@@ -58,34 +61,52 @@ public class GameGridBuilder {
 			clip.setArcHeight(20);
 			imageView.setClip(clip);
 
-			// Crear un HBox para el título del juego y los iconos de las plataformas
-			HBox titleContainer = new HBox(10); // Espaciado entre los elementos
-			titleContainer.setAlignment(Pos.BASELINE_LEFT); // Alineación a la izquierda
+			// Crear un VBox para el título y los iconos de las plataformas
+			VBox titleAndIconsContainer = new VBox(5); // Espaciado entre título e iconos
+			titleAndIconsContainer.setAlignment(Pos.CENTER_LEFT);
 
 			// Crear el Label con el título del juego
 			Label gameNameLabel = new Label(game.getName().toUpperCase());
 			gameNameLabel.getStyleClass().add("titulo-juego");
 
-			// Añadir el Label al HBox
-			titleContainer.getChildren().add(gameNameLabel);
+			// Añadir el Label al VBox
+			titleAndIconsContainer.getChildren().add(gameNameLabel);
 
-			// Recorrer las plataformas del juego y agregar los iconos
-			for (Platform platform : game.getPlatforms()) {
-				// Obtener el icono de la plataforma usando la clase PlatformIconManager
-				ImageView platformIcon = IconUtil.getPlatformIcon(platform);
+			// Crear un HBox para los iconos de las plataformas
+			HBox platformIconsContainer = new HBox(0); 
+			platformIconsContainer.setAlignment(Pos.CENTER_LEFT);
 
-				// Ajustar el tamaño del icono si es necesario
-				platformIcon.setFitWidth(30);
-				platformIcon.setFitHeight(30);
-				
-				// Añadir el icono al HBox
-				titleContainer.getChildren().add(platformIcon);
+			// Usar un Set para rastrear plataformas únicas
+			Set<String> addedPlatforms = new HashSet<>();
+
+			// Recorrer las plataformas del juego y agregar los iconos únicos
+			for (PlatformWrapper platformWrapper : game.getPlatforms()) {
+			    Platform platform = platformWrapper.getPlatform();
+
+			    // Obtener el nombre principal de la plataforma (por ejemplo, "PlayStation" en lugar de "PlayStation 5")
+			    String platformGroup = IconUtil.getPlatformGroup(platform.getName());
+
+			    // Verificar si ya hemos añadido una plataforma de este grupo
+			    if (!addedPlatforms.contains(platformGroup)) {
+			        // Obtener el icono de la plataforma usando la clase IconUtil
+			        ImageView platformIcon = IconUtil.getPlatformIcon(platform);
+
+			        // Asegurar que no sea nulo antes de añadir
+			        if (platformIcon != null) {
+			            platformIconsContainer.getChildren().add(platformIcon);
+			            addedPlatforms.add(platformGroup); // Marcar este grupo como añadido
+			        }
+			    }
 			}
 
+
+			// Añadir el HBox de iconos al VBox principal
+			titleAndIconsContainer.getChildren().add(platformIconsContainer);
+
 			// Crear un contenedor principal para la imagen y el título
-			VBox gameContainer = new VBox(10);
+			VBox gameContainer = new VBox(0);
 			gameContainer.setAlignment(Pos.CENTER);
-			gameContainer.getChildren().addAll(imageView, titleContainer);
+			gameContainer.getChildren().addAll(imageView, titleAndIconsContainer);
 
 			// Añadir el VBox al BorderPane
 			gamePane.setCenter(gameContainer);

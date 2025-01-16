@@ -261,7 +261,7 @@ public class LoginController {
 		} else {
 			plainPasswordConfirmation = newTxtPasswordConfirmation.getText();
 		}
-		
+
 		if (plainPassword.equals(plainPasswordConfirmation)) {
 			System.out.println("Cambiando contraseñas...");
 			bdUtil.updatePassword(emailUsuario, plainPassword);
