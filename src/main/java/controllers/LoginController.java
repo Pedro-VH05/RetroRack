@@ -1,7 +1,10 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -12,6 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import utils.BBDDUtils;
 import utils.EmailUtil;
@@ -196,7 +203,7 @@ public class LoginController {
 	}
 
 	@FXML
-	void loginUser() {
+	void loginUser(MouseEvent event) {
 		String userInput = ((TextField) loginPane.lookup("#loginUsernameField")).getText();
 
 		// Obtenemos la contraseña del campo visible
@@ -213,7 +220,12 @@ public class LoginController {
 		}
 
 		if (bdUtil.verificaContrasenya(userInput, plainPassword)) {
-			// redirigir a home
+			Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			// Cerramos la ventana actual
+			currentStage.close();
+
+			// Abrimos la nueva ventana
+			openHome(userInput);
 		}
 	}
 
@@ -305,6 +317,33 @@ public class LoginController {
 
 			openEye.setVisible(false);
 			closedEye.setVisible(true);
+		}
+	}
+
+	// Abre la ventana Home de la aplicación
+	private void openHome(String userName) {
+		try {
+			// Cargar la vista FXML
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoadingScreen.fxml"));
+			Parent root = loader.load();
+
+			// Obtener el controlador asociado al FXML
+			LoaderController loaderController = loader.getController();
+
+			// Pasar el nombre del usuario al controlador
+			loaderController.setUserName(userName);
+
+			// Crear y mostrar la escena
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/views/DiscoverMainStyles.css").toExternalForm());
+
+			Stage newStage = new Stage();
+			newStage.setScene(scene);
+			newStage.initStyle(StageStyle.UNDECORATED);
+			newStage.setTitle("Home");
+			newStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

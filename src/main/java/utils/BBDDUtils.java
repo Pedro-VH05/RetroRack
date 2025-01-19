@@ -23,7 +23,7 @@ public class BBDDUtils implements AutoCloseable {
 	private static final String URL = "jdbc:mysql://localhost:3306/";
 	private static final String BBDD = "bdretrorack";
 	private static final String USUARIO = "root";
-	private static final String CLAVE = "12345678";
+	private static final String CLAVE = "1234";
 
 	private MensajesErrorUtil mensajeError = new MensajesErrorUtil();
 	private Connection conexion;
