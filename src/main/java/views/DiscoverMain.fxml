@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="1050.0" minWidth="1920" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DescubrirController">
+<BorderPane minHeight="1050.0" minWidth="1920" style="-fx-background-color: #303030;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DiscoverController">
 	<top>
 		<GridPane alignment="CENTER" prefHeight="123.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
 			<columnConstraints>

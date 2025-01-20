@@ -335,7 +335,6 @@ public class LoginController {
 
 			// Crear y mostrar la escena
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/views/DiscoverMainStyles.css").toExternalForm());
 
 			Stage newStage = new Stage();
 			newStage.setScene(scene);
