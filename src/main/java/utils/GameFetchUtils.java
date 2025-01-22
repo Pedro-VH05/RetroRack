@@ -44,13 +44,19 @@ public class GameFetchUtils {
 
 			for (Game game : gameResponse.getResults()) {
 				System.out.println("Juego: " + game.getName());
-			
-				 for (PlatformWrapper platformWrapper : game.getPlatforms()) {
-				        Platform platform = platformWrapper.getPlatform();
-				        if (platform != null) {
-				            System.out.println("Plataforma: " + platform.getName());
-				        }
-				    }
+
+				// Verificar si platforms es nulo antes de iterar
+				List<PlatformWrapper> platforms = game.getPlatforms();
+				if (platforms != null) {
+					for (PlatformWrapper platformWrapper : platforms) {
+						Platform platform = platformWrapper.getPlatform();
+						if (platform != null) {
+							System.out.println("Plataforma: " + platform.getName());
+						}
+					}
+				} else {
+					System.out.println("No hay plataformas disponibles para este juego.");
+				}
 			}
 
 			// Retornar la lista de juegos

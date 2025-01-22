@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -323,21 +324,20 @@ public class LoginController {
 	// Abre la ventana Home de la aplicación
 	private void openHome(String userName) {
 		try {
-			// Cargar la vista FXML
+			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoadingScreen.fxml"));
 			Parent root = loader.load();
 
-			// Obtener el controlador asociado al FXML
 			LoaderController loaderController = loader.getController();
 
 			// Pasar el nombre del usuario al controlador
 			loaderController.setUserName(userName);
 
-			// Crear y mostrar la escena
 			Scene scene = new Scene(root);
 
 			Stage newStage = new Stage();
 			newStage.setScene(scene);
+			newStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 			newStage.initStyle(StageStyle.UNDECORATED);
 			newStage.setTitle("Home");
 			newStage.show();

@@ -179,7 +179,7 @@
 			<center>
 				<BorderPane prefHeight="200.0" prefWidth="200.0">
 					<center>
-						<fx:include source="DiscoverGamesGrid.fxml" />
+						<fx:include fx:id="discoverGamesGrid" source="DiscoverGamesGrid.fxml" />
 					</center>
 				</BorderPane>
 			</center>
