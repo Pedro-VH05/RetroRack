@@ -52,11 +52,13 @@
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</TextField>
+				<Label fx:id="usernameErrorLabel" text="" layoutX="70.0" layoutY="388.0" style="-fx-text-fill: red;" visible="false" />
 				<PasswordField fx:id="password" focusTraversable="false" layoutX="60.0" layoutY="410.0" prefHeight="50.0" prefWidth="670.0" promptText="Contraseña">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
 					</font>
 				</PasswordField>
+				<Label fx:id="passwordErrorLabel" text="" layoutX="70.0" layoutY="468.0" style="-fx-text-fill: red;" visible="false" />
 				<TextField fx:id="email" focusTraversable="false" layoutX="60.0" layoutY="490.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="670.0" promptText="Email">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
@@ -65,6 +67,7 @@
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</TextField>
+				<Label fx:id="emailErrorLabel" text="" layoutX="70.0" layoutY="548.0" style="-fx-text-fill: red;" visible="false" />
 				<TextField fx:id="nombreCompleto" focusTraversable="false" layoutX="60.0" layoutY="570.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="670.0" promptText="Nombre">
 					<font>
 						<Font name="Albert Sans Light" size="24.0" />
@@ -81,8 +84,7 @@
 						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Button>
-				<DatePicker fx:id="fechaNacimiento" layoutX="60.0" layoutY="650.0" prefHeight="50.0" prefWidth="670.0" promptText="Fecha de Nacimiento" style="-fx-background-color: #121212;" />
-			</children>
+				<DatePicker fx:id="fechaNacimiento" layoutX="60.0" layoutY="650.0" prefHeight="50.0" prefWidth="670.0" promptText="Fecha de Nacimiento" style="-fx-background-color: #121212;" />			</children>
          <StackPane.margin>
             <Insets left="75.0" top="100.0" />
          </StackPane.margin>
