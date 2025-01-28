@@ -79,7 +79,7 @@ BorderPane {
 
 #searchBar {
 	-fx-background-color: #181818;
-	-fx-background-radius: 0 50 50 0;
+	-fx-background-radius: 0 0 0 0;
 	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, -4, 0);
 	-fx-font-size: 27px;
 	-fx-font-family: "Albert Sans";
@@ -94,6 +94,13 @@ BorderPane {
 #searchBar .text {
     -fx-fill: gray;
 }
+
+#filterBar{
+	-fx-background-color: #F29441;
+	-fx-background-radius: 0 50 50 0;
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 0);
+}
+
 
 
 

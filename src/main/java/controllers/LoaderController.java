@@ -29,6 +29,7 @@ public class LoaderController implements Initializable {
 
     private Stage stage;
     private GameFetchUtils gameFetchUtils = new GameFetchUtils();
+    private static final String API_K = "&key=d119a39f3ac64031a6ab6bb78b067da6";
 
     public void setUserName(String userName) {
         if (userNameLabel != null) {
@@ -54,13 +55,13 @@ public class LoaderController implements Initializable {
             protected Void call() throws Exception {
                 // Realizamos las 4 llamadas a la API
                 List<Game> bestRatedGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?ordering=-rating&page_size=15&key=d119a39f3ac64031a6ab6bb78b067da6");
+                    "https://api.rawg.io/api/games?ordering=-rating&page_size=15" + API_K);
                 List<Game> popularGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?ordering=-added&page_size=15&key=d119a39f3ac64031a6ab6bb78b067da6");
+                    "https://api.rawg.io/api/games?ordering=-added&page_size=15" + API_K);
                 List<Game> newGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=15&key=d119a39f3ac64031a6ab6bb78b067da6");
+                    "https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=15" + API_K);
                 List<Game> b2001 = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?dates=2001-01-01,2001-12-31&ordering=-rating&key=d119a39f3ac64031a6ab6bb78b067da6");
+                    "https://api.rawg.io/api/games?dates=2001-01-01,2001-12-31&ordering=-rating" + API_K);
 
                 // Pasar los datos al DiscoverGamesGridController
                 Platform.runLater(() -> {
@@ -79,7 +80,7 @@ public class LoaderController implements Initializable {
 
         // Iniciamos la tarea en un hilo
         Thread thread = new Thread(loadGamesTask);
-        thread.setDaemon(true); // El hilo se detendrá cuando se cierre la aplicación
+        thread.setDaemon(true);
         thread.start();
     }
 

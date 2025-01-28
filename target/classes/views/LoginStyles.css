@@ -132,3 +132,25 @@
 #btnSendCode {
 	-fx-background-radius: 8;
 }
+
+#emailErrorLabel {
+	 -fx-text-fill: white;
+	 -fx-font-family: "Albert Sans Italic";
+	 -fx-font-size: 15.0;
+	 -fx-alignment: center;
+}
+
+#passwordErrorLabel {
+	 -fx-text-fill: white;
+	 -fx-font-family: "Albert Sans Italic";
+	 -fx-font-size: 15.0;
+	 -fx-alignment: center;
+}
+
+#usernameErrorLabel {
+	 -fx-text-fill: white;
+	 -fx-font-family: "Albert Sans Italic";
+	 -fx-font-size: 15.0;
+	 -fx-alignment: center;
+}
+

@@ -54,6 +54,7 @@ public class GameGridBuilder {
 			imageView.setFitHeight(IMAGE_HEIGHT);
 			imageView.setSmooth(true);
 			imageView.setCache(true);
+			imageView.preserveRatioProperty();
 
 			// Clip para bordes redondeados
 			Rectangle clip = new Rectangle(IMAGE_WIDTH, IMAGE_HEIGHT);
@@ -94,7 +95,7 @@ public class GameGridBuilder {
 			        // Asegurar que no sea nulo antes de añadir
 			        if (platformIcon != null) {
 			            platformIconsContainer.getChildren().add(platformIcon);
-			            addedPlatforms.add(platformGroup); // Marcar este grupo como añadido
+			            addedPlatforms.add(platformGroup);
 			        }
 			    }
 			}

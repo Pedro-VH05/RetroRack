@@ -24,9 +24,9 @@
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" maxWidth="620.0" minWidth="10.0" prefWidth="497.0" />
 				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1260.0" minWidth="10.0" prefWidth="933.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="414.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="34.0" />
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="42.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="396.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="38.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="940.0" minWidth="10.0" prefWidth="65.0" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
@@ -147,8 +147,9 @@
 				<GridPane prefHeight="60.0" prefWidth="1824.0" BorderPane.alignment="CENTER">
 					<columnConstraints>
 						<ColumnConstraints hgrow="SOMETIMES" maxWidth="94.5" minWidth="0.0" prefWidth="64.0" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="59.0" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1776.5" minWidth="1670.0" prefWidth="1699.0" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="105.99999237060547" minWidth="10.0" prefWidth="89.99999237060547" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1776.5" minWidth="1288.0000076293945" prefWidth="1304.0000076293945" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" prefWidth="405.0" />
 						<ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="100.0" />
 					</columnConstraints>
 					<rowConstraints>
@@ -156,7 +157,7 @@
 						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<TextField id="searchBar" focusTraversable="false" prefHeight="60.0" promptText="Search Bar" GridPane.columnIndex="2" GridPane.rowIndex="1">
+						<TextField id="searchBar" fx:id="searchBar" focusTraversable="false" onAction="#searchGame" prefHeight="60.0" promptText="Search Bar" GridPane.columnIndex="2" GridPane.rowIndex="1">
 							<GridPane.margin>
 								<Insets left="-10.0" />
 							</GridPane.margin>
@@ -170,6 +171,52 @@
 								</SVGPath>
 							</center>
 						</BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <center>
+                        <GridPane id="filterBar" alignment="CENTER" stylesheets="@DiscoverMainStyles.css" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <SVGPath content="M40,60 C42,48 44,30 25,32">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </SVGPath>
+                              <SVGPath content="M40,60 C42,48 44,30 25,32" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </SVGPath>
+                              <SVGPath content="M40,60 C42,48 44,30 25,32" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </SVGPath>
+                              <SVGPath content="M40,60 C42,48 44,30 25,32" GridPane.columnIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </SVGPath>
+                              <SVGPath content="M40,60 C42,48 44,30 25,32" GridPane.columnIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </SVGPath>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
 					</children>
                <BorderPane.margin>
                   <Insets bottom="20.0" top="20.0" />

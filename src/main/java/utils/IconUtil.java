@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class IconUtil {
 
-	private static final Map<String, Image> platformIcons = new HashMap<>(); 
+	private static final Map<String, Image> platformIcons = new HashMap<>();
 	private static final double LARGE = 36;
 
 	static {
@@ -28,10 +28,11 @@ public class IconUtil {
 		// Xbox
 		platformIcons.put("Xbox Series S/X",
 				new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
-		platformIcons.put("Xbox One",
-				new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
-		platformIcons.put("Xbox 360",
-				new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
+
+		platformIcons.put("Xbox One", new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
+
+		platformIcons.put("Xbox 360", new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
+
 		platformIcons.put("Xbox", new Image(IconUtil.class.getResource("/iconos/xbox/xbox.png").toExternalForm()));
 
 		// Nintendo
@@ -49,10 +50,10 @@ public class IconUtil {
 				new Image(IconUtil.class.getResource("/iconos/nintendo/gameboy.png").toExternalForm()));
 		platformIcons.put("Game Boy Advance",
 				new Image(IconUtil.class.getResource("/iconos/nintendo/gameboy.png").toExternalForm()));
-		platformIcons.put("Game Boy Advance",
-				new Image(IconUtil.class.getResource("/iconos/nintendo/gameboy.png").toExternalForm()));
-		platformIcons.put("Game Boy Advance",
-				new Image(IconUtil.class.getResource("/iconos/nintendo/gameboy.png").toExternalForm()));
+		platformIcons.put("Nintendo DS",
+				new Image(IconUtil.class.getResource("/iconos/nintendo/ds.png").toExternalForm()));
+		platformIcons.put("Nintendo 3DS",
+				new Image(IconUtil.class.getResource("/iconos/nintendo/3ds.png").toExternalForm()));
 
 		// OLD
 		platformIcons.put("Dreamcast",
@@ -94,7 +95,7 @@ public class IconUtil {
 		}
 		return createImageView(platformIcon);
 	}
-	
+
 	/**
 	 * Determina el grupo principal al que pertenece una plataforma.
 	 *
@@ -102,24 +103,23 @@ public class IconUtil {
 	 * @return Nombre del grupo principal de la plataforma.
 	 */
 	public static String getPlatformGroup(String platformName) {
-	    if (platformName == null || platformName.isEmpty()) {
-	        return "unknown";
-	    }
+		if (platformName == null || platformName.isEmpty()) {
+			return "unknown";
+		}
 
-	    // Agrupaciones personalizadas
-	    if (platformName.contains("PlayStation")) {
-	        return "PlayStation";
-	    } else if (platformName.contains("Xbox")) {
-	        return "Xbox";
-	    } else if (platformName.contains("Nintendo")) {
-	        return "Nintendo";
-	    } else if (platformName.equals("PC")) {
-	        return "PC";
-	    } else {
-	        return "Other";
-	    }
+		// Agrupaciones personalizadas
+		if (platformName.contains("PlayStation")) {
+			return "PlayStation";
+		} else if (platformName.contains("Xbox")) {
+			return "Xbox";
+		} else if (platformName.contains("Nintendo")) {
+			return "Nintendo";
+		} else if (platformName.equals("PC")) {
+			return "PC";
+		} else {
+			return "Other";
+		}
 	}
-
 
 	/**
 	 * Encuentra el icono que coincide con el nombre de la plataforma.

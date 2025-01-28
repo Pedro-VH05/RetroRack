@@ -1,10 +1,9 @@
 package utils;
 
 import com.google.gson.Gson;
+
 import models.Game;
 import models.GameResponse;
-import models.Platform;
-import models.PlatformWrapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -20,6 +19,9 @@ import java.util.Map;
 public class GameFetchUtils {
 
 	private static final String API_KEY = "d119a39f3ac64031a6ab6bb78b067da6";
+	private static final String BASE_URL = "https://api.rawg.io/api/games";
+
+	private final Gson gson = new Gson();
 	private static final OkHttpClient client = new OkHttpClient();
 
 	/**
@@ -42,24 +44,6 @@ public class GameFetchUtils {
 			Gson gson = new Gson();
 			GameResponse gameResponse = gson.fromJson(response.body().charStream(), GameResponse.class);
 
-			for (Game game : gameResponse.getResults()) {
-				System.out.println("Juego: " + game.getName());
-
-				// Verificar si platforms es nulo antes de iterar
-				List<PlatformWrapper> platforms = game.getPlatforms();
-				if (platforms != null) {
-					for (PlatformWrapper platformWrapper : platforms) {
-						Platform platform = platformWrapper.getPlatform();
-						if (platform != null) {
-							System.out.println("Plataforma: " + platform.getName());
-						}
-					}
-				} else {
-					System.out.println("No hay plataformas disponibles para este juego.");
-				}
-			}
-
-			// Retornar la lista de juegos
 			return gameResponse.getResults();
 		}
 	}
@@ -123,4 +107,31 @@ public class GameFetchUtils {
 
 		return games;
 	}
+
+	/**
+	 * Metodo para buscar juegos con una query
+	 * 
+	 * @param query
+	 * @return
+	 * @throws IOException
+	 */
+	public List<Game> searchGames(String query) throws IOException {
+		String url = BASE_URL + "?search=" + query + "&key=" + API_KEY;
+
+		Request request = new Request.Builder().url(url).get().build();
+
+		try (Response response = client.newCall(request).execute()) {
+			if (response.isSuccessful() && response.body() != null) {
+				// Leer el cuerpo de la respuesta como String
+				String responseBody = response.body().string();
+
+				// Deserializar usando el modelo adecuado
+				GameResponse gameResponse = gson.fromJson(responseBody, GameResponse.class);
+				return gameResponse.getResults(); // Retornar la lista de juegos
+			} else {
+				throw new IOException("Error en la solicitud: " + response.code());
+			}
+		}
+	}
+
 }
