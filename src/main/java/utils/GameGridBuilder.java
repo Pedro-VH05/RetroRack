@@ -1,5 +1,6 @@
 package utils;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -7,8 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.SVGPath;
 import models.Game;
 import models.Platform;
 import models.PlatformWrapper;
@@ -62,8 +66,35 @@ public class GameGridBuilder {
 			clip.setArcHeight(20);
 			imageView.setClip(clip);
 
+			// Crear el SVGPath para el icono "Añadir"
+			SVGPath addGameIcon = new SVGPath();
+			addGameIcon.setContent(
+					"M25 2.36c-5.8 0-11.6 2.21-16.02 6.62A22.68 22.68 0 0 0 25 47.66 22.68 22.68 0 0 0 41.02 8.99 22.58 22.58 0 0 0 25 2.35Zm0 2.33c5.2 0 10.4 1.99 14.38 5.93a20.42 20.42 0 0 1 0 28.76 20.3 20.3 0 0 1-28.72 0 20.38 20.38 0 0 1-.04-28.76A20.39 20.39 0 0 1 25 4.7Zm0 11.72c-.66 0-1.17.5-1.17 1.17v6.25h-6.25c-.67 0-1.17.5-1.17 1.17 0 .66.5 1.17 1.17 1.17h6.25v6.25c0 .67.5 1.17 1.17 1.17.66 0 1.17-.5 1.17-1.17v-6.25h6.25c.67 0 1.17-.5 1.17-1.17 0-.66-.5-1.17-1.17-1.17h-6.25v-6.25c0-.67-.5-1.17-1.17-1.17Z");
+			addGameIcon.setFill(new Color(1.0, 1.0, 1.0, 1.0));
+			addGameIcon.getStyleClass().add("add-icon");
+			addGameIcon.setVisible(false);
+
+			// Contenedor StackPane para superponer imagen y SVG
+			StackPane imageContainer = new StackPane();
+			imageContainer.getChildren().addAll(imageView, addGameIcon);
+			StackPane.setAlignment(addGameIcon, Pos.BOTTOM_RIGHT);
+
+			// Agregar margen al icono para separarlo del borde
+			StackPane.setMargin(addGameIcon, new Insets(0, 25, 25, 0));
+
+			// Manejo de eventos para bajar opacidad y mostrar el icono
+			imageContainer.setOnMouseEntered(event -> {
+				imageView.setOpacity(0.5);
+				addGameIcon.setVisible(true);
+			});
+
+			imageContainer.setOnMouseExited(event -> {
+				imageView.setOpacity(1.0);
+				addGameIcon.setVisible(false);
+			});
+
 			// Crear un VBox para el título y los iconos de las plataformas
-			VBox titleAndIconsContainer = new VBox(5); // Espaciado entre título e iconos
+			VBox titleAndIconsContainer = new VBox(5);
 			titleAndIconsContainer.setAlignment(Pos.CENTER_LEFT);
 
 			// Crear el Label con el título del juego
@@ -74,40 +105,30 @@ public class GameGridBuilder {
 			titleAndIconsContainer.getChildren().add(gameNameLabel);
 
 			// Crear un HBox para los iconos de las plataformas
-			HBox platformIconsContainer = new HBox(0); 
+			HBox platformIconsContainer = new HBox(0);
 			platformIconsContainer.setAlignment(Pos.CENTER_LEFT);
 
-			// Usar un Set para rastrear plataformas únicas
 			Set<String> addedPlatforms = new HashSet<>();
 
-			// Recorrer las plataformas del juego y agregar los iconos únicos
 			for (PlatformWrapper platformWrapper : game.getPlatforms()) {
-			    Platform platform = platformWrapper.getPlatform();
+				Platform platform = platformWrapper.getPlatform();
+				String platformGroup = IconUtil.getPlatformGroup(platform.getName());
 
-			    // Obtener el nombre principal de la plataforma (por ejemplo, "PlayStation" en lugar de "PlayStation 5")
-			    String platformGroup = IconUtil.getPlatformGroup(platform.getName());
-
-			    // Verificar si ya hemos añadido una plataforma de este grupo
-			    if (!addedPlatforms.contains(platformGroup)) {
-			        // Obtener el icono de la plataforma usando la clase IconUtil
-			        ImageView platformIcon = IconUtil.getPlatformIcon(platform);
-
-			        // Asegurar que no sea nulo antes de añadir
-			        if (platformIcon != null) {
-			            platformIconsContainer.getChildren().add(platformIcon);
-			            addedPlatforms.add(platformGroup);
-			        }
-			    }
+				if (!addedPlatforms.contains(platformGroup)) {
+					ImageView platformIcon = IconUtil.getPlatformIcon(platform);
+					if (platformIcon != null) {
+						platformIconsContainer.getChildren().add(platformIcon);
+						addedPlatforms.add(platformGroup);
+					}
+				}
 			}
 
-
-			// Añadir el HBox de iconos al VBox principal
 			titleAndIconsContainer.getChildren().add(platformIconsContainer);
 
 			// Crear un contenedor principal para la imagen y el título
 			VBox gameContainer = new VBox(0);
 			gameContainer.setAlignment(Pos.CENTER);
-			gameContainer.getChildren().addAll(imageView, titleAndIconsContainer);
+			gameContainer.getChildren().addAll(imageContainer, titleAndIconsContainer);
 
 			// Añadir el VBox al BorderPane
 			gamePane.setCenter(gameContainer);

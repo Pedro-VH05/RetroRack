@@ -47,12 +47,12 @@ BorderPane {
 }
 
 #lblDescubrir {
-	-fx-text-fill: #ffe86f;
+	-fx-text-fill: #F29441;
  	-fx-alignment: center;
  	-fx-font-size: 24px;
  	-fx-font-family: "Albert Sans Medium";
  	-fx-padding: 0 0 0 0;
- 	-fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 10, 0.3, 0, 0);
+ 	-fx-effect: dropshadow(gaussian, rgba(248, 201, 160, 0.5), 10, 0.3, 0, 0);
 }
 
 #paneDescubrir {
@@ -66,9 +66,9 @@ BorderPane {
 }
 
 #brujula1, #brujula2 {
-	-fx-fill: #ffe86f;
+	-fx-fill: #F29441;
 	-fx-translateY: 2.5;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 10, 0.3, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(248, 201, 160, 0.5), 10, 0.3, 0, 0);
 
 }
 
@@ -97,8 +97,13 @@ BorderPane {
 
 #filterBar{
 	-fx-background-color: #F29441;
-	-fx-background-radius: 0 50 50 0;
-	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0.5, 0, 0);
+	-fx-background-radius: 50 50 50 50;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.9), 10, 0.5, 0, 0);
+
+}
+
+#gameGrid{
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.5), 50, 0.5, -10, 5);
 }
 
 
