@@ -55,13 +55,13 @@ public class LoaderController implements Initializable {
             protected Void call() throws Exception {
                 // Realizamos las 4 llamadas a la API
                 List<Game> bestRatedGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?ordering=-rating&page_size=15" + API_K);
+                    "https://api.rawg.io/api/games?ordering=-rating" + API_K);
                 List<Game> popularGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?ordering=-added&page_size=15" + API_K);
+                    "https://api.rawg.io/api/games?ordering=-added" + API_K);
                 List<Game> newGames = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=15" + API_K);
+                    "https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released" + API_K);
                 List<Game> b2001 = gameFetchUtils.fetchGames(
-                    "https://api.rawg.io/api/games?dates=2001-01-01,2001-12-31&ordering=-rating" + API_K);
+                    "https://api.rawg.io/api/games?dates=2008-01-01,2008-12-31&ordering=-rating" + API_K);
 
                 // Pasar los datos al DiscoverGamesGridController
                 Platform.runLater(() -> {
