@@ -4,12 +4,17 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane id="scrollPane" fx:id="mainScrollPane" minViewportHeight="600.0" minViewportWidth="1920.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@DiscoverGridStyles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.DiscoverGamesGridController">
-   <content>
-      <VBox id="vBox" fx:id="VBoxContainer">
-         <padding>
-            <Insets bottom="100.0" left="60.0" right="30.0" top="60.0" />
-         </padding>
-      </VBox>
-   </content>
+<ScrollPane id="scrollPane" fx:id="mainScrollPane"
+	minViewportHeight="600.0" minViewportWidth="1920.0" prefHeight="200.0"
+	prefWidth="200.0" stylesheets="@DiscoverGridStyles.css"
+	xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controllers.DiscoverGamesGridController">
+	<content>
+		<VBox id="vBox" fx:id="VBoxContainer">
+			<padding>
+				<Insets bottom="100.0" left="60.0" right="30.0" top="60.0" />
+			</padding>
+		</VBox>
+	</content>
 </ScrollPane>

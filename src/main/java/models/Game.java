@@ -26,8 +26,9 @@ public class Game {
 	private List<Shop> shops;
 	private List<Tag> tags;
 	private List<String> screenshots;
+	private String description_raw;
 
-	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image,
+	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image, String description_raw,
 			double rating, int ratingTop, List<Rating> ratings, int ratingsCount, int reviewsCount, int added,
 			int playtime, String metacritic, String esrbRating, List<PlatformWrapper> platforms, List<Genre> genres,
 			List<Shop> tiendas, List<Tag> tags, List<String> screenshots) {
@@ -213,4 +214,12 @@ public class Game {
 	public void setScreenshots(List<String> screenshots) {
 		this.screenshots = screenshots;
 	}
+	
+    public String getDescription() {
+        return description_raw;
+    }
+
+    public void setDescription(String description) {
+        this.description_raw = description;
+    }
 }
