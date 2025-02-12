@@ -30,7 +30,7 @@ public class DiscoverGamesGridController {
 	public void setGamesData(List<Game> bestRatedGames, List<Game> popularGames, List<Game> newGames,
 			List<Game> b2001) {
 		VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Populares", popularGames));
-		VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Nuevos", newGames));
+		// VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Juegos Nuevos", newGames));
 		VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejor Valorados", bestRatedGames));
 		VBoxContainer.getChildren().add(GameGridBuilder.createGameSection("Mejores Valorados 2001", b2001));
 

@@ -13,7 +13,6 @@ import okhttp3.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Clase utilitaria para realizar solicitudes HTTP relacionadas con juegos.

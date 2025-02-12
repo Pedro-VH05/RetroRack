@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,6 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
@@ -76,42 +79,64 @@
 								<Font size="40.0" />
 							</font>
 						</Label>
-						<Label id="description" layoutX="80.0" layoutY="400.0" prefHeight="58.0" prefWidth="172.0" text="Géneros: ">
+						<Label layoutX="80.0" layoutY="411.0" styleClass="detailLabels" text="Genres: ">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<Label id="description" layoutX="80.0" layoutY="451.0" prefHeight="58.0" prefWidth="224.0" text="Plataformas:">
+						<Label layoutX="80.0" layoutY="453.0" styleClass="detailLabels" text="Platforms:">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<Label id="description" layoutX="80.0" layoutY="499.0" prefHeight="58.0" prefWidth="314.0" text="Tiempo de Juego:">
+						<Label layoutX="80.0" layoutY="495.0" styleClass="detailLabels" text="Play time">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<Label id="description" fx:id="lblGeneros" layoutX="217.0" layoutY="396.0" prefHeight="66.0" prefWidth="656.0" text="Label">
+						<Label id="description" fx:id="lblGeneros" layoutX="173.0" layoutY="418.0" styleClass="detailLabelsInfo" text="Label">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<Label id="description" fx:id="lblPlataformas" layoutX="265.0" layoutY="448.0" prefHeight="66.0" prefWidth="590.0" text="Label">
+						<Label id="description" fx:id="lblPlataformas" layoutX="204.0" layoutY="460.0" styleClass="detailLabelsInfo" text="Label">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<Label id="description" fx:id="lblTiempoJuego" layoutX="339.0" layoutY="498.0" prefHeight="66.0" prefWidth="496.0" text="Label">
+						<Label id="description" fx:id="lblTiempoJuego" layoutX="202.0" layoutY="502.0" styleClass="detailLabelsInfo" text="Label">
 							<font>
 								<Font size="32.0" />
 							</font>
 						</Label>
-						<TextArea fx:id="lblDescription" editable="false" layoutX="80.0" layoutY="100.0" prefHeight="300.0" prefWidth="800.0" wrapText="true" />
-						<ScrollPane id="imageScroller" fx:id="screenshotsScrollPane" layoutX="80.0" layoutY="575.0" pannable="true" prefHeight="280.0" prefWidth="800" vbarPolicy="NEVER">
+						<ScrollPane id="imageScroller" fx:id="screenshotsScrollPane" fitToHeight="true" layoutX="80.0" layoutY="541.0" pannable="true" prefHeight="285.0" prefWidth="800" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
 							<content>
 								<HBox id="imagesHbox" fx:id="screenshotsHBox" alignment="CENTER" prefHeight="275.0" spacing="50" />
 							</content>
 						</ScrollPane>
+                  <TextArea fx:id="lblDescription" editable="false" layoutX="91.0" layoutY="110.0" prefHeight="300.0" prefWidth="800.0" styleClass="descriptionArea" wrapText="true" />
+                  <TextArea id="reviewArea" fx:id="reviewArea" disable="true" layoutX="1050.0" layoutY="110.0" prefHeight="300.0" prefWidth="800.0" promptText="Escribe una reseña..." wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextArea>
+                  <Label id="gameTitle" layoutX="1050.0" layoutY="27.0" text="Reseña">
+                     <font>
+                        <Font size="40.0" />
+                     </font>
+                  </Label>
+                  <Button id="editReview" fx:id="editReviewBtn" layoutX="1715.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#editPersonalReview" prefWidth="90.0" text="EDIT" />
+                  <Button id="doneReview" fx:id="doneReviewBtn" layoutX="1715.0" layoutY="515.0" mnemonicParsing="false" onMouseClicked="#editPersonalReview" prefWidth="90.0" text="DONE" visible="false" />
+                  <Slider fx:id="noteSlider" blockIncrement="1.0" disable="true" layoutX="1050.0" layoutY="450.0" majorTickUnit="1.0" max="10.0" minorTickCount="1" prefHeight="20.0" prefWidth="700.0" showTickLabels="true" snapToTicks="true" />
+                  <Circle fill="#121212" layoutX="1810.0" layoutY="455.0" radius="30.0" stroke="#f29441" strokeType="OUTSIDE" strokeWidth="5.0" />
+                  <Label id="note" fx:id="noteLabel" alignment="CENTER" layoutX="1790.0" layoutY="431.0" prefHeight="47.0" prefWidth="40.0" text="-" />
+                  <Label id="metacritic" layoutX="1050.0" layoutY="525.0" styleClass="detailLabels" text="Metacritic Score" textFill="#ee2727" />
+                  <Label id="comunity" layoutX="1371.0" layoutY="525.0" styleClass="detailLabels" text="Comunity Score" />
+                  <Label id="metacritic" fx:id="lblMetacriticScore" alignment="CENTER" contentDisplay="CENTER" layoutX="1256.0" layoutY="520.0" prefHeight="50.0" prefWidth="60.0" styleClass="rating" text="0" />
+                  <Label id="comunity" fx:id="lblComunityScore" alignment="CENTER" layoutX="1573.0" layoutY="520.0" prefHeight="50.0" prefWidth="60.0" styleClass="rating" text="10" />
+                  <Button layoutX="1050.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="ADD GAME" />
+                  <Button id="favourites" layoutX="1334.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="FAVOURITES" />
+                  <Button id="whishlist" layoutX="1645.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="WHISLIST" />
 					</children>
 				</AnchorPane>
 			</center>

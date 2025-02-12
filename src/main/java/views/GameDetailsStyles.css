@@ -8,65 +8,275 @@
 #gameTitle {
     -fx-text-fill: white;
     -fx-background-color: #AF6E33;
-    -fx-background-radius: 20px;
-    -fx-padding: 0 10 0 10;
-    -fx-font-weight: 900;
+    -fx-background-radius: 12.0px;
+    -fx-padding: 0.0 10.0 0.0 10.0;
+    -fx-font-weight: bolder;
 }
 
-.text-area {
+.descriptionArea {
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-control-inner-background: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-font-size: 24px;
+    -fx-background-insets: 0.0;
+    -fx-padding: 0.0;
+    -fx-font-size: 24.0px;
 }
 
-.text-area .content {
+.descriptionArea .content {
     -fx-background-color: transparent;
-    -fx-background-insets: 0;
-    -fx-padding: 5;
+    -fx-background-insets: 0.0;
+    -fx-padding: 5.0;
 }
 
-.text-area .scroll-pane {
+.descriptionArea .scroll-pane {
     -fx-background-color: transparent;
     -fx-hbar-policy: never;
     -fx-vbar-policy: as-needed;
 }
 
-.text-area .scroll-pane .viewport {
+.descriptionArea .scroll-pane .viewport {
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-pane .content {
+.descriptionArea .scroll-pane .content {
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-bar:vertical {
+.descriptionArea .scroll-bar:vertical {
     -fx-background-color: transparent;
-    -fx-pref-width: 12px;
+    -fx-pref-width: 12.0px;
 }
 
-.text-area .scroll-bar:vertical .thumb {
+.descriptionArea .scroll-bar:vertical .thumb {
     -fx-background-color: white;
-    -fx-background-radius: 4px;
+    -fx-background-radius: 4.0px;
     -fx-opacity: 0.7;
 }
 
-.text-area .scroll-bar:vertical .track {
+.descriptionArea .scroll-bar:vertical .track {
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-bar:vertical .increment-button,
-.text-area .scroll-bar:vertical .decrement-button {
+.descriptionArea .scroll-bar:vertical .increment-button,
+.descriptionArea .scroll-bar:vertical .decrement-button {
     -fx-background-color: transparent;
-    -fx-padding: 0;
+    -fx-padding: 0.0;
 }
 
-.text-area .scroll-bar:vertical .increment-arrow,
-.text-area .scroll-bar:vertical .decrement-arrow {
+.descriptionArea .scroll-bar:vertical .increment-arrow,
+.descriptionArea .scroll-bar:vertical .decrement-arrow {
     -fx-background-color: transparent;
 }
 
+/* Estilo para el ScrollPane */
+#imageScroller {
+    -fx-background-color: transparent;
+}
+
+/* Estilo para el HBox dentro del ScrollPane */
+#imagesHbox {
+    -fx-background-color: transparent;
+}
+
+/* Estilo para el contenido del ScrollPane */
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Estilo para la barra de desplazamiento horizontal del ScrollPane */
+#imageScroller .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-height: 12.0px; /* Altura de la barra horizontal */
+}
+
+#imageScroller .scroll-bar:horizontal .thumb {
+    -fx-background-color: white; /* Color del thumb */
+    -fx-background-radius: 4.0px; /* Bordes redondeados */
+    -fx-opacity: 0.7; /* Opacidad */
+}
+
+#imageScroller .scroll-bar:horizontal .track {
+    -fx-background-color: transparent; /* Fondo transparente */
+}
+
+#imageScroller .scroll-bar:horizontal .increment-button,
+#imageScroller .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent; /* Botones transparentes */
+    -fx-padding: 0.0; /* Sin padding */
+}
+
+#imageScroller .scroll-bar:horizontal .increment-arrow,
+#imageScroller .scroll-bar:horizontal .decrement-arrow {
+    -fx-background-color: transparent; /* Flechas transparentes */
+}
+
+.detailLabels {
+	-fx-text-fill: #F29441;
+	-fx-font-weight: bold;
+		-fx-font-size: 24.0px;
+}
+
+.detailLabelsInfo {
+	-fx-text-fill: white;
+	-fx-font-size: 16.0px;
+}
+
+/* Estilos para el TextArea con ID reviewArea */
+#reviewArea {
+    -fx-background-color: #121212;
+    -fx-text-fill: white;
+    -fx-control-inner-background: #121212; 
+    -fx-font-size: 16.0px; 
+    -fx-border-color: #F29441;
+    -fx-border-width: 5.0px; 
+    -fx-border-radius: 10.0px; 
+    -fx-background-radius: 15.0px; 
+    -fx-prompt-text-fill: #989898;
+    -fx-padding: 10.0px;
+}
+
+#reviewArea .content {
+    -fx-background-color: #121212;
+    -fx-background-insets: 0.0;
+    -fx-padding: 5.0;
+}
+
+
+
+#reviewArea .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: as-needed;
+}
+
+#reviewArea .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+#reviewArea .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+#reviewArea .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12.0px;
+}
+
+#reviewArea .scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 4.0px;
+    -fx-opacity: 0.7;
+}
+
+#reviewArea .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+
+#reviewArea .scroll-bar:vertical .increment-button,
+#reviewArea .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0.0;
+}
+
+#reviewArea .scroll-bar:vertical .increment-arrow,
+#reviewArea .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+}
+
+#editReview, #doneReview {
+	-fx-background-color: #F29441;
+	-fx-text-fill: white;
+	-fx-font-weight: bolder;
+	-fx-font-size: 20.0px;
+	-fx-background-radius: 8.0px;
+}
+
+#doneReview {
+	-fx-background-color: #5da747;
+}
+
+.text-area:disabled {
+	  -fx-opacity: 1.0;
+}
+
+.slider:disabled {
+	 -fx-opacity: 0.7;
+}
+
+.slider .track {
+    -fx-background-color: linear-gradient(to right, red, yellow, green); 
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 18.0px; 
+    -fx-pref-height: 16.0px; 
+    -fx-padding: 0.0;
+    -fx-border-color: white; 
+    -fx-border-width: 2.0px; 
+    -fx-border-radius: 18.0px;
+    -fx-border-insets: 0.0;
+}
+
+
+.slider .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 50.0%; 
+    -fx-pref-width: 20.0px; 
+    -fx-pref-height: 20.0px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0.0, 0.0, 0.0, 0.3), 5.0, 0.5, 0.0, 1.0);
+}
+
+.slider .axis {
+    -fx-tick-label-fill: white;
+}
+
+#note {
+	-fx-text-fill:#F29441;
+	-fx-font-size: 32.0px;
+	-fx-font-weight: bolder;
+}
+
+#metacritic {
+	-fx-text-fill: rgb(255.0, 50.0, 50.0);
+	-fx-background-color: rgba(0.0,0.0,0.0,0.3);
+	-fx-padding: 5.0px; 
+	-fx-background-radius: 10.0px;    
+}
+
+#comunity {
+	-fx-text-fill: rgb(50.0, 50.0, 255.0);
+	-fx-background-color: rgba(0.0,0.0,0.0,0.3);
+	-fx-padding: 5.0px; 
+	-fx-background-radius: 10.0px;  
+}
+
+.rating {
+    -fx-text-fill: rgb(200.0,50.0,50.0);
+    -fx-font-size: 32.0px;
+    -fx-font-weight: bolder;
+    -fx-background-color: rgba(0.0,0.0,0.0,0.3);
+    -fx-padding: 10.0px; 
+    -fx-background-radius: 20.0px; 
+}
+
+.buttons {
+    -fx-background-color: linear-gradient(to bottom, rgba(76, 108, 254, 1), rgba(120, 150, 255, 1));
+    -fx-text-fill: #e6eaff;
+    -fx-font-weight: bolder;
+    -fx-font-size: 32.0px;
+    -fx-padding: 20.0px;
+    -fx-background-radius: 8.0px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 3);
+}
+
+#favourites {
+    -fx-background-color: linear-gradient(to bottom, #c14846, #e57373);
+    -fx-text-fill: #f2d9d9;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 3);
+}
+
+#whishlist {
+    -fx-background-color: linear-gradient(to bottom, #efc91c, #fff176);
+    -fx-text-fill: #fcf4cf;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0, 0, 3);
+}
 
 

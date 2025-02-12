@@ -19,7 +19,7 @@ public class GameDetailsBuilder {
             controller.setPrimaryStage(primaryStage);
 
             // Pasar el ID del juego al controlador
-            controller.setGameId(gameId);
+            controller.setGameDetails(gameId);
 
             // Crear y mostrar la ventana
             Stage stage = new Stage();
