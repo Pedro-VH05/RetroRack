@@ -32,6 +32,11 @@ public class MainApp extends Application {
    }
 
    public static void main(String[] args) {
+      try {
+         Class.forName("org.sqlite.JDBC");
+      } catch (ClassNotFoundException e) {
+         e.printStackTrace();
+      }
       launch(args);
    }
 

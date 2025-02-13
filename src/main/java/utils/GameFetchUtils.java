@@ -50,30 +50,29 @@ public class GameFetchUtils {
 	}
 
 	public static Game getGameDetails(int gameId) {
-	    try {
-	        // Construir la URL de la API
-	        String url = BASE_URL + "/" + gameId + "?key=" + API_KEY;
+		try {
+			// Construir la URL de la API
+			String url = BASE_URL + "/" + gameId + "?key=" + API_KEY;
 
-	        // Crear la solicitud HTTP
-	        Request request = new Request.Builder().url(url).get().build();
+			// Crear la solicitud HTTP
+			Request request = new Request.Builder().url(url).get().build();
 
-	        // Ejecutar la solicitud
-	        try (Response response = client.newCall(request).execute()) {
-	            if (response.isSuccessful() && response.body() != null) {
-	                // Convertir la respuesta JSON a un objeto Game
-	            	Gson gson = new Gson();
-	                return gson.fromJson(response.body().charStream(), Game.class);
-	            } else {
-	                throw new IOException("Error en la solicitud: " + response.code());
-	            }
-	        }
-	    } catch (Exception e) {
-	        System.err.println("Error al obtener detalles del juego: " + e.getMessage());
-	        e.printStackTrace();
-	        return null;
-	    }
+			// Ejecutar la solicitud
+			try (Response response = client.newCall(request).execute()) {
+				if (response.isSuccessful() && response.body() != null) {
+					// Convertir la respuesta JSON a un objeto Game
+					Gson gson = new Gson();
+					return gson.fromJson(response.body().charStream(), Game.class);
+				} else {
+					throw new IOException("Error en la solicitud: " + response.code());
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("Error al obtener detalles del juego: " + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
-
 
 	/**
 	 * Metodo para buscar juegos con una query
@@ -100,39 +99,39 @@ public class GameFetchUtils {
 			}
 		}
 	}
-	
+
 	/**
-     * Obtiene las URLs de las capturas de pantalla de un juego.
-     *
-     * @param gameId ID del juego
-     * @return Lista de URLs de las capturas de pantalla
-     */
-    public static List<String> getGameScreenshots(int gameId) {
-        List<String> screenshotUrls = new ArrayList<>();
-        String url = BASE_URL + "/" + gameId + "/screenshots?key=" + API_KEY;
+	 * Obtiene las URLs de las capturas de pantalla de un juego.
+	 *
+	 * @param gameId ID del juego
+	 * @return Lista de URLs de las capturas de pantalla
+	 */
+	public static List<String> getGameScreenshots(int gameId) {
+		List<String> screenshotUrls = new ArrayList<>();
+		String url = BASE_URL + "/" + gameId + "/screenshots?key=" + API_KEY;
 
-        Request request = new Request.Builder().url(url).build();
+		Request request = new Request.Builder().url(url).build();
 
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful() && response.body() != null) {
-                String responseBody = response.body().string();
-                Gson gson = new Gson();
-                JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
+		try (Response response = client.newCall(request).execute()) {
+			if (response.isSuccessful() && response.body() != null) {
+				String responseBody = response.body().string();
+				Gson gson = new Gson();
+				JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
 
-                // Obtener el array de capturas de pantalla
-                JsonArray screenshots = jsonObject.getAsJsonArray("results");
-                for (int i = 0; i < screenshots.size(); i++) {
-                    JsonObject screenshot = screenshots.get(i).getAsJsonObject();
-                    String imageUrl = screenshot.get("image").getAsString();
-                    screenshotUrls.add(imageUrl);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error al obtener capturas de pantalla: " + e.getMessage());
-            e.printStackTrace();
-        }
+				// Obtener el array de capturas de pantalla
+				JsonArray screenshots = jsonObject.getAsJsonArray("results");
+				for (int i = 0; i < screenshots.size(); i++) {
+					JsonObject screenshot = screenshots.get(i).getAsJsonObject();
+					String imageUrl = screenshot.get("image").getAsString();
+					screenshotUrls.add(imageUrl);
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("Error al obtener capturas de pantalla: " + e.getMessage());
+			e.printStackTrace();
+		}
 
-        return screenshotUrls;
-    }
+		return screenshotUrls;
+	}
 
 }
