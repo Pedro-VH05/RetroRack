@@ -15,7 +15,7 @@ public class MainApp extends Application {
       try {
          FXMLLoader loader = new FXMLLoader();
 
-         loader.setLocation(MainApp.class.getResource("/views/LoginWindow.fxml"));
+         loader.setLocation(MainApp.class.getResource("/views/GameDetails.fxml"));
          primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
          Pane ventana = (Pane) loader.load();
@@ -23,7 +23,7 @@ public class MainApp extends Application {
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         scene.getStylesheets().add(getClass().getResource("/views/LoginStyles.css").toExternalForm());
+         scene.getStylesheets().add(getClass().getResource("/views/GameDetailsStyles.css").toExternalForm());
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {
