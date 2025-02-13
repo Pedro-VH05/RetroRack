@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -175,7 +176,7 @@ public class Game {
 	}
 
 	public List<PlatformWrapper> getPlatforms() {
-		return platforms;
+		return platforms != null ? platforms : new ArrayList<>();
 	}
 
 	public void setPlatforms(List<PlatformWrapper> plataformas) {
