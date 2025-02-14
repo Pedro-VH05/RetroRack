@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.Game;
+import models.Genre;
 import models.Platform;
 import models.PlatformWrapper;
 import utils.GameFetchUtils;
@@ -105,16 +107,39 @@ public class DiscoverController {
 		if (gridPaneNode instanceof GridPane) {
 			GridPane gridPane = (GridPane) gridPaneNode;
 
-			// Recopilamos los filtros seleccionados
-			List<String> selectedFilters = gridPane.getChildren().stream().filter(node -> node instanceof CheckBox)
-					.map(node -> (CheckBox) node).filter(CheckBox::isSelected).map(CheckBox::getText)
-					.map(String::toLowerCase).collect(Collectors.toList());
+			// Listas para almacenar los filtros seleccionados
+			List<String> selectedPlatforms = new ArrayList<>();
+			List<String> selectedGenres = new ArrayList<>();
 
-			System.out.println("Filtros seleccionados: " + selectedFilters);
+			// Recorremos los CheckBox del GridPane
+			for (Node node : gridPane.getChildren()) {
+				if (node instanceof CheckBox) {
+					CheckBox checkBox = (CheckBox) node;
+					if (checkBox.isSelected()) {
+						String filterText = checkBox.getText().toLowerCase();
+
+						// Verificamos si el CheckBox está en la fila 0 (géneros) o en otra fila
+						// (plataformas)
+						Integer rowIndex = GridPane.getRowIndex(node);
+						if (rowIndex == null) {
+							rowIndex = 0; // Si no tiene fila definida, asumimos que está en la fila 0
+						}
+
+						if (rowIndex == 0) {
+							selectedGenres.add(filterText); // Es un género
+						} else {
+							selectedPlatforms.add(filterText); // Es una plataforma
+						}
+					}
+				}
+			}
+
+			System.out.println("Plataformas seleccionadas: " + selectedPlatforms);
+			System.out.println("Géneros seleccionados: " + selectedGenres);
 
 			// Aplicamos los filtros si hay alguno seleccionado
-			if (!selectedFilters.isEmpty()) {
-				filterGames(selectedFilters);
+			if (!selectedPlatforms.isEmpty() || !selectedGenres.isEmpty()) {
+				filterGames(selectedPlatforms, selectedGenres);
 			}
 
 			closePopup(event);
@@ -123,18 +148,15 @@ public class DiscoverController {
 		}
 	}
 
-	/**
-	 * Filtra los juegos según los filtros seleccionados.
-	 *
-	 * @param filters La lista de filtros seleccionados.
-	 */
-	private void filterGames(List<String> filters) {
+	private void filterGames(List<String> platforms, List<String> genres) {
 		// Obtenemos todos los juegos
 		List<Game> allGames = discoverGamesGridController.getAllGames();
 
-		// Filtramos los juegos que coincidan con al menos uno de los filtros
-		List<Game> filteredGames = allGames.stream().filter(game -> gameMatchesFilters(game, filters))
-				.collect(Collectors.toList());
+		// Filtramos los juegos que coincidan con al menos uno de los filtros de
+		// plataformas y al menos uno de los filtros de géneros
+		List<Game> filteredGames = allGames.stream()
+				.filter(game -> (platforms.isEmpty() || gameMatchesPlatforms(game, platforms)))
+				.filter(game -> (genres.isEmpty() || gameMatchesGenres(game, genres))).collect(Collectors.toList());
 
 		System.out.println("Cantidad de juegos filtrados: " + filteredGames.size());
 
@@ -144,16 +166,31 @@ public class DiscoverController {
 	}
 
 	/**
-	 * Verifica si un juego coincide con al menos uno de los filtros.
+	 * Verifica si un juego coincide con al menos uno de los filtros de plataformas.
 	 *
-	 * @param game    El juego a verificar.
-	 * @param filters La lista de filtros (nombres de plataformas).
-	 * @return true si el juego coincide con al menos un filtro, false en caso
-	 *         contrario.
+	 * @param game      El juego a verificar.
+	 * @param platforms La lista de filtros de plataformas.
+	 * @return true si el juego coincide con al menos un filtro de plataformas,
+	 *         false en caso contrario.
 	 */
-	private boolean gameMatchesFilters(Game game, List<String> filters) {
+	private boolean gameMatchesPlatforms(Game game, List<String> platforms) {
 		return game.getPlatforms().stream().map(PlatformWrapper::getPlatform).map(Platform::getName).map(String::trim)
-				.map(String::toLowerCase).anyMatch(platformName -> filters.contains(platformName));
+				.map(String::toLowerCase).anyMatch(platforms::contains);
+	}
+
+	/**
+	 * Verifica si un juego coincide con al menos uno de los filtros de géneros.
+	 *
+	 * @param game   El juego a verificar.
+	 * @param genres La lista de filtros de géneros.
+	 * @return true si el juego coincide con al menos un filtro de géneros, false en
+	 *         caso contrario.
+	 */
+	private boolean gameMatchesGenres(Game game, List<String> selectedGenres) {
+		return game.getGenres().stream().map(Genre::getName) // Extraer el nombre del género usando el método getName()
+				.map(String::trim) // Eliminar espacios en blanco alrededor del nombre
+				.map(String::toLowerCase) // Convertir a minúsculas para comparación sin distinción de mayúsculas
+				.anyMatch(selectedGenres::contains); // Verificar si coincide con alguno de los géneros seleccionados
 	}
 
 	/**
