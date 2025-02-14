@@ -80,7 +80,7 @@
 							<children>
 								<ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@/images/retroRack_logo.png" />
+										<Image url="@../images/retroRack_logo.png" />
 									</image>
 									<HBox.margin>
 										<Insets />
@@ -104,7 +104,7 @@
 							<children>
 								<ImageView id="profilePic" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
 									<image>
-										<Image url="@/images/PABLO.png" />
+										<Image url="@../images/PABLO.png" />
 									</image>
 								</ImageView>
 							</children>
@@ -236,21 +236,21 @@
 				</BorderPane>
 			</center>
 		</BorderPane>
-		<AnchorPane fx:id="filterPane" layoutX="400.0" layoutY="400.0" prefHeight="206.0" prefWidth="1000.0" visible="false">
+		<AnchorPane fx:id="filterPane" layoutX="275.0" layoutY="400.0" prefHeight="206.0" prefWidth="1400.0" visible="false">
 			<children>
-				<GridPane alignment="CENTER" prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: #303030; -fx-background-radius: 20;">
+				<GridPane alignment="CENTER" prefHeight="150.0" prefWidth="1400.0" style="-fx-background-color: #303030; -fx-background-radius: 25; -fx-border-color: #F29441; -fx-border-width: 5px; -fx-border-radius: 20;">
 					<columnConstraints>
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="73.0" minWidth="10.0" prefWidth="19.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="129.0" minWidth="30.0" prefWidth="65.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="155.0" minWidth="30.0" prefWidth="85.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="30.0" prefWidth="107.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="133.0" minWidth="30.0" prefWidth="94.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="132.0" minWidth="30.0" prefWidth="97.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="120.0" minWidth="30.0" prefWidth="98.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="127.0" minWidth="30.0" prefWidth="100.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="127.0" minWidth="30.0" prefWidth="94.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="98.0" minWidth="30.0" prefWidth="82.0" />
-						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="75.0" minWidth="30.0" prefWidth="35.0" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="73.0" minWidth="0.0" prefWidth="32.666656494140625" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="272.6666564941406" minWidth="30.0" prefWidth="141.33334350585938" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="234.0" minWidth="30.0" prefWidth="166.0" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="186.0" minWidth="30.0" prefWidth="126.0" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="164.0" minWidth="30.0" prefWidth="121.33331298828125" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="148.66668701171875" minWidth="30.0" prefWidth="148.66668701171875" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="192.0" minWidth="30.0" prefWidth="192.0" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="243.0" minWidth="30.0" prefWidth="152.0" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="238.6666259765625" minWidth="30.0" prefWidth="152.333251953125" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="163.3333740234375" minWidth="30.0" prefWidth="93.3333740234375" />
+						<ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="75.0" minWidth="0.6666259765625" prefWidth="0.6666259765625" />
 					</columnConstraints>
 					<rowConstraints>
 						<RowConstraints minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -287,7 +287,7 @@
 						<CheckBox mnemonicParsing="false" text="XBOX" textFill="WHITE" GridPane.columnIndex="9" GridPane.rowIndex="2" />
 					</children>
 				</GridPane>
-				<Pane layoutX="449.0" layoutY="163.0" prefHeight="52.0" prefWidth="185.0" style="-fx-background-color: #303030; -fx-background-radius: 8;">
+				<Pane layoutX="550.0" layoutY="163.0" prefHeight="52.0" prefWidth="185.0" style="-fx-background-color: #303030; -fx-background-radius: 8;">
 					<children>
 						<Label fx:id="applyFilters" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="9.0" onMouseClicked="#applyFilters" prefHeight="35.0" prefWidth="65.0" style="-fx-font-weight: bolder; -fx-text-fill: white; -fx-background-color: #5da747; -fx-label-padding: 5; -fx-background-radius: 4;" text="APPLY">
 							<font>

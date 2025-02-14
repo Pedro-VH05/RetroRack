@@ -38,7 +38,7 @@
 					<children>
 						<ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
 							<image>
-								<Image url="@/images/PABLO.png" />
+								<Image url="@../images/PABLO.png" />
 							</image>
 							<GridPane.margin>
 								<Insets left="20.0" />
@@ -46,7 +46,7 @@
 						</ImageView>
 						<ImageView fitHeight="125.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
 							<image>
-								<Image url="@/images/retroRack_logo.png" />
+								<Image url="@../images/retroRack_logo.png" />
 							</image>
 						</ImageView>
 						<Label text="RetroRack" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -132,10 +132,10 @@
                   <Label id="note" fx:id="noteLabel" alignment="CENTER" layoutX="1790.0" layoutY="431.0" prefHeight="47.0" prefWidth="40.0" text="-" />
                   <Label id="metacritic" layoutX="1050.0" layoutY="525.0" styleClass="detailLabels" text="Metacritic Score" textFill="#ee2727" />
                   <Label id="comunity" layoutX="1371.0" layoutY="525.0" styleClass="detailLabels" text="Comunity Score" />
-                  <Label id="metacritic" fx:id="lblMetacriticScore" alignment="CENTER" contentDisplay="CENTER" layoutX="1256.0" layoutY="520.0" prefHeight="50.0" prefWidth="60.0" styleClass="rating" text="0" />
-                  <Label id="comunity" fx:id="lblComunityScore" alignment="CENTER" layoutX="1573.0" layoutY="520.0" prefHeight="50.0" prefWidth="60.0" styleClass="rating" text="10" />
+                  <Label id="metacritic" fx:id="lblMetacriticScore" alignment="CENTER" contentDisplay="CENTER" layoutX="1256.0" layoutY="520.0" styleClass="rating" text="-" />
+                  <Label id="comunity" fx:id="lblComunityScore" alignment="CENTER" layoutX="1573.0" layoutY="520.0" styleClass="rating" text="-" />
                   <Button layoutX="1050.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="ADD GAME" />
-                  <Button id="favourites" layoutX="1334.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="FAVOURITES" />
+                  <Button id="favourites" disable="true" layoutX="1334.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="FAVOURITES" />
                   <Button id="whishlist" layoutX="1645.0" layoutY="688.0" mnemonicParsing="false" styleClass="buttons" text="WHISLIST" />
 					</children>
 				</AnchorPane>

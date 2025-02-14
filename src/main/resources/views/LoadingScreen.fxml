@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane minHeight="1050.0" minWidth="1920"
+	style="-fx-background-color: #303030;"
+	xmlns="http://javafx.com/javafx/23.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controllers.LoaderController">
+	<center>
+		<AnchorPane prefHeight="200.0" prefWidth="200.0"
+			BorderPane.alignment="CENTER">
+			<children>
+				<ImageView fx:id="loadingGif" fitHeight="150.0"
+					fitWidth="200.0" layoutX="877.0" layoutY="485.0"
+					pickOnBounds="true" preserveRatio="true"
+					AnchorPane.bottomAnchor="415.0" AnchorPane.leftAnchor="877.0"
+					AnchorPane.rightAnchor="843.0" AnchorPane.topAnchor="485.0" />
+				<Label id="lblUsername" fx:id="userNameLabel"
+					alignment="CENTER" layoutY="300.0" prefHeight="150.0"
+					prefWidth="1920.0" stylesheets="@LoaderStyles.css"
+					textAlignment="CENTER" textFill="#ff983d" />
+				<Label id="lblBienvenida" alignment="CENTER"
+					contentDisplay="CENTER" layoutY="675.0" prefHeight="100.0"
+					prefWidth="1920.0" stylesheets="@LoaderStyles.css"
+					text="Espera mientras preparamos todo..." textAlignment="CENTER"
+					textFill="WHITE" />
+			</children>
+		</AnchorPane>
+	</center>
+</BorderPane>

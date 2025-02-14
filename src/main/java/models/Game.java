@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase Juego
+ * Clase que representa un juego.
  */
 public class Game {
 	private int id;
@@ -13,14 +13,14 @@ public class Game {
 	private String releaseDate;
 	private boolean tba;
 	private String background_image;
-	private double rating;
+	private double rating; // Rating de la comunidad
 	private int ratingTop;
 	private List<Rating> ratings;
 	private int ratingsCount;
 	private int reviewsCount;
 	private int added;
 	private int playtime;
-	private String metacritic;
+	private Integer metacritic; // Puntuación de Metacritic
 	private String esrbRating;
 	private List<PlatformWrapper> platforms;
 	private List<Genre> genres;
@@ -29,17 +29,18 @@ public class Game {
 	private List<String> screenshots;
 	private String description_raw;
 
-	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image, String description_raw,
-			double rating, int ratingTop, List<Rating> ratings, int ratingsCount, int reviewsCount, int added,
-			int playtime, String metacritic, String esrbRating, List<PlatformWrapper> platforms, List<Genre> genres,
-			List<Shop> tiendas, List<Tag> tags, List<String> screenshots) {
-		super();
+	public Game(int id, String slug, String name, String releaseDate, boolean tba, String background_image,
+			String description_raw, double rating, int ratingTop, List<Rating> ratings, int ratingsCount,
+			int reviewsCount, int added, int playtime, Integer metacritic, String esrbRating,
+			List<PlatformWrapper> platforms, List<Genre> genres, List<Shop> shops, List<Tag> tags,
+			List<String> screenshots) {
 		this.id = id;
 		this.slug = slug;
 		this.name = name;
 		this.releaseDate = releaseDate;
 		this.tba = tba;
 		this.background_image = background_image;
+		this.description_raw = description_raw;
 		this.rating = rating;
 		this.ratingTop = ratingTop;
 		this.ratings = ratings;
@@ -51,10 +52,12 @@ public class Game {
 		this.esrbRating = esrbRating;
 		this.platforms = platforms;
 		this.genres = genres;
-		this.shops = tiendas;
+		this.shops = shops;
 		this.tags = tags;
 		this.screenshots = screenshots;
 	}
+
+	// Getters y Setters
 
 	public int getId() {
 		return id;
@@ -84,8 +87,8 @@ public class Game {
 		return releaseDate;
 	}
 
-	public void setRelease(String fechaLanzamiento) {
-		this.releaseDate = fechaLanzamiento;
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 	public boolean isTba() {
@@ -160,11 +163,11 @@ public class Game {
 		this.playtime = playtime;
 	}
 
-	public String getMetacritic() {
+	public Integer getMetacritic() {
 		return metacritic;
 	}
 
-	public void setMetacritic(String metacritic) {
+	public void setMetacritic(Integer metacritic) {
 		this.metacritic = metacritic;
 	}
 
@@ -180,15 +183,15 @@ public class Game {
 		return platforms != null ? platforms : new ArrayList<>();
 	}
 
-	public void setPlatforms(List<PlatformWrapper> plataformas) {
-		this.platforms = plataformas;
+	public void setPlatforms(List<PlatformWrapper> platforms) {
+		this.platforms = platforms;
 	}
 
-	public List<Genre> getGeneros() {
+	public List<Genre> getGenres() {
 		return genres;
 	}
 
-	public void setGeneros(List<Genre> genres) {
+	public void setGenres(List<Genre> genres) {
 		this.genres = genres;
 	}
 
@@ -196,7 +199,7 @@ public class Game {
 		return shops;
 	}
 
-	public void setTiendas(List<Shop> shops) {
+	public void setShops(List<Shop> shops) {
 		this.shops = shops;
 	}
 
@@ -215,12 +218,12 @@ public class Game {
 	public void setScreenshots(List<String> screenshots) {
 		this.screenshots = screenshots;
 	}
-	
-    public String getDescription() {
-        return description_raw;
-    }
 
-    public void setDescription(String description) {
-        this.description_raw = description;
-    }
+	public String getDescription() {
+		return description_raw;
+	}
+
+	public void setDescription(String description) {
+		this.description_raw = description;
+	}
 }

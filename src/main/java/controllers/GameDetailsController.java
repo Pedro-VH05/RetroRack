@@ -41,6 +41,12 @@ public class GameDetailsController {
 	private Label lblTiempoJuego;
 
 	@FXML
+	private Label lblMetacriticScore;
+
+	@FXML
+	private Label lblComunityScore;
+
+	@FXML
 	private HBox screenshotsHBox;
 
 	@FXML
@@ -48,33 +54,43 @@ public class GameDetailsController {
 
 	@FXML
 	private Button editReviewBtn;
-	
+
 	@FXML
 	private Button doneReviewBtn;
-	
+
 	@FXML
 	private TextArea reviewArea;
-	
-    @FXML
-    private Slider noteSlider; 
 
-    @FXML
-    private Label noteLabel;
+	@FXML
+	private Slider noteSlider;
+
+	@FXML
+	private Label noteLabel;
 
 	private Stage primaryStage;
-	
 
-
+	/**
+	 * Establece el Stage principal para poder volver a la ventana anterior.
+	 *
+	 * @param primaryStage El Stage principal de la aplicación.
+	 */
 	public void setPrimaryStage(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+		// Establecer el ícono de la aplicación
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/retroRack_logo.png")));
 	}
 
+	/**
+	 * Carga y muestra los detalles de un juego específico.
+	 *
+	 * @param gameId ID del juego del que los detalles se van a cargar.
+	 */
 	public void setGameDetails(int gameId) {
-		// Obtener los detalles del juego desde la API
+		// Obtenemos los detalles del juego desde la API
 		Game game = GameFetchUtils.getGameDetails(gameId);
 
 		if (game != null) {
-			// Actualizar la interfaz con los detalles del juego
+			// Actualizamos la interfaz con los detalles del juego
 			setGameInfo(game);
 			loadScreenshots(gameId);
 		} else {
@@ -82,76 +98,108 @@ public class GameDetailsController {
 		}
 	}
 
-    @FXML
-    void editPersonalReview() {
-        editReview();
-    }
+	/**
+	 * Habilita la edición de la reseña personal del usuario.
+	 */
+	@FXML
+	void editPersonalReview() {
+		editReview();
+	}
 
-
-
+	/**
+	 * Navega de vuelta a la pantalla de descubrimiento de juegos.
+	 */
 	@FXML
 	void goToDiscover() {
 		goBack();
 	}
 
-		
+	/**
+	 * Cierra la ventana actual y vuelve a la ventana principal.
+	 */
 	private void goBack() {
-		// Cerrar la ventana de detalles
+		// Cerramos la ventana de detalles
 		Stage stage = (Stage) arrowBack.getScene().getWindow();
 		stage.close();
 
-		// Volver a mostrar la ventana principal
+		// Volvemos a mostrar la ventana principal
 		if (primaryStage != null) {
 			primaryStage.show();
 		}
 	}
 
+	/**
+	 * Actualiza la interfaz con la información del juego.
+	 *
+	 * @param game El juego del que los detalles se van a mostrar.
+	 */
 	private void setGameInfo(Game game) {
-		// Limpiar la descripción
+		// Limpiamos la descripción para eliminar etiquetas HTML
 		String cleanDescription = cleanDescriptionRaw(game.getDescription());
 
-		// Actualizar los campos de la interfaz
+		// Actualizamos los campos de la interfaz
 		lblTitle.setText(game.getName());
 		lblDescription.setText(cleanDescription);
 
-		// Convertir la lista de géneros a una cadena separada por comas
-		String generos = game.getGeneros().stream().map(genre -> genre.getName()).collect(Collectors.joining(", "));
+		// Convertimos la lista de géneros a una cadena separada por comas
+		String generos = game.getGenres().stream().map(genre -> genre.getName()).collect(Collectors.joining(", "));
 		lblGeneros.setText(generos);
 
-		// Convertir la lista de plataformas a una cadena separada por comas
+		// Convertimos la lista de plataformas a una cadena separada por comas
 		String plataformas = game.getPlatforms().stream().map(platform -> platform.getPlatform().getName())
 				.collect(Collectors.joining(", "));
 		lblPlataformas.setText(plataformas);
 
-		// Mostrar el tiempo de juego en horas
+		// Mostramos el tiempo de juego en horas
 		lblTiempoJuego.setText(game.getPlaytime() + " horas");
+
+		// Mostramos la puntuación de Metacritic
+		if (game.getMetacritic() != null) {
+			lblMetacriticScore.setText("" + game.getMetacritic());
+		} else {
+			lblMetacriticScore.setText("-");
+		}
+
+		// Mostramos la puntuación de la comunidad (sobre 100 y truncando el decimal)
+		if (game.getRating() != -1) {
+			double communityRating = game.getRating() * 20; // Convertir a escala de 100
+			int truncatedRating = (int) communityRating; // Truncar el decimal
+			lblComunityScore.setText("" + truncatedRating);
+		} else {
+			lblComunityScore.setText("-");
+		}
 	}
 
+	/**
+	 * Carga y muestra las capturas de pantalla del juego.
+	 *
+	 * @param gameId ID del juego cuyas capturas de pantalla se van a cargar.
+	 */
 	private void loadScreenshots(int gameId) {
-		// Obtener las capturas de pantalla desde la API
+		// Obtenemos las capturas de pantalla desde la API
 		List<String> screenshotUrls = GameFetchUtils.getGameScreenshots(gameId);
 
 		if (screenshotUrls != null && !screenshotUrls.isEmpty()) {
-			// Limpiar el HBox antes de agregar nuevas imágenes
+			// Limpiamos el HBox antes de agregar nuevas imágenes
 			screenshotsHBox.getChildren().clear();
 
-			// Agregar cada imagen al HBox
+			// Agregamos cada imagen al HBox
 			for (String url : screenshotUrls) {
-				// Crear la ImageView y cargar la imagen
+				// Creamos la ImageView y cargamos la imagen
 				ImageView imageView = new ImageView(new Image(url));
 				imageView.setFitHeight(IMAGE_HEIGHT); // Altura fija
-				imageView.setPreserveRatio(true); // Mantener la proporción
+				imageView.setPreserveRatio(true); // Mantenemos la proporción
 
-				// Obtener el ancho real de la imagen después de escalarla
+				// Obtenemos el ancho real de la imagen después de escalarla
 				double imageWidth = imageView.getBoundsInLocal().getWidth();
 
-				// Crear el rectángulo de recorte con las dimensiones correctas
+				// Creamos el rectángulo de recorte con las dimensiones correctas
 				Rectangle clip = new Rectangle(imageWidth, IMAGE_HEIGHT); // Ancho dinámico, altura fija
 				clip.setArcWidth(20); // Bordes redondeados
 				clip.setArcHeight(20); // Bordes redondeados
 				imageView.setClip(clip);
 
-				// Agregar la imagen al HBox
+				// Agregamos la imagen al HBox
 				screenshotsHBox.getChildren().add(imageView);
 			}
 		} else {
@@ -159,10 +207,17 @@ public class GameDetailsController {
 		}
 	}
 
+	/**
+	 * Limpia la descripción del juego eliminando etiquetas HTML y contenido
+	 * innecesario.
+	 *
+	 * @param descriptionRaw La descripción cruda del juego.
+	 * @return La descripción limpia y lista para mostrar.
+	 */
 	private static String cleanDescriptionRaw(String descriptionRaw) {
 		// Si no hay descripción, devolvemos una cadena vacía
 		if (descriptionRaw == null || descriptionRaw.isEmpty()) {
-			return ""; 
+			return "";
 		}
 
 		// Dividimos el texto en partes
@@ -176,29 +231,31 @@ public class GameDetailsController {
 
 		return englishDescription;
 	}
-	
+
+	/**
+	 * Habilita o deshabilita la edición de la reseña personal del usuario.
+	 */
 	private void editReview() {
 		if (reviewArea.isDisabled()) {
-            // Habilitar el TextArea y el Slider
-            reviewArea.setDisable(false);
-            noteSlider.setDisable(false);
+			// Habilitamos el TextArea y el Slider
+			reviewArea.setDisable(false);
+			noteSlider.setDisable(false);
 
-            // Cambiar los botones
-            editReviewBtn.setVisible(false);
-            doneReviewBtn.setVisible(true);
-        } else {
-            // Deshabilitar el TextArea y el Slider
-            reviewArea.setDisable(true);
-            noteSlider.setDisable(true);
+			// Cambiamos los botones
+			editReviewBtn.setVisible(false);
+			doneReviewBtn.setVisible(true);
+		} else {
+			// Deshabilitamos el TextArea y el Slider
+			reviewArea.setDisable(true);
+			noteSlider.setDisable(true);
 
-            // Cambiar los botones
-            editReviewBtn.setVisible(true); 
-            doneReviewBtn.setVisible(false);
+			// Cambiamos los botones
+			editReviewBtn.setVisible(true);
+			doneReviewBtn.setVisible(false);
 
-            // Actualizar la nota en la Label
-            int nota = (int) noteSlider.getValue();
-            noteLabel.setText(String.valueOf(nota));
-        }
+			// Actualizamos la nota en la Label
+			int nota = (int) noteSlider.getValue();
+			noteLabel.setText(String.valueOf(nota));
+		}
 	}
-
 }

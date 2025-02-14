@@ -10,33 +10,25 @@ import javafx.stage.StageStyle;
 
 public class MainApp extends Application {
 
-   @Override
-   public void start(Stage primaryStage) {
-      try {
-         FXMLLoader loader = new FXMLLoader();
-         loader.setLocation(MainApp.class.getResource("/views/LoginWindow.fxml"));
+	@Override
+	public void start(Stage primaryStage) {
+		try {
 
-         // Check if the image resource is found
-         String imagePath = "/images/retroRack_logo.png";
-         if (MainApp.class.getResource(imagePath) != null) {
-            primaryStage.getIcons().add(new Image(imagePath));
-         } else {
-            System.out.println("Image not found: " + imagePath);
-         }
+			primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
 
-         Pane ventana = (Pane) loader.load();
-         primaryStage.initStyle(StageStyle.UNDECORATED);
+			Pane ventana = FXMLLoader.load(getClass().getResource("/views/LoginWindow.fxml"));
+			primaryStage.initStyle(StageStyle.UNDECORATED);
 
-         Scene scene = new Scene(ventana);
-         scene.getStylesheets().add(getClass().getResource("/views/LoginStyles.css").toExternalForm());
-         primaryStage.setScene(scene);
-         primaryStage.show();
-      } catch (Exception e) {
-         e.printStackTrace();
-      }
-   }
+			Scene scene = new Scene(ventana);
+			scene.getStylesheets().add(getClass().getResource("/views/LoginStyles.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-   public static void main(String[] args) {
-      launch(args);
-   }
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

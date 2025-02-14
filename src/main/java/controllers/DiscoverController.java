@@ -24,205 +24,271 @@ import utils.TransitionUtil;
 
 public class DiscoverController {
 
-    @FXML
-    private Pane closeAppBtn;
+	@FXML
+	private Pane closeAppBtn;
 
-    @FXML
-    private Pane minimizeAppBtn;
+	@FXML
+	private Pane minimizeAppBtn;
 
-    @FXML
-    private DiscoverGamesGridController discoverGamesGridController;
+	@FXML
+	private DiscoverGamesGridController discoverGamesGridController;
 
-    @FXML
-    private TextField searchBar;
+	@FXML
+	private TextField searchBar;
 
-    @FXML
-    private BorderPane restore;
+	@FXML
+	private BorderPane restore;
 
-    @FXML
-    private BorderPane filterBtn;
+	@FXML
+	private BorderPane filterBtn;
 
-    @FXML
-    private AnchorPane filterPane;
+	@FXML
+	private AnchorPane filterPane;
 
-    @FXML
-    private Label cancelBtn;
+	@FXML
+	private Label cancelBtn;
 
-    @FXML
-    private Label applyFilters;
+	@FXML
+	private Label applyFilters;
 
-    private Stage stage;
+	private Stage stage;
 
-    private GameFetchUtils gameFetcher = new GameFetchUtils();
+	private GameFetchUtils gameFetcher = new GameFetchUtils();
 
-    private TransitionUtil transition = new TransitionUtil();
+	private TransitionUtil transition = new TransitionUtil();
 
-    @FXML
-    private void initialize() {
-        if (closeAppBtn != null && closeAppBtn.getScene() != null) {
-            stage = (Stage) closeAppBtn.getScene().getWindow();
+	/**
+	 * Inicializa el controlador. Configura el stage y el listener para restaurar la
+	 * ventana cuando se desminimiza.
+	 */
+	@FXML
+	private void initialize() {
+		if (searchBar != null && searchBar.getScene() != null) {
+			stage = (Stage) searchBar.getScene().getWindow();
 
-            stage.iconifiedProperty().addListener((observable, wasMinimized, isNowMinimized) -> {
-                if (!isNowMinimized) {
-                    restaurarVentana(stage);
-                }
-            });
-        }
-        // Habilitar el botón de restaurar cuando se aplica un filtro o se realiza una búsqueda
-        restore.setDisable(true);
-    }
+			// Listener para restaurar la ventana cuando se desminimiza
+			stage.iconifiedProperty().addListener((observable, wasMinimized, isNowMinimized) -> {
+				if (!isNowMinimized) {
+					restaurarVentana(stage);
+				}
+			});
+		}
 
-    @FXML
-    void restoreGames() {
-        if (discoverGamesGridController != null) {
-            System.out.println("restaurando");
-            discoverGamesGridController.restoreOriginalState();
-            restore.setDisable(true); // Deshabilitar el botón de restaurar
-        }
-    }
+		restore.setDisable(true);
+	}
 
-    @FXML
-    private void applyFilters(MouseEvent event) {
-        System.out.println("applyFilters method called"); // Debug statement
+	/**
+	 * Restaura los juegos a su estado original.
+	 */
+	@FXML
+	private void restoreGames() {
+		if (discoverGamesGridController != null) {
+			System.out.println("Restaurando juegos");
+			discoverGamesGridController.restoreOriginalState();
+			restore.setDisable(true); // Deshabilitar el botón de restaurar
+		}
+	}
 
-        // Access the GridPane within the filterPane
-        Node gridPaneNode = filterPane.getChildren().stream().filter(node -> node instanceof GridPane).findFirst()
-                .orElse(null);
+	/**
+	 * Aplica los filtros seleccionados y filtra los juegos.
+	 *
+	 * @param event El evento de mouse que desencadenó la acción.
+	 */
+	@FXML
+	private void applyFilters(MouseEvent event) {
+		System.out.println("Aplicando filtros");
 
-        if (gridPaneNode instanceof GridPane) {
-            GridPane gridPane = (GridPane) gridPaneNode;
+		// Accedemos al GridPane dentro del filterPane
+		Node gridPaneNode = filterPane.getChildren().stream().filter(node -> node instanceof GridPane).findFirst()
+				.orElse(null);
 
-            // Collect the selected filters
-            List<String> selectedFilters = gridPane.getChildren().stream().filter(node -> node instanceof CheckBox)
-                    .map(node -> (CheckBox) node) // Convert to CheckBox
-                    .filter(CheckBox::isSelected).map(CheckBox::getText).map(String::toLowerCase)
-                    .collect(Collectors.toList());
+		if (gridPaneNode instanceof GridPane) {
+			GridPane gridPane = (GridPane) gridPaneNode;
 
-            System.out.println("Filtros seleccionados: " + selectedFilters);
+			// Recopilamos los filtros seleccionados
+			List<String> selectedFilters = gridPane.getChildren().stream().filter(node -> node instanceof CheckBox)
+					.map(node -> (CheckBox) node).filter(CheckBox::isSelected).map(CheckBox::getText)
+					.map(String::toLowerCase).collect(Collectors.toList());
 
-            // Apply the filters if any are selected
-            if (!selectedFilters.isEmpty()) {
-                filterGames(selectedFilters);
-            }
+			System.out.println("Filtros seleccionados: " + selectedFilters);
 
-            // Close the filter popup
-            closePopup(event);
-        } else {
-            System.out.println("GridPane not found within filterPane.");
-        }
-    }
+			// Aplicamos los filtros si hay alguno seleccionado
+			if (!selectedFilters.isEmpty()) {
+				filterGames(selectedFilters);
+			}
 
-    private void filterGames(List<String> filters) {
-        // Obtener todos los juegos
-        List<Game> allGames = discoverGamesGridController.getAllGames();
+			closePopup(event);
+		} else {
+			System.out.println("GridPane no encontrado dentro del filterPane.");
+		}
+	}
 
-        // Filtrar los juegos que coincidan con al menos uno de los filtros
-        List<Game> filteredGames = allGames.stream().filter(game -> gameMatchesFilters(game, filters))
-                .collect(Collectors.toList());
+	/**
+	 * Filtra los juegos según los filtros seleccionados.
+	 *
+	 * @param filters La lista de filtros seleccionados.
+	 */
+	private void filterGames(List<String> filters) {
+		// Obtenemos todos los juegos
+		List<Game> allGames = discoverGamesGridController.getAllGames();
 
-        System.out.println("Filtered Games Count: " + filteredGames.size());
+		// Filtramos los juegos que coincidan con al menos uno de los filtros
+		List<Game> filteredGames = allGames.stream().filter(game -> gameMatchesFilters(game, filters))
+				.collect(Collectors.toList());
 
-        // Mostrar los resultados filtrados
-        discoverGamesGridController.showFilteredResults(filteredGames);
-        restore.setDisable(false);
-    }
+		System.out.println("Cantidad de juegos filtrados: " + filteredGames.size());
 
-    /**
-     * Verifica si un juego coincide con al menos uno de los filtros.
-     *
-     * @param game    El juego a verificar.
-     * @param filters La lista de filtros (nombres de plataformas).
-     * @return true si el juego coincide con al menos un filtro, false en caso contrario.
-     */
-    private boolean gameMatchesFilters(Game game, List<String> filters) {
-        return game.getPlatforms().stream().map(PlatformWrapper::getPlatform).map(Platform::getName).map(String::trim)
-                .map(String::toLowerCase).anyMatch(platformName -> filters.contains(platformName));
-    }
+		// Mostramos por pantalla los resultados filtrados
+		discoverGamesGridController.showFilteredResults(filteredGames);
+		restore.setDisable(false);
+	}
 
-    @FXML
-    void openFilterPane() {
-        transition.slideSwitch(null, filterPane, 0, 0, 200, true, 700);
-    }
+	/**
+	 * Verifica si un juego coincide con al menos uno de los filtros.
+	 *
+	 * @param game    El juego a verificar.
+	 * @param filters La lista de filtros (nombres de plataformas).
+	 * @return true si el juego coincide con al menos un filtro, false en caso
+	 *         contrario.
+	 */
+	private boolean gameMatchesFilters(Game game, List<String> filters) {
+		return game.getPlatforms().stream().map(PlatformWrapper::getPlatform).map(Platform::getName).map(String::trim)
+				.map(String::toLowerCase).anyMatch(platformName -> filters.contains(platformName));
+	}
 
-    public static void restaurarVentana(Stage stage) {
-        if (stage != null) {
-            Node root = stage.getScene().getRoot();
-            root.setScaleX(1.0);
-            root.setScaleY(1.0);
-            root.setTranslateX(0.0);
-            root.setTranslateY(0.0);
-            root.setOpacity(1.0);
+	/**
+	 * Abre el panel de filtros
+	 */
+	@FXML
+	void openFilterPane() {
+		transition.slideSwitch(null, filterPane, 0, 0, 200, true, 700);
+	}
 
-            stage.setOpacity(1.0);
-        }
-    }
+	/**
+	 * Restaura la ventana a su estado original.
+	 *
+	 * @param stage El stage que se va a restaurar.
+	 */
+	private static void restaurarVentana(Stage stage) {
+		if (stage != null) {
+			System.out.println("Restaurando ventana");
+			Node root = stage.getScene().getRoot();
+			root.setScaleX(1.0);
+			root.setScaleY(1.0);
+			root.setTranslateX(0.0);
+			root.setTranslateY(0.0);
+			root.setOpacity(1.0);
 
-    @FXML
-    private void closeApp(MouseEvent event) {
-        javafx.application.Platform.exit();
-    }
+			stage.setOpacity(1.0);
+		}
+	}
 
-    @FXML
-    private void minimizeApp(MouseEvent event) {
-        if (stage != null) {
-            stage.setIconified(true);
-        }
-    }
+	/**
+	 * Cierra la aplicación.
+	 *
+	 * @param event El evento de mouse que desencadenó la acción.
+	 */
+	@FXML
+	private void closeApp(MouseEvent event) {
+		Stage stage = getStageFromNode((Node) event.getSource());
+		if (stage != null) {
+			javafx.application.Platform.exit();
+		}
+	}
 
-    @FXML
-    private void closePopup(MouseEvent event) {
-        // Get the node that triggered the event
-        Node source = (Node) event.getSource();
+	/**
+	 * Minimiza la aplicación.
+	 *
+	 * @param event El evento de mouse que desencadenó la acción.
+	 */
+	@FXML
+	private void minimizeApp(MouseEvent event) {
+		Stage stage = getStageFromNode((Node) event.getSource());
+		if (stage != null) {
+			stage.setIconified(true);
+		} else {
+			System.out.println("Stage es null");
+		}
+	}
 
-        // Traverse up the parent hierarchy to find the AnchorPane
-        Node parent = source.getParent();
-        while (parent != null && !(parent instanceof AnchorPane)) {
-            parent = parent.getParent();
-        }
+	/**
+	 * Cierra el popup de filtros
+	 *
+	 * @param event El evento de mouse que desencadena la acción.
+	 */
+	@FXML
+	private void closePopup(MouseEvent event) {
+		// Obtener el nodo que desencadenó el evento
+		Node source = (Node) event.getSource();
 
-        if (parent instanceof AnchorPane) {
-            AnchorPane anchorPane = (AnchorPane) parent;
-            transition.slideSwitch(null, anchorPane, 0, 0, 200, false, 700);
-        }
-    }
+		// Recorrer la jerarquía de padres para encontrar el AnchorPane
+		Node parent = source.getParent();
+		while (parent != null && !(parent instanceof AnchorPane)) {
+			parent = parent.getParent();
+		}
 
-    @FXML
-    private void searchGame() {
-        String query = searchBar.getText().trim();
-        if (!query.isEmpty()) {
-            try {
-                List<Game> searchResults = gameFetcher.searchGames(query);
-                if (discoverGamesGridController != null) {
-                    discoverGamesGridController.showSearchResults(searchResults);
-                    restore.setDisable(false); // Habilitar el botón de restaurar
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-                showErrorAlert("Error al realizar la búsqueda");
-            }
-        }
-    }
+		if (parent instanceof AnchorPane) {
+			AnchorPane anchorPane = (AnchorPane) parent;
+			transition.slideSwitch(null, anchorPane, 0, 0, 200, false, 700);
+		}
+	}
 
-    private void showErrorAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+	/**
+	 * Realiza una búsqueda de juegos basada en el texto ingresado en la barra de
+	 * búsqueda.
+	 */
+	@FXML
+	private void searchGame() {
+		String query = searchBar.getText().trim();
+		if (!query.isEmpty()) {
+			try {
+				List<Game> searchResults = gameFetcher.searchGames(query);
+				if (discoverGamesGridController != null) {
+					discoverGamesGridController.showSearchResults(searchResults);
+					restore.setDisable(false); // Habilitar el botón de restaurar
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				showErrorAlert("Error al realizar la búsqueda");
+			}
+		}
+	}
 
-    /**
-     * Método para pasar los datos al controlador de DiscoverGamesGrid
-     *
-     * @param popularGames     - Llamada a una api
-     * @param newGames         - Llamada a una api
-     * @param recommendedGames - Llamada a una api
-     * @param classics         - Llamada a una api
-     */
-    public void setLoaderGamesData(List<Game> popularGames, List<Game> newGames, List<Game> recommendedGames,
-                                   List<Game> classics) {
-        if (discoverGamesGridController != null) {
-            discoverGamesGridController.setGamesData(popularGames, newGames, recommendedGames, classics);
-        }
-    }
+	/**
+	 * Muestra una alerta de error con el mensaje especificado.
+	 *
+	 * @param message El mensaje de error a mostrar.
+	 */
+	private void showErrorAlert(String message) {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.showAndWait();
+	}
+
+	/**
+	 * Pasa los datos de los juegos al controlador de DiscoverGamesGrid.
+	 *
+	 * @param popularGames     La lista de juegos populares.
+	 * @param newGames         La lista de juegos nuevos.
+	 * @param recommendedGames La lista de juegos recomendados.
+	 * @param classics         La lista de juegos clásicos.
+	 */
+	public void setLoaderGamesData(List<Game> popularGames, List<Game> newGames, List<Game> recommendedGames,
+			List<Game> classics) {
+		if (discoverGamesGridController != null) {
+			discoverGamesGridController.setGamesData(popularGames, newGames, recommendedGames, classics);
+		}
+	}
+
+	/**
+	 * Obtiene el Stage desde un nodo.
+	 *
+	 * @param node El nodo desde el cual obtener el Stage.
+	 * @return El Stage asociado al nodo.
+	 */
+	private Stage getStageFromNode(Node node) {
+		return (Stage) node.getScene().getWindow();
+	}
 }

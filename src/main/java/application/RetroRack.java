@@ -1,6 +1,6 @@
 package application;
 
-public class LauncherRetroRack {
+public class RetroRack {
 	public static void main(String[] args) {
 		MainApp.main(args);
 	}
