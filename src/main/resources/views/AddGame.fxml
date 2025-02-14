@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="1050.0" minWidth="1920"
-	style="-fx-background-color: #303030;"
-	xmlns="http://javafx.com/javafx/23.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="controllers.LoaderController">
-	<center>
-		<AnchorPane prefHeight="200.0" prefWidth="200.0"
-			BorderPane.alignment="CENTER">
-			<children>
-				<ImageView fx:id="loadingGif" fitHeight="150.0"
-					fitWidth="200.0" layoutX="877.0" layoutY="485.0"
-					pickOnBounds="true" preserveRatio="true"
-					AnchorPane.bottomAnchor="415.0" AnchorPane.leftAnchor="877.0"
-					AnchorPane.rightAnchor="843.0" AnchorPane.topAnchor="485.0" />
-				<Label id="lblUsername" fx:id="userNameLabel"
-					alignment="CENTER" layoutY="300.0" prefHeight="150.0"
-					prefWidth="1920.0" stylesheets="@LoaderStyles.css"
-					textAlignment="CENTER" textFill="#ff983d" />
-				<Label id="lblBienvenida" alignment="CENTER"
-					contentDisplay="CENTER" layoutY="675.0" prefHeight="100.0"
-					prefWidth="1920.0" stylesheets="@LoaderStyles.css"
-					text="Espera mientras preparamos todo..." textAlignment="CENTER"
-					textFill="WHITE" />
-			</children>
-		</AnchorPane>
-	</center>
-</BorderPane>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="700.0" style="-fx-background-color: #181818;" stylesheets="@AddGame.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="144.0" layoutY="29.0" style="-fx-font-weight: bolder;" text="AÑADIR JUEGO" textFill="WHITE">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="114.0" style="-fx-font-weight: bolder;" text="Título" textFill="#f29441">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField layoutX="50.0" layoutY="156.0" prefHeight="35.0" prefWidth="600.0" promptText="Introduce un título para el juego..." style="-fx-background-color: #303030; -fx-background-radius: 50;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="62.0" layoutY="203.0" style="-fx-font-weight: bolder;" text="Descripción" textFill="#f29441">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField layoutX="56.0" layoutY="507.0" prefHeight="35.0" prefWidth="600.0" promptText="Introduce un género para el juego..." style="-fx-background-color: #303030; -fx-background-radius: 50;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <TextArea layoutX="50.0" layoutY="251.0" prefHeight="200.0" prefWidth="600.0" promptText="¿Sobre que va el juego?" />
+      <Label layoutX="62.0" layoutY="460.0" style="-fx-font-weight: bolder;" text="Género" textFill="#f29441">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField layoutX="56.0" layoutY="593.0" prefHeight="35.0" prefWidth="600.0" promptText="Introduce una paltaforma para el juego..." style="-fx-background-color: #303030; -fx-background-radius: 50;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="62.0" layoutY="546.0" style="-fx-font-weight: bolder;" text="Plataforma" textFill="#f29441">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <TextField layoutX="55.0" layoutY="675.0" prefHeight="35.0" prefWidth="600.0" promptText="Introduce la ruta de la imagen para el juego..." style="-fx-background-color: #303030; -fx-background-radius: 50;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+      <Label layoutX="63.0" layoutY="628.0" style="-fx-font-weight: bolder;" text="Imagen" textFill="#f29441">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="173.0" layoutY="781.0" style="-fx-background-color: #74b33b; -fx-label-padding: 20px; -fx-font-weight: bolder; -fx-background-radius: 12px;" text="ACEPTAR" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="384.0" layoutY="781.0" style="-fx-background-color: transparent; -fx-label-padding: 20px; -fx-font-weight: bolder; -fx-border-radius: 12px; -fx-border-width: 2; -fx-border-color: white;" text="CANCELAR" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
