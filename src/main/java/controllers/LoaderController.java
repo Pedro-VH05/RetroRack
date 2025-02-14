@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Game;
@@ -49,51 +49,42 @@ public class LoaderController implements Initializable {
    }
 
    private void loadAllGamesInBackground() {
-      // Creamos un Task para cargar los juegos en segundo plano
-      Task<Void> loadGamesTask = new Task<>() {
-         @Override
-         protected Void call() throws Exception {
-            // Realizamos las 4 llamadas a la API
-            List<Game> bestRatedGames = gameFetchUtils
-                  .fetchGames("https://api.rawg.io/api/games?ordering=-rating" + API_K);
-            List<Game> popularGames = gameFetchUtils
-                  .fetchGames("https://api.rawg.io/api/games?ordering=-added" + API_K);
-            List<Game> newGames = gameFetchUtils
-                  .fetchGames("https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released" + API_K);
-            List<Game> b2001 = gameFetchUtils
-                  .fetchGames("https://api.rawg.io/api/games?dates=2008-01-01,2008-12-31&ordering=-rating" + API_K);
+	    Task<Void> loadGamesTask = new Task<>() {
+	        @Override
+	        protected Void call() throws Exception {
 
-            // Pasar los datos al DiscoverGamesGridController
-            Platform.runLater(() -> {
-               openDiscoverGamesGrid(bestRatedGames, popularGames, newGames, b2001);
-            });
+	            List<Game> popularGames = gameFetchUtils.fetchGames("https://api.rawg.io/api/games?ordering=-added&page_size=12" + API_K);
 
-            return null;
-         }
-      };
+	            List<Game> newGames = gameFetchUtils.fetchGames("https://api.rawg.io/api/games?dates=2024-10-01,2025-12-31&ordering=-released&page_size=12" + API_K);
 
-      // Si la tarea falla
-      loadGamesTask.setOnFailed(event -> {
-         System.out.println("Error al cargar los juegos: " + loadGamesTask.getException().getMessage());
+	            List<Game> recommendedGames = gameFetchUtils.fetchGames("https://api.rawg.io/api/games?key=" + API_K + "&ordering=-rating&page_size=12");
+	            
+	            List<Game> clasics = gameFetchUtils.fetchGames("https://api.rawg.io/api/games?key=" + API_K + "&dates=1990-01-01,2010-12-31&page_size=12");
 
-      });
+	            // Pasar los datos al controlador
+	            Platform.runLater(() -> {
+	                openDiscoverGamesGrid(popularGames, newGames, recommendedGames, clasics);
+	            });
 
-      // Iniciamos la tarea en un hilo
-      Thread thread = new Thread(loadGamesTask);
-      thread.setDaemon(true);
-      thread.start();
-   }
+	            return null;
+	        }
+	    };
 
-   private void openDiscoverGamesGrid(List<Game> bestRatedGames, List<Game> popularGames, List<Game> newGames,
-         List<Game> b2001) {
+	    // Iniciar la tarea en un hilo
+	    Thread thread = new Thread(loadGamesTask);
+	    thread.setDaemon(true);
+	    thread.start();
+	}
+
+   private void openDiscoverGamesGrid(List<Game> popularGames, List<Game> newGames, List<Game> recommendedGames, List<Game> clasics) {
       try {
          // Cargamos la nueva ventana
          FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/DiscoverMain.fxml"));
-         BorderPane newWindowRoot = loader.load();
+         Pane newWindowRoot = loader.load();
 
          DiscoverController discoverController = loader.getController();
 
-         discoverController.setGamesData(bestRatedGames, popularGames, newGames, b2001);
+         discoverController.setLoaderGamesData(popularGames, newGames, recommendedGames, clasics);
 
          Scene newScene = new Scene(newWindowRoot);
          newScene.getStylesheets().add(getClass().getResource("/views/DiscoverMainStyles.css").toExternalForm());

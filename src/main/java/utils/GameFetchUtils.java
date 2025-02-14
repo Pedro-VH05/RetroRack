@@ -76,7 +76,7 @@ public class GameFetchUtils {
 
 	/**
 	 * Metodo para buscar juegos con una query
-	 * 
+	 *
 	 * @param query
 	 * @return
 	 * @throws IOException
@@ -133,5 +133,4 @@ public class GameFetchUtils {
 
 		return screenshotUrls;
 	}
-
 }

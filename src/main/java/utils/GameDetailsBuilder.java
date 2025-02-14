@@ -29,7 +29,7 @@ public class GameDetailsBuilder {
             stage.show();
         } catch (Exception e) {
             System.err.println("Error al cargar la vista FXML: " + e.getMessage());
-            e.printStackTrace();
+            System.exit(1);
         }
     }
 }

@@ -74,5 +74,9 @@ public class Platform {
 	public void setImageBackground(String imageBackground) {
 		this.imageBackground = imageBackground;
 	}
+	
+	
+	
+	
 
 }

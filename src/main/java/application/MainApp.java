@@ -14,16 +14,21 @@ public class MainApp extends Application {
    public void start(Stage primaryStage) {
       try {
          FXMLLoader loader = new FXMLLoader();
+         loader.setLocation(MainApp.class.getResource("/views/LoginWindow.fxml"));
 
-         loader.setLocation(MainApp.class.getResource("/views/GameDetails.fxml"));
-         primaryStage.getIcons().add(new Image("/images/retroRack_logo.png"));
+         // Check if the image resource is found
+         String imagePath = "/images/retroRack_logo.png";
+         if (MainApp.class.getResource(imagePath) != null) {
+            primaryStage.getIcons().add(new Image(imagePath));
+         } else {
+            System.out.println("Image not found: " + imagePath);
+         }
 
          Pane ventana = (Pane) loader.load();
-         // Hacer la ventana sin bordes  
          primaryStage.initStyle(StageStyle.UNDECORATED);
 
          Scene scene = new Scene(ventana);
-         scene.getStylesheets().add(getClass().getResource("/views/GameDetailsStyles.css").toExternalForm());
+         scene.getStylesheets().add(getClass().getResource("/views/LoginStyles.css").toExternalForm());
          primaryStage.setScene(scene);
          primaryStage.show();
       } catch (Exception e) {
@@ -32,12 +37,6 @@ public class MainApp extends Application {
    }
 
    public static void main(String[] args) {
-      try {
-         Class.forName("org.sqlite.JDBC");
-      } catch (ClassNotFoundException e) {
-         e.printStackTrace();
-      }
       launch(args);
    }
-
 }
