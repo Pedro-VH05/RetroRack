@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane minHeight="1050.0" minWidth="1920"
+    style="-fx-background-color: #303030;"
+    xmlns="http://javafx.com/javafx/23.0.1"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="controllers.LibraryController">
+    <top>
+        <GridPane alignment="CENTER" prefHeight="123.0"
+            prefWidth="1920.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES"
+                    maxWidth="620.0" minWidth="10.0" prefWidth="497.0" />
+                <ColumnConstraints hgrow="SOMETIMES"
+                    maxWidth="1260.0" minWidth="10.0" prefWidth="933.0" />
+                <ColumnConstraints hgrow="SOMETIMES"
+                    maxWidth="940.0" minWidth="10.0" prefWidth="396.0" />
+                <ColumnConstraints hgrow="SOMETIMES"
+                    maxWidth="940.0" minWidth="10.0" prefWidth="38.0" />
+                <ColumnConstraints hgrow="SOMETIMES"
+                    maxWidth="940.0" minWidth="10.0" prefWidth="65.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="79.0" minHeight="10.0"
+                    prefHeight="41.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="145.0" minHeight="10.0"
+                    prefHeight="78.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <!-- First HBox (Biblioteca and Descubrir) -->
+                <HBox alignment="CENTER_LEFT" prefHeight="70.0"
+                    prefWidth="377.0" GridPane.rowIndex="1">
+                    <children>
+                        <BorderPane id="paneBiblioteca" fx:id="paneBiblioteca" layoutX="60.0"
+                            prefHeight="70.0" prefWidth="184.0">
+                            <center>
+                                <Label id="lblBiblioteca" fx:id="lblBiblioteca" prefHeight="35.0"
+                                    prefWidth="137.0" text="Biblioteca" textFill="#F29441"
+                                    BorderPane.alignment="CENTER">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <graphic>
+                                        <SVGPath id="libreriaIcon"
+                                            content="M2.77778 0H4.16667C5.63031 0 6.83072 1.13389 6.93682 2.57057L6.94444 2.77778V22.2222C6.94444 23.6858 5.81056 24.8862 4.37388 24.9924L4.16667 25H2.77778C1.31414 25 0.113722 23.8661 0.00762509 22.4294L0 22.2222V2.77778C0 1.31414 1.13389 0.113722 2.57057 0.00762509L2.77778 0ZM11.1111 0H12.5C13.9636 0 15.164 1.13389 15.2701 2.57057L15.2778 2.77778V22.2222C15.2778 23.6858 14.1439 24.8862 12.7072 24.9924L12.5 25H11.1111C9.64747 25 8.44706 23.8661 8.34096 22.4294L8.33333 22.2222V2.77778C8.33333 1.31414 9.46722 0.113722 10.9039 0.00762509L11.1111 0ZM20.7976 2.77847C21.9636 2.77847 23.0312 3.51542 23.4226 4.64772L23.4879 4.86458L27.6754 21.1785C28.04 22.5957 27.2403 24.0408 25.8743 24.5003L25.6754 24.559L24.3296 24.9049C24.099 24.9632 23.8657 24.9924 23.6379 24.9924C22.4732 24.9924 21.4044 24.2542 21.0142 23.1217L20.949 22.9049L16.7601 6.59236C16.3969 5.17381 17.1954 3.72993 18.5624 3.27061L18.7615 3.21181L20.106 2.86597C20.3365 2.80625 20.5699 2.77847 20.7976 2.77847ZM4.16667 2.08333H2.77778C2.43704 2.08333 2.15336 2.33025 2.09453 2.65337L2.08333 2.77778V22.2222C2.08333 22.5617 2.32915 22.8464 2.653 22.9054L2.77778 22.9167H4.16667C4.5074 22.9167 4.79108 22.6697 4.84992 22.3467L4.86111 22.2222V2.77778C4.86111 2.43828 4.61529 2.15364 4.29144 2.09457L4.16667 2.08333ZM12.5 2.08333H11.1111C10.7704 2.08333 10.4867 2.33025 10.4279 2.65337L10.4167 2.77778V22.2222C10.4167 22.5617 10.6625 22.8464 10.9863 22.9054L11.1111 22.9167H12.5C12.8407 22.9167 13.1244 22.6697 13.1832 22.3467L13.1944 22.2222V2.77778C13.1944 2.43828 12.9486 2.15364 12.6247 2.09457L12.5 2.08333ZM20.799 4.86181L20.711 4.86718L20.624 4.88403L19.2796 5.22847C19.0365 5.29097 18.9088 5.45486 18.8532 5.54931C18.8099 5.62264 18.7479 5.75997 18.7568 5.93642L18.7782 6.07569L22.9671 22.3868C23.0588 22.7451 23.3796 22.909 23.6379 22.909L23.7247 22.9036L23.8115 22.8868L25.1574 22.541C25.4882 22.4571 25.7017 22.1469 25.6776 21.8197L25.6574 21.6965L21.4699 5.38264C21.3768 5.02569 21.0574 4.86181 20.799 4.86181Z"
+                                            fill="WHITE" />
+                                    </graphic>
+                                </Label>
+                            </center>
+                        </BorderPane>
+                        <BorderPane id="paneDescubrir" fx:id="paneDescubrir" onMouseClicked="#goToDiscover" prefHeight="70.0"
+                            prefWidth="175.0">
+                            <left>
+                                <Group BorderPane.alignment="CENTER">
+                                    <children>
+                                        <SVGPath id="brujula1"
+                                            content="M5.32233 29.8609C3.65803 29.8609 2.4098 29.4438 1.43896 28.4704C0.0520371 27.0798 -0.364039 24.9939 0.329421 22.63L3.65803 8.72423C4.08702 7.5125 4.80359 6.4236 5.74593 5.55146C6.68826 4.67932 7.82806 4.05013 9.06701 3.71816L22.7975 0.241731C25.1553 -0.314498 27.2357 0.102674 28.6226 1.35419C30.0095 2.74476 30.2869 4.83062 29.7321 7.1946L26.2648 21.1003C25.8874 22.3477 25.2091 23.4825 24.2898 24.4042C23.3705 25.326 22.2386 26.0061 20.9945 26.3845L7.12533 29.7219L5.18364 30L5.32233 29.8609ZM23.3523 2.04948L9.48309 5.52591C8.59766 5.83421 7.79716 6.34741 7.14654 7.02391C6.49593 7.7004 6.0135 8.52113 5.73841 9.41952L2.27111 23.1862C1.85503 24.8549 2.13242 26.1064 2.96457 26.9407C3.65803 27.7751 5.04495 28.0532 6.70925 27.636L20.5784 24.1596C21.4541 23.875 22.25 23.3863 22.9009 22.7337C23.5519 22.081 24.0392 21.283 24.3231 20.405L27.7904 6.49931C28.2065 4.83062 27.9291 3.57911 27.097 2.74476C26.2648 1.91042 25.0166 1.6323 23.3523 2.04948Z"
+                                            layoutY="-2.0">
+                                            <effect>
+                                                <Glow />
+                                            </effect>
+                                        </SVGPath>
+                                        <SVGPath id="brujula2"
+                                            content="M15.0306 20.8222C13.449 20.8222 11.9321 20.1922 10.8136 19.0709C9.69522 17.9495 9.06689 16.4286 9.06689 14.8427C9.06689 13.2569 9.69522 11.736 10.8136 10.6146C11.9321 9.49324 13.449 8.86327 15.0306 8.86327C16.6123 8.86327 18.1292 9.49324 19.2477 10.6146C20.3661 11.736 20.9944 13.2569 20.9944 14.8427C20.9944 16.4286 20.3661 17.9495 19.2477 19.0709C18.1292 20.1922 16.6123 20.8222 15.0306 20.8222ZM15.0306 11.0882C14.0375 11.0882 13.085 11.4838 12.3828 12.1879C11.6805 12.892 11.286 13.847 11.286 14.8427C11.286 15.8385 11.6805 16.7935 12.3828 17.4976C13.085 18.2017 14.0375 18.5973 15.0306 18.5973C16.0238 18.5973 16.9763 18.2017 17.6785 17.4976C18.3808 16.7935 18.7753 15.8385 18.7753 14.8427C18.7753 13.847 18.3808 12.892 17.6785 12.1879C16.9763 11.4838 16.0238 11.0882 15.0306 11.0882Z"
+                                            layoutY="-2.0" />
+                                    </children>
+                                </Group>
+                            </left>
+                            <center>
+                                <Label id="lblDescubrir" fx:id="lblDescubrir" alignment="CENTER"
+                                    text="Descubrir" BorderPane.alignment="CENTER">
+                                </Label>
+                            </center>
+                        </BorderPane>
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="60.0" />
+                    </GridPane.margin>
+                </HBox>
+                <!-- Second HBox (RETRORACK logo and label) -->
+                <HBox alignment="CENTER" prefHeight="144.0" prefWidth="933.0"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0"
+                            pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/retroRack_logo.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label id="lblRetroRack" text="RETRORACK" textFill="WHITE">
+                            <font>
+                                <Font name="Genos SemiBold" size="64.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <opaqueInsets>
+                        <Insets top="20.0" />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </HBox>
+                <!-- Third HBox (PABLO image) -->
+                <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2"
+                    GridPane.rowIndex="1">
+                    <children>
+                        <ImageView id="profilePic" fitHeight="100.0"
+                            fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@/images/PABLO.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                    <padding>
+                        <Insets left="100.0" />
+                    </padding>
+                    <GridPane.margin>
+                        <Insets right="20.0" />
+                    </GridPane.margin>
+                </HBox>
+                <Pane fx:id="closeAppBtn" onMouseClicked="#closeApp"
+                    GridPane.columnIndex="4">
+                    <children>
+                        <SVGPath content="M25.6 6.2H4.3V24h21.3V6.2Z"
+                            fill="#970a08" scaleX="0.75" scaleY="0.75" />
+                        <SVGPath
+                            content="M30 15a15 15 0 1 1-30 0 15 15 0 0 1 30 0ZM10 8.7A1 1 0 0 0 8.7 10l5 5-5 5a1 1 0 0 0 1.3 1.3l5-5 5 5a1 1 0 0 0 1.3-1.3l-5-5 5-5A1 1 0 0 0 20 8.7l-5 5-5-5Z"
+                            fill="#ff5752" scaleX="0.75" scaleY="0.75" />
+                    </children>
+                    <GridPane.margin>
+                        <Insets top="25.0" />
+                    </GridPane.margin>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Pane>
+                <Pane fx:id="minimizeAppBtn" onMouseClicked="#minimizeApp"
+                    prefWidth="41.0" GridPane.columnIndex="3">
+                    <children>
+                        <SVGPath
+                            content="M6.30566 10.4828H23.2688V18.2993H6.30566V10.4828Z"
+                            fill="#aa5900" scaleX="0.75" scaleY="0.75" />
+                        <SVGPath
+                            content="M30 15.0005C30 26.5296 17.5013 33.7358 7.5 27.9712C2.85938 25.2958 0 20.3513 0 15.0005C0 3.46953 12.5006 -3.73662 22.5 2.02981C27.1425 4.70521 30 9.64972 30 15.0005ZM8.4375 14.0644C7.7175 14.0644 7.2656 14.8451 7.6256 15.4686C7.79435 15.7588 8.10375 15.9366 8.4375 15.9366H21.5625C22.2844 15.9366 22.7362 15.1559 22.3743 14.5325C22.2075 14.2423 21.8981 14.0644 21.5625 14.0644H8.4375Z"
+                            fill="#ffbd32" scaleX="0.75" scaleY="0.75" />
+                    </children>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                    <GridPane.margin>
+                        <Insets top="25.0" />
+                    </GridPane.margin>
+                </Pane>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="40.0" />
+            </BorderPane.margin>
+        </GridPane>
+    </top>
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0"
+            BorderPane.alignment="CENTER">
+            <center>
+                <VBox fx:id="gamesContainer" xmlns="http://javafx.com/javafx"
+      					xmlns:fx="http://javafx.com/fxml">
+    				<!-- Contenido del VBox -->
+					</VBox>
+            </center>
+            <top>
+                <StackPane prefHeight="60.0" prefWidth="200.0"
+                    BorderPane.alignment="CENTER">
+                    <children>
+                        <GridPane id="gridPaneSearchBar" prefHeight="60.0"
+                            prefWidth="1824.0" BorderPane.alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES"
+                                    maxWidth="94.5" minWidth="0.0" prefWidth="64.0" />
+                                <ColumnConstraints hgrow="SOMETIMES"
+                                    maxWidth="105.99999237060547" minWidth="10.0"
+                                    prefWidth="89.99999237060547" />
+                                <ColumnConstraints hgrow="SOMETIMES"
+                                    maxWidth="1776.5" minWidth="1288.0000076293945"
+                                    prefWidth="1304.0000076293945" />
+                                <ColumnConstraints hgrow="SOMETIMES"
+                                    maxWidth="405.0" minWidth="10.0" prefWidth="405.0" />
+                                <ColumnConstraints hgrow="SOMETIMES"
+                                    maxWidth="409.0" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints minHeight="10.0"
+                                    prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <TextField id="searchBar" fx:id="searchBar"
+                                    focusTraversable="false" onAction="#searchGame"
+                                    prefHeight="60.0" promptText="Search Bar"
+                                    GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                </TextField>
+                                <BorderPane id="searchIcon" prefHeight="200.0"
+                                    prefWidth="200.0" GridPane.columnIndex="1"
+                                    GridPane.rowIndex="1">
+                                    <center>
+                                        <SVGPath
+                                            content="M22.1641 18.5312C23.3359 16.6875 24.0234 14.5 24.0234 12.1484C24.0234 5.57813 18.7031 0.25 12.1406 0.25C5.57031 0.25 0.25 5.57813 0.25 12.1484C0.25 18.7188 5.57031 24.0469 12.1328 24.0469C14.5156 24.0469 16.7344 23.3438 18.5938 22.1406L19.1328 21.7656L27.6172 30.25L30.25 27.5703L21.7734 19.0859L22.1641 18.5312ZM18.7969 5.5C20.5703 7.27344 21.5469 9.63281 21.5469 12.1406C21.5469 14.6484 20.5703 17.0078 18.7969 18.7812C17.0234 20.5547 14.6641 21.5312 12.1562 21.5312C9.64844 21.5312 7.28906 20.5547 5.51562 18.7812C3.74219 17.0078 2.76562 14.6484 2.76562 12.1406C2.76562 9.63281 3.74219 7.27344 5.51562 5.5C7.28906 3.72656 9.64844 2.75 12.1562 2.75C14.6641 2.75 17.0234 3.72656 18.7969 5.5Z"
+                                            fill="WHITE" BorderPane.alignment="CENTER">
+                                            <BorderPane.margin>
+                                                <Insets left="10.0" />
+                                            </BorderPane.margin>
+                                        </SVGPath>
+                                    </center>
+                                </BorderPane>
+                            </children>
+                            <BorderPane.margin>
+                                <Insets bottom="20.0" top="20.0" />
+                            </BorderPane.margin>
+                        </GridPane>
+                        <Pane id="filterBar" prefHeight="200.0" prefWidth="200.0">
+                            <StackPane.margin>
+                                <Insets left="1425.0" right="120.0" />
+                            </StackPane.margin>
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES"
+                                            minWidth="10.0" prefWidth="75.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES"
+                                            minWidth="10.0" prefWidth="75.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES"
+                                            minWidth="10.0" prefWidth="75.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES"
+                                            minWidth="10.0" prefWidth="75.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES"
+                                            minWidth="10.0" prefWidth="75.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0"
+                                            prefHeight="60.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <SVGPath
+                                            content="M16.6667 42.4286C16.6667 41.8792 16.8862 41.3523 17.2769 40.9638C17.6676 40.5754 18.1975 40.3571 18.75 40.3571H31.25C31.8025 40.3571 32.3324 40.5754 32.7231 40.9638C33.1138 41.3523 33.3333 41.8792 33.3333 42.4286C33.3333 42.9779 33.1138 43.5048 32.7231 43.8933C32.3324 44.2818 31.8025 44.5 31.25 44.5H18.75C18.1975 44.5 17.6676 44.2818 17.2769 43.8933C16.8862 43.5048 16.6667 42.9779 16.6667 42.4286ZM8.33333 30C8.33333 29.4506 8.55283 28.9237 8.94353 28.5353C9.33423 28.1468 9.86413 27.9286 10.4167 27.9286H39.5833C40.1359 27.9286 40.6658 28.1468 41.0565 28.5353C41.4472 28.9237 41.6667 29.4506 41.6667 30C41.6667 30.5494 41.4472 31.0763 41.0565 31.4647C40.6658 31.8532 40.1359 32.0714 39.5833 32.0714H10.4167C9.86413 32.0714 9.33423 31.8532 8.94353 31.4647C8.55283 31.0763 8.33333 30.5494 8.33333 30ZM0 17.5714C0 17.0221 0.219494 16.4952 0.610195 16.1067C1.0009 15.7182 1.5308 15.5 2.08333 15.5H47.9167C48.4692 15.5 48.9991 15.7182 49.3898 16.1067C49.7805 16.4952 50 17.0221 50 17.5714C50 18.1208 49.7805 18.6477 49.3898 19.0361C48.9991 19.4246 48.4692 19.6429 47.9167 19.6429H2.08333C1.5308 19.6429 1.0009 19.4246 0.610195 19.0361C0.219494 18.6477 0 18.1208 0 17.5714Z">
+                                            <GridPane.margin>
+                                                <Insets left="15.0" />
+                                            </GridPane.margin>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </SVGPath>
+                                        <SVGPath
+                                            content="M24.4843 11.5286L8.41286 13.9393C7.88786 14.0186 7.5 14.4686 7.5 14.999V27.8565C7.5 28.449 7.98 28.928 8.57143 28.928H24.6429C25.2343 28.928 25.7143 28.449 25.7143 27.8565V12.5882C25.7143 12.2764 25.5782 11.9807 25.3414 11.7761C25.1057 11.5736 24.7918 11.4857 24.4843 11.5286ZM52.1271 7.75812C51.8914 7.55561 51.5786 7.46775 51.2689 7.51061L28.7689 10.8857C28.245 10.965 27.8571 11.415 27.8571 11.9454V27.8565C27.8571 28.449 28.3371 28.928 28.9286 28.928H51.4286C52.02 28.928 52.5 28.449 52.5 27.8565V8.57028C52.5 8.25849 52.3639 7.96277 52.1271 7.75812ZM24.6429 31.0709H8.57143C7.98 31.0709 7.5 31.5498 7.5 32.1423V44.9998C7.5 45.5302 7.88786 45.9802 8.41286 46.0595L24.4843 48.4702C24.5379 48.4777 24.5904 48.482 24.6429 48.482C24.8979 48.482 25.1464 48.391 25.3414 48.2227C25.5782 48.0181 25.7143 47.7224 25.7143 47.4106V32.1423C25.7143 31.5498 25.2343 31.0709 24.6429 31.0709ZM51.4286 31.0709H28.9286C28.3371 31.0709 27.8571 31.5498 27.8571 32.1423V48.0535C27.8571 48.5838 28.245 49.0338 28.77 49.1131L51.27 52.4882C51.3225 52.4957 51.3761 52.5 51.4286 52.5C51.6836 52.5 51.9321 52.4089 52.1271 52.2407C52.3639 52.0361 52.5 51.7403 52.5 51.4285V32.1423C52.5 31.5498 52.02 31.0709 51.4286 31.0709Z"
+                                            GridPane.columnIndex="1">
+                                            <GridPane.margin>
+                                                <Insets left="15.0" />
+                                            </GridPane.margin>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </SVGPath>
+                                        <SVGPath
+                                            content="M57.8105 43.2708C56.6964 44.4843 55.3589 45.4154 53.8899 46L33.1234 54.3333V48.1875L48.3934 42.125C50.138 41.4375 50.4006 40.4583 48.9937 40.0417C47.1279 39.565 45.1796 39.6732 43.3659 40.3542L33.1984 44.3542V37.9167L33.7799 37.7083C36.0779 36.8776 38.4485 36.3189 40.8522 36.0417C45.2906 35.531 49.7758 36.1216 53.9836 37.7708C58.4483 39.3542 58.9548 41.6667 57.8105 43.2708ZM35.0931 32.8542V17.2292C35.0931 15.375 34.7929 13.6875 33.2172 13.2083C32.0353 12.7917 31.3412 14.0208 31.3412 15.8542V55L21.8491 51.6458V5C26.2933 6.03642 30.6782 7.36515 34.9805 8.97917C43.0282 12.0625 45.7483 15.875 45.7483 24.4792C45.7483 33.0833 41.021 36.0417 35.0931 32.875V32.8542ZM4.3842 47.4375C-0.23058 46 -0.98095 43 1.10133 41.1875C2.72917 40.0081 4.48863 39.0696 6.33516 38.3958L19.9731 33.0208V39.1458L10.162 43.2292C8.43619 43.9167 8.1548 44.8958 9.56175 45.3125C11.4301 45.7717 13.3758 45.6564 15.1895 44.9792L19.8981 43.0833V48.75L18.9601 48.9375C14.0527 49.8219 9.02544 49.3715 4.30916 47.625L4.3842 47.4375Z"
+                                            GridPane.columnIndex="2">
+                                            <GridPane.margin>
+                                                <Insets left="15.0" />
+                                            </GridPane.margin>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </SVGPath>
+                                        <SVGPath
+                                            content="M22.5268 55.0131C18.5548 54.603 14.7384 53.2497 11.3954 51.066C8.59689 49.2281 7.94947 48.4763 7.94947 46.8891C7.94947 43.8608 11.2701 38.5353 16.9715 32.5415C19.4026 29.7707 22.1583 27.3025 25.1791 25.1902C26.1189 25.399 33.6999 32.7921 36.5193 36.2589C41.0095 41.7515 43.0561 46.2417 42.0119 48.2466C41.2183 49.7711 36.2896 52.7576 32.6557 53.9062C29.3781 54.9043 25.9426 55.2797 22.5268 55.0131ZM4.14851 43.7355C1.78224 40.0641 0.381451 35.8545 0.0760561 31.4973C-0.104319 29.4552 0.0366214 27.3975 0.493743 25.399C1.32211 20.786 3.43592 16.5004 6.59198 13.0355C7.84505 11.7198 7.94947 11.678 9.49492 12.2001C12.0956 13.3164 14.4461 14.9426 16.4076 16.9826L18.2037 18.6116L17.2221 19.8229C12.6603 25.437 8.90001 31.6573 6.04899 38.3056C5.1404 40.3271 4.80794 42.5604 5.08831 44.7589C5.38069 45.4689 5.10919 45.1974 4.14851 43.7355ZM45.1654 44.3412C45.3196 42.5474 45.0698 40.742 44.4345 39.0574C41.6583 32.3467 37.9382 26.0667 33.3867 20.4077L31.9456 18.6116L33.4911 17.1706C35.0268 15.698 36.7059 14.3827 38.5033 13.2443C39.6031 12.5282 40.8412 12.0515 42.1372 11.8451C42.5967 11.8451 44.2257 13.4949 45.4787 15.291C47.5172 18.2179 48.9384 21.5292 49.6556 25.0231C50.1148 28.146 50.1148 31.3192 49.6556 34.442C49.2473 36.4817 48.6171 38.4706 47.776 40.3731C47.037 41.9073 46.1781 43.3807 45.2072 44.7798C44.894 45.1766 44.894 45.1766 45.061 44.3203L45.1654 44.3412ZM22.9445 11.0097C20.6733 9.8847 18.2753 9.0363 15.802 8.48269C15.0211 8.36667 14.2309 8.32472 13.4421 8.35739C11.9593 8.35739 12.0219 8.35739 14.3819 7.22963C16.2459 6.34956 18.2093 5.69743 20.2295 5.28738C23.4394 4.77579 26.71 4.77579 29.9198 5.28738C32.5939 5.8308 35.1707 6.77424 37.5635 8.08589L38.0856 8.42004H36.8952C33.4788 8.51961 30.1324 9.41339 27.1213 11.0306C25.9936 11.5736 25.0329 12.0122 25.0329 12.0122C25.0329 12.0122 23.9887 11.5527 22.9445 11.0097Z"
+                                            GridPane.columnIndex="3">
+                                            <GridPane.margin>
+                                                <Insets left="20.0" />
+                                            </GridPane.margin>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </SVGPath>
+                                        <BorderPane prefHeight="200.0" prefWidth="200.0"
+                                            style="-fx-background-color: transparent;"
+                                            GridPane.columnIndex="4">
+                                            <center>
+                                                <Pane prefHeight="200.0" prefWidth="200.0"
+                                                    style="-fx-background-color: transparent;"
+                                                    BorderPane.alignment="CENTER">
+                                                    <children>
+                                                        <SVGPath
+                                                            content="M48.2317 10.4601C49.3216 12.5992 49.3216 15.3995 49.3216 21V39C49.3216 44.6005 49.3216 47.4008 48.2317 49.5399C47.2729 51.4215 45.7431 52.9513 43.8615 53.9101C41.7224 55 38.9221 55 33.3216 55H25.9316V5H33.3216C38.9221 5 41.7224 5 43.8615 6.08993C45.7431 7.04867 47.2729 8.57847 48.2317 10.4601ZM37.6266 45.8203C40.8294 45.8203 43.4258 43.197 43.4258 39.9609C43.4258 36.7249 40.8294 34.1016 37.6266 34.1016C34.4238 34.1016 31.8275 36.7249 31.8275 39.9609C31.8275 43.197 34.4238 45.8203 37.6266 45.8203Z"
+                                                            layoutX="-1.0" rotate="180.0" />
+                                                        <SVGPath
+                                                            content="M48.2317 10.4601C49.3216 12.5992 49.3216 15.3995 49.3216 21V39C49.3216 44.6005 49.3216 47.4008 48.2317 49.5399C47.2729 51.4215 45.7431 52.9513 43.8615 53.9101C41.7224 55 38.9221 55 33.3216 55H25.9316V5H33.3216C38.9221 5 41.7224 5 43.8615 6.08993C45.7431 7.04867 47.2729 8.57847 48.2317 10.4601ZM37.6266 45.8203C40.8294 45.8203 43.4258 43.197 43.4258 39.9609C43.4258 36.7249 40.8294 34.1016 37.6266 34.1016C34.4238 34.1016 31.8275 36.7249 31.8275 39.9609C31.8275 43.197 34.4238 45.8203 37.6266 45.8203Z"
+                                                            layoutX="25.0" />
+                                                    </children>
+                                                </Pane>
+                                            </center>
+                                            <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                            </cursor>
+                                        </BorderPane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </Pane>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="30.0" />
+                    </BorderPane.margin>
+                </StackPane>
+            </top>
+        </BorderPane>
+    </center>
+</BorderPane>
