@@ -129,3 +129,17 @@ BorderPane {
     -fx-background-color: #F29441;
     -fx-border-color: transparent;
 }
+
+/* Estilo para el botón seleccionado */
+.selected-button {
+    -fx-background-color: #F29441; /* Color de fondo cuando está seleccionado */
+    -fx-text-fill: white; /* Color del texto cuando está seleccionado */
+    -fx-effect: dropshadow(gaussian, rgba(248.0, 201.0, 160.0, 0.5), 10.0, 0.3, 0.0, 0.0); /* Efecto de sombra */
+}
+
+/* Estilo para el botón no seleccionado */
+.unselected-button {
+    -fx-background-color: #181818; /* Color de fondo cuando no está seleccionado */
+    -fx-text-fill: #F29441; /* Color del texto cuando no está seleccionado */
+    -fx-effect: innershadow(gaussian, black, 10.0, 0.5, 0.0, 0.0); /* Efecto de sombra interior */
+}

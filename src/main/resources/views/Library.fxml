@@ -23,7 +23,8 @@
     style="-fx-background-color: #303030;"
     xmlns="http://javafx.com/javafx/23.0.1"
     xmlns:fx="http://javafx.com/fxml/1"
-    fx:controller="controllers.LibraryController">
+    fx:controller="controllers.LibraryController"
+    stylesheets="@LibraryStyle.css">
     <top>
         <GridPane alignment="CENTER" prefHeight="123.0"
             prefWidth="1920.0" BorderPane.alignment="CENTER">

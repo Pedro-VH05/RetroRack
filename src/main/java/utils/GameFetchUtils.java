@@ -19,8 +19,8 @@ import java.util.List;
  */
 public class GameFetchUtils {
 
-	private static final String API_KEY = "d119a39f3ac64031a6ab6bb78b067da6";
-	private static final String BASE_URL = "https://api.rawg.io/api/games";
+	public static final String API_KEY = "d119a39f3ac64031a6ab6bb78b067da6";
+	public static final String BASE_URL = "https://api.rawg.io/api/games";
 
 	private final Gson gson = new Gson();
 	private static final OkHttpClient client = new OkHttpClient();

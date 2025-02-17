@@ -40,7 +40,7 @@
 						<!-- First HBox (Biblioteca and Descubrir) -->
 						<HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="377.0" GridPane.rowIndex="1">
 							<children>
-								<BorderPane id="paneBiblioteca" layoutX="60.0" prefHeight="70.0" prefWidth="184.0">
+								<BorderPane id="paneBiblioteca" layoutX="60.0" prefHeight="70.0" prefWidth="184.0" onMouseClicked="#openLibrary">
 									<center>
 										<Label id="lblBiblioteca" prefHeight="35.0" prefWidth="137.0" text="Biblioteca" textFill="WHITE" BorderPane.alignment="CENTER">
 											<font>

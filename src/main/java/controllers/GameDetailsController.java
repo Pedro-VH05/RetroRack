@@ -13,249 +13,285 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import models.Game;
+import utils.BBDDUtils;
 import utils.GameFetchUtils;
+import utils.GameGridBuilder;
 
 public class GameDetailsController {
 
-	private static final double IMAGE_HEIGHT = 250;
+   private static final double IMAGE_HEIGHT = 250;
 
-	@FXML
-	private BorderPane arrowBack;
+   @FXML
+   private BorderPane arrowBack;
 
-	@FXML
-	private Label lblTitle;
+   @FXML
+   private Label lblTitle;
 
-	@FXML
-	private TextArea lblDescription;
+   @FXML
+   private TextArea lblDescription;
 
-	@FXML
-	private Label lblGeneros;
+   @FXML
+   private Label lblGeneros;
 
-	@FXML
-	private Label lblPlataformas;
+   @FXML
+   private Label lblPlataformas;
 
-	@FXML
-	private Label lblTiempoJuego;
+   @FXML
+   private Label lblTiempoJuego;
 
-	@FXML
-	private Label lblMetacriticScore;
+   @FXML
+   private Label lblMetacriticScore;
 
-	@FXML
-	private Label lblComunityScore;
+   @FXML
+   private Label lblComunityScore;
 
-	@FXML
-	private HBox screenshotsHBox;
+   @FXML
+   private HBox screenshotsHBox;
 
-	@FXML
-	private ScrollPane screenshotsScrollPane;
+   @FXML
+   private ScrollPane screenshotsScrollPane;
 
-	@FXML
-	private Button editReviewBtn;
+   @FXML
+   private Button editReviewBtn;
 
-	@FXML
-	private Button doneReviewBtn;
+   @FXML
+   private Button doneReviewBtn;
 
-	@FXML
-	private TextArea reviewArea;
+   @FXML
+   private TextArea reviewArea;
 
-	@FXML
-	private Slider noteSlider;
+   @FXML
+   private Slider noteSlider;
 
-	@FXML
-	private Label noteLabel;
+   @FXML
+   private Label noteLabel;
 
-	private Stage primaryStage;
+   private Stage primaryStage;
 
-	/**
-	 * Establece el Stage principal para poder volver a la ventana anterior.
-	 *
-	 * @param primaryStage El Stage principal de la aplicación.
-	 */
-	public void setPrimaryStage(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-		// Establecer el ícono de la aplicación
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/retroRack_logo.png")));
-	}
+   @FXML
+   private Button addGameButton;
 
-	/**
-	 * Carga y muestra los detalles de un juego específico.
-	 *
-	 * @param gameId ID del juego del que los detalles se van a cargar.
-	 */
-	public void setGameDetails(int gameId) {
-		// Obtenemos los detalles del juego desde la API
-		Game game = GameFetchUtils.getGameDetails(gameId);
+   @FXML
+   private VBox libraryContainer; // Contenedor de la biblioteca
 
-		if (game != null) {
-			// Actualizamos la interfaz con los detalles del juego
-			setGameInfo(game);
-			loadScreenshots(gameId);
-		} else {
-			System.err.println("No se pudo obtener la información del juego.");
-		}
-	}
+   private Game selectedGame;
+   private BBDDUtils dbUtils = new BBDDUtils();
+   public void setGameDetails(Game game) {
+      this.selectedGame = game;
+   }
 
-	/**
-	 * Habilita la edición de la reseña personal del usuario.
-	 */
-	@FXML
-	void editPersonalReview() {
-		editReview();
-	}
+   /**
+    * Establece el Stage principal para poder volver a la ventana anterior.
+    *
+    * @param primaryStage El Stage principal de la aplicación.
+    */
+   public void setPrimaryStage(Stage primaryStage) {
+      this.primaryStage = primaryStage;
+      // Establecer el ícono de la aplicación
+      primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/retroRack_logo.png")));
+   }
 
-	/**
-	 * Navega de vuelta a la pantalla de descubrimiento de juegos.
-	 */
-	@FXML
-	void goToDiscover() {
-		goBack();
-	}
+   /**
+    * Carga y muestra los detalles de un juego específico.
+    *
+    * @param gameId ID del juego del que los detalles se van a cargar.
+    */
+   public void setGameDetails(int gameId) {
+      // Obtenemos los detalles del juego desde la API
+      Game game = GameFetchUtils.getGameDetails(gameId);
 
-	/**
-	 * Cierra la ventana actual y vuelve a la ventana principal.
-	 */
-	private void goBack() {
-		// Cerramos la ventana de detalles
-		Stage stage = (Stage) arrowBack.getScene().getWindow();
-		stage.close();
+      if (game != null) {
+         // Actualizamos la interfaz con los detalles del juego
+         setGameInfo(game);
+         loadScreenshots(gameId);
+      } else {
+         System.err.println("No se pudo obtener la información del juego.");
+      }
+   }
 
-		// Volvemos a mostrar la ventana principal
-		if (primaryStage != null) {
-			primaryStage.show();
-		}
-	}
+   /**
+    * Habilita la edición de la reseña personal del usuario.
+    */
+   @FXML
+   void editPersonalReview() {
+      editReview();
+   }
 
-	/**
-	 * Actualiza la interfaz con la información del juego.
-	 *
-	 * @param game El juego del que los detalles se van a mostrar.
-	 */
-	private void setGameInfo(Game game) {
-		// Limpiamos la descripción para eliminar etiquetas HTML
-		String cleanDescription = cleanDescriptionRaw(game.getDescription());
+   /**
+    * Navega de vuelta a la pantalla de descubrimiento de juegos.
+    */
+   @FXML
+   void goToDiscover() {
+      goBack();
+   }
+   
+   @FXML
+   void addGameToLibrary() {
+      addGame();
+   }
 
-		// Actualizamos los campos de la interfaz
-		lblTitle.setText(game.getName());
-		lblDescription.setText(cleanDescription);
+   /**
+    * Cierra la ventana actual y vuelve a la ventana principal.
+    */
+   private void goBack() {
+      // Cerramos la ventana de detalles
+      Stage stage = (Stage) arrowBack.getScene().getWindow();
+      stage.close();
 
-		// Convertimos la lista de géneros a una cadena separada por comas
-		String generos = game.getGenres().stream().map(genre -> genre.getName()).collect(Collectors.joining(", "));
-		lblGeneros.setText(generos);
+      // Volvemos a mostrar la ventana principal
+      if (primaryStage != null) {
+         primaryStage.show();
+      }
+   }
 
-		// Convertimos la lista de plataformas a una cadena separada por comas
-		String plataformas = game.getPlatforms().stream().map(platform -> platform.getPlatform().getName())
-				.collect(Collectors.joining(", "));
-		lblPlataformas.setText(plataformas);
+   /**
+    * Actualiza la interfaz con la información del juego.
+    *
+    * @param game El juego del que los detalles se van a mostrar.
+    */
+   private void setGameInfo(Game game) {
+      // Limpiamos la descripción para eliminar etiquetas HTML
+      String cleanDescription = cleanDescriptionRaw(game.getDescription());
 
-		// Mostramos el tiempo de juego en horas
-		lblTiempoJuego.setText(game.getPlaytime() + " horas");
+      // Actualizamos los campos de la interfaz
+      lblTitle.setText(game.getName());
+      lblDescription.setText(cleanDescription);
 
-		// Mostramos la puntuación de Metacritic
-		if (game.getMetacritic() != null) {
-			lblMetacriticScore.setText("" + game.getMetacritic());
-		} else {
-			lblMetacriticScore.setText("-");
-		}
+      // Convertimos la lista de géneros a una cadena separada por comas
+      String generos = game.getGenres().stream().map(genre -> genre.getName()).collect(Collectors.joining(", "));
+      lblGeneros.setText(generos);
 
-		// Mostramos la puntuación de la comunidad (sobre 100 y truncando el decimal)
-		if (game.getRating() != -1) {
-			double communityRating = game.getRating() * 20; // Convertir a escala de 100
-			int truncatedRating = (int) communityRating; // Truncar el decimal
-			lblComunityScore.setText("" + truncatedRating);
-		} else {
-			lblComunityScore.setText("-");
-		}
-	}
+      // Convertimos la lista de plataformas a una cadena separada por comas
+      String plataformas = game.getPlatforms().stream().map(platform -> platform.getPlatform().getName())
+            .collect(Collectors.joining(", "));
+      lblPlataformas.setText(plataformas);
 
-	/**
-	 * Carga y muestra las capturas de pantalla del juego.
-	 *
-	 * @param gameId ID del juego cuyas capturas de pantalla se van a cargar.
-	 */
-	private void loadScreenshots(int gameId) {
-		// Obtenemos las capturas de pantalla desde la API
-		List<String> screenshotUrls = GameFetchUtils.getGameScreenshots(gameId);
+      // Mostramos el tiempo de juego en horas
+      lblTiempoJuego.setText(game.getPlaytime() + " horas");
 
-		if (screenshotUrls != null && !screenshotUrls.isEmpty()) {
-			// Limpiamos el HBox antes de agregar nuevas imágenes
-			screenshotsHBox.getChildren().clear();
+      // Mostramos la puntuación de Metacritic
+      if (game.getMetacritic() != null) {
+         lblMetacriticScore.setText("" + game.getMetacritic());
+      } else {
+         lblMetacriticScore.setText("-");
+      }
 
-			// Agregamos cada imagen al HBox
-			for (String url : screenshotUrls) {
-				// Creamos la ImageView y cargamos la imagen
-				ImageView imageView = new ImageView(new Image(url));
-				imageView.setFitHeight(IMAGE_HEIGHT); // Altura fija
-				imageView.setPreserveRatio(true); // Mantenemos la proporción
+      // Mostramos la puntuación de la comunidad (sobre 100 y truncando el decimal)
+      if (game.getRating() != -1) {
+         double communityRating = game.getRating() * 20; // Convertir a escala de 100
+         int truncatedRating = (int) communityRating; // Truncar el decimal
+         lblComunityScore.setText("" + truncatedRating);
+      } else {
+         lblComunityScore.setText("-");
+      }
+   }
 
-				// Obtenemos el ancho real de la imagen después de escalarla
-				double imageWidth = imageView.getBoundsInLocal().getWidth();
+   /**
+    * Carga y muestra las capturas de pantalla del juego.
+    *
+    * @param gameId ID del juego cuyas capturas de pantalla se van a cargar.
+    */
+   private void loadScreenshots(int gameId) {
+      // Obtenemos las capturas de pantalla desde la API
+      List<String> screenshotUrls = GameFetchUtils.getGameScreenshots(gameId);
 
-				// Creamos el rectángulo de recorte con las dimensiones correctas
-				Rectangle clip = new Rectangle(imageWidth, IMAGE_HEIGHT); // Ancho dinámico, altura fija
-				clip.setArcWidth(20); // Bordes redondeados
-				clip.setArcHeight(20); // Bordes redondeados
-				imageView.setClip(clip);
+      if (screenshotUrls != null && !screenshotUrls.isEmpty()) {
+         // Limpiamos el HBox antes de agregar nuevas imágenes
+         screenshotsHBox.getChildren().clear();
 
-				// Agregamos la imagen al HBox
-				screenshotsHBox.getChildren().add(imageView);
-			}
-		} else {
-			System.out.println("No se encontraron capturas de pantalla.");
-		}
-	}
+         // Agregamos cada imagen al HBox
+         for (String url : screenshotUrls) {
+            // Creamos la ImageView y cargamos la imagen
+            ImageView imageView = new ImageView(new Image(url));
+            imageView.setFitHeight(IMAGE_HEIGHT); // Altura fija
+            imageView.setPreserveRatio(true); // Mantenemos la proporción
 
-	/**
-	 * Limpia la descripción del juego eliminando etiquetas HTML y contenido
-	 * innecesario.
-	 *
-	 * @param descriptionRaw La descripción cruda del juego.
-	 * @return La descripción limpia y lista para mostrar.
-	 */
-	private static String cleanDescriptionRaw(String descriptionRaw) {
-		// Si no hay descripción, devolvemos una cadena vacía
-		if (descriptionRaw == null || descriptionRaw.isEmpty()) {
-			return "";
-		}
+            // Obtenemos el ancho real de la imagen después de escalarla
+            double imageWidth = imageView.getBoundsInLocal().getWidth();
 
-		// Dividimos el texto en partes
-		String[] parts = descriptionRaw.split("\n\n");
+            // Creamos el rectángulo de recorte con las dimensiones correctas
+            Rectangle clip = new Rectangle(imageWidth, IMAGE_HEIGHT); // Ancho dinámico, altura fija
+            clip.setArcWidth(20); // Bordes redondeados
+            clip.setArcHeight(20); // Bordes redondeados
+            imageView.setClip(clip);
 
-		// Tomamos la primera parte
-		String englishDescription = parts.length > 0 ? parts[0] : descriptionRaw;
+            // Agregamos la imagen al HBox
+            screenshotsHBox.getChildren().add(imageView);
+         }
+      } else {
+         System.out.println("No se encontraron capturas de pantalla.");
+      }
+   }
 
-		// Eliminamos saltos de línea y espacios adicionales
-		englishDescription = englishDescription.replace("\n", " ").trim();
+   /**
+    * Limpia la descripción del juego eliminando etiquetas HTML y contenido
+    * innecesario.
+    *
+    * @param descriptionRaw La descripción cruda del juego.
+    * @return La descripción limpia y lista para mostrar.
+    */
+   private static String cleanDescriptionRaw(String descriptionRaw) {
+      // Si no hay descripción, devolvemos una cadena vacía
+      if (descriptionRaw == null || descriptionRaw.isEmpty()) {
+         return "";
+      }
 
-		return englishDescription;
-	}
+      // Dividimos el texto en partes
+      String[] parts = descriptionRaw.split("\n\n");
 
-	/**
-	 * Habilita o deshabilita la edición de la reseña personal del usuario.
-	 */
-	private void editReview() {
-		if (reviewArea.isDisabled()) {
-			// Habilitamos el TextArea y el Slider
-			reviewArea.setDisable(false);
-			noteSlider.setDisable(false);
+      // Tomamos la primera parte
+      String englishDescription = parts.length > 0 ? parts[0] : descriptionRaw;
 
-			// Cambiamos los botones
-			editReviewBtn.setVisible(false);
-			doneReviewBtn.setVisible(true);
-		} else {
-			// Deshabilitamos el TextArea y el Slider
-			reviewArea.setDisable(true);
-			noteSlider.setDisable(true);
+      // Eliminamos saltos de línea y espacios adicionales
+      englishDescription = englishDescription.replace("\n", " ").trim();
 
-			// Cambiamos los botones
-			editReviewBtn.setVisible(true);
-			doneReviewBtn.setVisible(false);
+      return englishDescription;
+   }
 
-			// Actualizamos la nota en la Label
-			int nota = (int) noteSlider.getValue();
-			noteLabel.setText(String.valueOf(nota));
-		}
-	}
+   /**
+    * Habilita o deshabilita la edición de la reseña personal del usuario.
+    */
+   private void editReview() {
+      if (reviewArea.isDisabled()) {
+         // Habilitamos el TextArea y el Slider
+         reviewArea.setDisable(false);
+         noteSlider.setDisable(false);
+
+         // Cambiamos los botones
+         editReviewBtn.setVisible(false);
+         doneReviewBtn.setVisible(true);
+      } else {
+         // Deshabilitamos el TextArea y el Slider
+         reviewArea.setDisable(true);
+         noteSlider.setDisable(true);
+
+         // Cambiamos los botones
+         editReviewBtn.setVisible(true);
+         doneReviewBtn.setVisible(false);
+
+         // Actualizamos la nota en la Label
+         int nota = (int) noteSlider.getValue();
+         noteLabel.setText(String.valueOf(nota));
+      }
+   }
+
+   private void addGame() {
+       if (selectedGame != null && !dbUtils.isGameInDatabase(selectedGame.getId())) {
+           dbUtils.insertGameIntoDatabase(selectedGame);
+           refreshLibrary(); // Actualiza la biblioteca
+           System.out.println("Juego añadido correctamente");
+       }
+   }
+
+   private void refreshLibrary() {
+       libraryContainer.getChildren().clear();
+       List<Game> games = dbUtils.getAllGamesFromDatabase();
+       if (!games.isEmpty()) {
+           libraryContainer.getChildren().add(GameGridBuilder.createGameSection("Mi Biblioteca", games));
+       }
+   }
 }

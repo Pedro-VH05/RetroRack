@@ -97,7 +97,7 @@ public class LibraryController {
             }
 
             // Pasar los datos al controlador de DiscoverGamesGrid
-            discoverController.setGamesData(gameDataCache.getBestRatedGames(), gameDataCache.getPopularGames(),
+            discoverController.setLoaderGamesData(gameDataCache.getBestRatedGames(), gameDataCache.getPopularGames(),
                   gameDataCache.getNewGames(), gameDataCache.getB2001());
 
             Scene scene = new Scene(root);
@@ -143,7 +143,7 @@ public class LibraryController {
                   rs.getInt("reviewsCount"),
                   rs.getInt("added"),
                   rs.getInt("playtime"),
-                  rs.getString("metacritic"),
+                  rs.getInt("metacritic"),
                   rs.getString("esrbRating"),
                   null, // platforms (debes cargarlos desde otra tabla)
                   null, // genres (debes cargarlos desde otra tabla)

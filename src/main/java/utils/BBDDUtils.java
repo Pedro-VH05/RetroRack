@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Game;
 
 /**
  * Clase para hacer todo tipo de operaciones en la BBDD con SQLite.
@@ -287,5 +291,86 @@ public class BBDDUtils implements AutoCloseable {
          return false;
       }
    }
+   
+   public boolean isGameInDatabase(int gameId) {
+      String query = "SELECT id FROM Game WHERE id = ?";
+      try (Connection conn = conectar();
+           PreparedStatement pstmt = conn.prepareStatement(query)) {
+          pstmt.setInt(1, gameId);
+          ResultSet rs = pstmt.executeQuery();
+          return rs.next();
+      } catch (SQLException e) {
+          e.printStackTrace();
+          return false;
+      }
+  }
+
+  public void insertGameIntoDatabase(Game game) {
+      String query = "INSERT INTO Game (id, slug, name, releaseDate, tba, background_image, description_raw, rating, " +
+                     "ratingTop, ratingsCount, reviewsCount, added, playtime, metacritic, esrbRating) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      try (Connection conn = conectar();
+           PreparedStatement pstmt = conn.prepareStatement(query)) {
+          pstmt.setInt(1, game.getId());
+          pstmt.setString(2, game.getSlug());
+          pstmt.setString(3, game.getName());
+          pstmt.setString(4, game.getReleaseDate());
+          pstmt.setBoolean(5, game.isTba());
+          pstmt.setString(6, game.getBackgroundImage());
+          pstmt.setString(7, game.getDescription());
+          pstmt.setDouble(8, game.getRating());
+          pstmt.setInt(9, game.getRatingTop());
+          pstmt.setInt(10, game.getRatingsCount());
+          pstmt.setInt(11, game.getReviewsCount());
+          pstmt.setInt(12, game.getAdded());
+          pstmt.setInt(13, game.getPlaytime());
+          pstmt.setInt(14, game.getMetacritic());
+          pstmt.setString(15, game.getEsrbRating());
+
+          pstmt.executeUpdate();
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+  }
+
+  public List<Game> getAllGamesFromDatabase() {
+      List<Game> games = new ArrayList<>();
+      String query = "SELECT * FROM Game";
+      try (Connection conn = conectar();
+           PreparedStatement pstmt = conn.prepareStatement(query);
+           ResultSet rs = pstmt.executeQuery()) {
+
+          while (rs.next()) {
+              Game game = new Game(
+                  rs.getInt("id"),
+                  rs.getString("slug"),
+                  rs.getString("name"),
+                  rs.getString("releaseDate"),
+                  rs.getBoolean("tba"),
+                  rs.getString("background_image"),
+                  rs.getString("description_raw"),
+                  rs.getDouble("rating"),
+                  rs.getInt("ratingTop"),
+                  null, // ratings (se pueden cargar desde otra tabla si es necesario)
+                  rs.getInt("ratingsCount"),
+                  rs.getInt("reviewsCount"),
+                  rs.getInt("added"),
+                  rs.getInt("playtime"),
+                  rs.getInt("metacritic"),
+                  rs.getString("esrbRating"),
+                  null, // platforms
+                  null, // genres
+                  null, // shops
+                  null, // tags
+                  null  // screenshots
+              );
+              games.add(game);
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      return games;
+  }
+
 
 }

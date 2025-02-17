@@ -199,13 +199,13 @@
 						<Label id="comunity" fx:id="lblComunityScore"
 							alignment="CENTER" layoutX="1573.0" layoutY="520.0"
 							styleClass="rating" text="-" />
-						<Button layoutX="1050.0" layoutY="688.0"
+						<Button fx:id="addGameButton" layoutX="1050.0" layoutY="688.0" onMouseClicked="#addGameToLibrary"
 							mnemonicParsing="false" styleClass="buttons" text="ADD GAME" />
 						<Button id="favourites" disable="true" layoutX="1334.0"
 							layoutY="688.0" mnemonicParsing="false" styleClass="buttons"
 							text="FAVOURITES" />
 						<Button id="whishlist" layoutX="1645.0" layoutY="688.0"
-							mnemonicParsing="false" styleClass="buttons" text="WHISLIST" />
+							mnemonicParsing="false" styleClass="buttons" text="WISHLIST" />
 					</children>
 				</AnchorPane>
 			</center>
